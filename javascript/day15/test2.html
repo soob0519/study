@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ 
+ <script>
+ //풀어보기1
+ var score = 98;
+ if (score > 100){
+	document.write("100을 초과했습니다.");
+ } else if (score < 0 ) {
+	document.write("음수 설정은 안됩니다.");
+ } else{
+	document.write("정상입력");
+ }
+ 
+ document.write("<hr>");
+ //풀어보기2
+ var score1 = prompt("점수를 입력해주세요.","");
+ if (score1 >= 80){
+	document.write("우수");
+ } else if (score1 >= 60 ) {
+	document.write("보통");
+ } else{
+	document.write("미흡");
+ }
+ 
+ document.write("<hr>");
+ //풀어보기3
+ var name = prompt("이름을 입력해주세요.","");
+ var year = prompt("근무년수를 입력해주세요.","");
+ if (year >= 15){
+	document.write("<b>" + name + " 사원의 년차는 " + year + "년으로 특급입니다." + "</b>");
+ } else if (year >= 10) {
+	document.write("<b>" + name + " 사원의 년차는 " + year + "년으로 고급입니다." + "</b>");
+ } else if (year >= 6) {
+	document.write("<b>" + name + " 사원의 년차는 " + year + "년으로 중급입니다." + "</b>");
+ } else{
+	document.write("<b>" + name + " 사원의 년차는 " + year + "년으로 초급입니다." + "</b>");
+ }
+ //풀어보기4
+ var eng = 60;
+ var kor = 70;
+ 
+ if (eng>=60 && kor>=60) {
+	document.write("합격");
+ } else {
+	document.write("불합격");
+ }
+ 
+ //풀어보기 4-1
+ var math = 90;
+ 
+ if (eng>=60 && kor>=60 && math>=60) {
+	document.write("합격");
+ } else {
+	document.write("불합격");
+ }
+ 
+ //풀어보기 4-2
+ /* 60점 이상 합격, 한과목 60이하 재시험, 모두 60점 이하 불합격  */
+ var eng = 60;
+ var kor = 70;
+ 
+ if (eng>=60 && kor>=60) {
+	document.write("합격");
+ } else if (eng<=60 or kor<=60) {
+	document.write("재시험");
+ } else {
+	document.write("불합격");
+ }
+ 
+ 
+ </script>
+ 
+ 
+ <body>
+  
+ </body>
+</html>

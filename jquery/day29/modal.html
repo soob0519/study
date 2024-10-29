@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>modal창 jquery</title>
+  <link rel="stylesheet" href="jquery-ui.css">
+  <script src="jquery-3.7.1.js"></script>
+  <script src="jquery-ui.js"></script>
+ </head>
+ 
+ <style>
+ #div_modal {
+	position:relative;
+	top:30%;
+	left:30%;
+	width:400px;
+	height:300px;
+	background-color:#9933ff;
+	color:#fff;
+	text-align:center;
+	border-radius:30px;
+ }
+ 
+ </style>
+ 
+ <script>
+ $(function(){
+	
+	$("#div_modal").css({'display':'block'});
+	
+	$("#btn1").click(function(){
+		$("#div_modal").css({'display':'block'});
+	});
+	$("#btn2").click(function(){
+		$("#div_modal").css({'display':'none'});
+	});
+	$("#btn3").click(function(){
+		$("#div_modal").css({'display':'none'});
+	});
+ });
+ 
+ </script>
+ 
+ <body>
+  
+  <div>
+	<button type="button" id="btn1">모달창 열기</button>
+	<button type="button" id="btn2">모달창 닫기</button>
+  </div>
+  
+  <div id="div_modal">
+	<h1>모달창입니다.</h1>
+	<p>
+		<button type="button" id="btn3">닫기</button>
+	</p>
+  </div>
+  <!-- 모달(Modal)창: 창 내부에서 상위 레이러를 띄우는 방식을 사용하는 창
+					이목을 집중시키기 위한 용도로 제작되는 그래픽 인터페이스 창-->
+  
+  
+  
+ </body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <script>
+ function fn_onload() {
+	//alert("안녕~~");
+ 
+ }
+ 
+ function fn_change() {
+	//alert(document.frm.year.value);
+ 
+ }
+ 
+ function fn_image(filename) {
+	//alret(filename);
+	document.frm.big_image.src = filename;
+ }
+ 
+ function fn_count() {
+	let box1 = document.frm.box1.value;
+	box1++;
+	document.frm.box1.value = box1; 
+ }
+ 
+ </script>
+ 
+ <body onload="fn_onload()">
+ <form name="frm">
+ <!-- 사용자가 선택값을 변경할때 자바스크립을 발생시키는 이벤트 -->
+ <select name="year" onchange="alert(this.value)">
+	<option value="2000년">2000년</option>
+	<option value="2001년">2001년</option>
+	<option value="2002년">2002년</option>
+ </select>
+ <br><br>
+ 
+ <div style="width:200px;height:100px;background:yellow;"
+		onmousemove="fn_count()" onmouseout="document.frm.box1.value=1;"></div>
+ <br><br>
+ 
+ <div style="width:200px;height:50px;background:skyblue;">
+	<input type="text" name="box1" value="1" style="border:0px;">
+ </div>
+ <br><br>
+ 
+ 
+ <table border="1" onmouseout="fn_image('mouse1.png')">
+	<tr>
+		<td>
+			<img src="mouse1.png" width="100" height="100"
+			onmouseover="fn_image('mouse1.png')">
+		</td>
+		<td rowspan="3">
+			<img src="mouse1.png" name="big_image" width="400" height="400">
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<img src="mouse2.png" width="100" height="100"
+			onmouseover="fn_image('mouse2.png')">
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<img src="mouse3.png" width="100" height="100"
+			onmouseover="fn_image('mouse3.png')">
+		</td>
+	</tr>
+  </table>
+ 
+ </form>
+ 
+ </body>
+</html>

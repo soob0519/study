@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ 
+ <script>
+ function fn_sum() {
+	var eng = document.frm.eng.value;
+	var kor = document.frm.kor.value;
+	var hap = Number(eng) + Number(kor);
+	alert("합계: " + hap);
+ }
+ 
+ function fn_avg() {
+	var eng = document.frm.eng.value;
+	var kor = document.frm.kor.value;
+	var avg = (Number(eng) + Number(kor))/2;
+	alert("평균: " + avg);
+ }
+ 
+ </script>
+ 
+ <body>
+  
+  <h2>점수계산</h2>
+  <form name="frm">
+  영어점수 <input type="text" name="eng">
+  +
+  국어점수 <input type="text" name="kor">
+  <button type="button" onclick="fn_sum()">합계</button>
+  <button type="button" onclick="fn_avg()">평균</button>
+  </form>
+  
+ </body>
+</html>

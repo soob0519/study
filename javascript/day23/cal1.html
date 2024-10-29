@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ 
+ <style>
+ body {
+	line-height:40px;
+	font-size:15px;
+ }
+ 
+ button {
+	padding:5px;
+	width:40px;
+ }
+ 
+ .input1 {
+	height:30px;
+	text-align:right;
+ }
+ 
+ </style>
+ 
+ <script>
+ 
+ function fn_add(a) {
+	 
+	var screen = document.frm.screen.value;
+	
+	if (screen == "") {
+		if ( a == "+" || a == "-" || a == "×" || a == "÷" || a == ".") {
+			return false;
+		}
+		
+	} else {
+	let len = screen.length;
+	let last = screen.substring((len-1),len);
+		if (last == "+" || last == "-" || last == "×" || last == "÷" || last == ".")
+		{
+			if ( a == "+" || a == "-" || a == "×" || a == "÷" || a == ".") {
+			return false;
+			}
+		}
+	}
+
+	document.frm.screen.value += a;
+ 
+ }
+ 
+ function fn_clear() {
+	document.frm.screen.value = "";
+ }
+ 
+ function fn_back() {
+	let screen = document.frm.screen.value;
+	let len = screen.length;
+	let result = screen.substring(0,len-1);
+	document.frm.screen.value = result;
+ }
+	
+ function fn_result() {
+	
+	//입력상자의 값을 가져옴
+	let screen = document.frm.screen.value;
+		if (screen == "") {
+			return false;
+		}
+	// 변수.replace("","") 치환함수
+	screen = screen.replace("×","*");
+	screen = screen.replace("÷","/");
+	//연산처리(결과를 얻어냄)
+	let result = eval(screen);
+	//결과 값을 화면에 출력
+	document.frm.screen.value = result;
+ }
+ 
+ </script>
+ 
+ <body>
+ <form name="frm">
+ 
+ <input type="text" name="screen" class="input1" readonly> <br>
+ <button type="button" onclick="fn_add('1')">1</button>
+ <button type="button" onclick="fn_add('2')">2</button>
+ <button type="button" onclick="fn_add('3')">3</button>
+ <button type="button" onclick="fn_add('+')">+</button>
+ <br>
+ <button type="button" onclick="fn_add('4')">4</button>
+ <button type="button" onclick="fn_add('5')">5</button>
+ <button type="button" onclick="fn_add('6')">6</button>
+ <button type="button" onclick="fn_add('-')">-</button>
+ <br>
+ <button type="button" onclick="fn_add('7')">7</button>
+ <button type="button" onclick="fn_add('8')">8</button>
+ <button type="button" onclick="fn_add('9')">9</button>
+ <button type="button" onclick="fn_add('×')">×</button>
+ <br>
+ <button type="button" onclick="fn_clear()">c</button>
+ <button type="button" onclick="fn_add('0')">0</button>
+ <button type="button" onclick="fn_add('.')">.</button>
+ <button type="button" onclick="fn_add('÷')">÷</button>
+ <br>
+ <button type="button" onclick="fn_result()"style="width:130px;">=</button>
+ <button type="button" onclick="fn_back()">←</button>
+ </form>
+  
+ </body>
+</html>

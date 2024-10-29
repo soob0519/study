@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ 
+ <script>
+	
+	function fn_submit() {
+		
+		if (document.frm.title.value == "")	{
+			alert("제목을 입력해주세요");
+			document.frm.title.focus();
+			return false; //프로그램(함수) 종료
+		}
+		
+		if (document.frm.pass.value == "")	{
+			alert("암호를 입력해주세요");
+			document.frm.pass.focus();
+			return false; //프로그램(함수) 종료
+		}
+		
+		document.frm.submit(); //폼 전송
+	} 
+ 
+ </script>
+ 
+ <body>
+ 
+  <form name="frm" method="post" action="boardWriteSave.jsp">
+  
+  <table border="1">
+	<tr>
+		<th><label for="title">제목</label></th>
+		<td><input type="text" name="title" id="title" placeholder="제목입력" tabindex="1" autofocus></td> 
+	</tr>
+	<tr>
+		<th><label for="pass">암호</label></th>
+		<td><input type="password" name="pass" id="pass" placeholder="암호입력" tabindex="2"></td> 
+	</tr>
+	<tr>
+		<th>이름</th>
+		<td><input type="text" name="name" placeholder="이름입력" tabindex="3"></td> 
+	</tr>
+	<tr>
+		<th>이메일</th>
+		<td><input type="email" name="email" tabindex="4"></td> 
+	</tr>
+	<tr>
+		<th>내용</th>
+		<td><textarea name="content" rows="7" cols="60" tabindex="5"></textarea></td> 
+	</tr>
+	<tr>
+		<th colspan="2">
+			<button type="submit" onclick="fn_submit();return false;">저장</button>
+			<button type="reset">취소</button>
+		</th>		
+	</tr>
+  </table>
+  
+  </form>
+  
+ </body>
+</html>

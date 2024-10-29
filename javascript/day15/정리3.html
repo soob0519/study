@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ 
+ <script>
+ 
+ //양수, 음수, 0
+ var number = 17;
+ 
+ if (number > 0) {
+  document.write(number + "은 양수입니다.");
+ } else if (number < 0) {
+  document.write(number + "은 음수입니다.");
+ } else {
+  document.write(number + "은 0입니다.");
+ }
+ 
+ document.write("<hr>");
+ 
+ // 2개 모두 양수입니다. 1개만 양수입니다. 모두 양수가 아닙니다.
+ var a1 = 80;
+ var a2 = -30;
+ if (a1 > 0 && a2 > 0) { // and(&&) 연산자
+  document.write( "2개 모두 양수입니다.");
+ } else if (a1 > 0 && a2 < 0 ) {
+  document.write("1개만 양수입니다.");
+ } else if (a1 < 0 && a2 > 0) {
+  document.write("1개만 양수입니다.");
+ } else if (a1 < 0 && a2 < 0) {
+  document.write("모두 양수가 아닙니다.");
+ } else { // 상위의 조건문의 모두 false인 경우 else 처리가 가능하다.
+  document.write("0이 포함되어 있는 숫자가 있습니다.");
+ }
+ 
+ 
+ 
+ </script>
+ <body>
+  
+ </body>
+</html>

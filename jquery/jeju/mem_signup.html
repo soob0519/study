@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+ </head>
+ 
+ <style>
+  
+ div.section_main {
+ 	margin:auto;
+	width:710px;
+	height:530px;
+	background-color:#ffffff;
+	text-align:center;
+ }
+ .section_txt1 {
+	margin-top:-25px;
+	font-size:15px;
+	font-weight:bold;
+	letter-spacing:-1px;
+	color:#808080;
+ }
+ 
+ .section_table1 {
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:40px;
+ }
+ 
+ .btn_submit1 {
+	border:1px solid #cccccc;
+	border-radius:5px;
+	width:430px;
+	background-color:#FF5722;
+	font-size:15px;
+	font-weight:bold;
+	height:50px;
+	color:#ffffff;
+	cursor:pointer;
+ }
+ 
+ .btn_submit1:hover {
+	background-color:#f23d00;
+ }
+ 
+ 
+ .btn_submit2 {
+	border:0px solid #cccccc;
+	border-radius:5px;
+	width:210px;
+	background-color:#1EC800;
+	font-size:15px;
+	font-weight:bold;
+	height:50px;
+	color:#ffffff;
+	cursor:pointer;
+ }
+ 
+ .btn_submit3 {
+	border:0px solid #cccccc;
+	border-radius:5px;
+	width:210px;
+	background-color:#FEE500;
+	font-size:15px;
+	font-weight:bold;
+	height:50px;
+	color:#000000;
+	cursor:pointer;
+ }
+ 
+ .btn_logo{
+	position:relative;
+	top:0px;
+	left:-20px;
+ } 
+ 
+ .login_txt {
+	position:relative;
+	top:-5px;
+ }
+ 
+ .section_txt2 {
+	position:relative;
+	top:20px;
+	color:#808080;
+ }
+ 
+ </style>
+ 
+ <body>
+ 
+  <header>
+	<div class="quick_top">
+		<a href="#">회원가입</a>
+		<span class="txt_bar">│</span>
+		<a href="#">로그인</a>
+		<span class="txt_bar">│</span>
+		<a href="#">마이페이지</a>
+		<span class="txt_bar">│</span>
+		<a href="#">이벤트</a>
+		<span class="txt_bar">│</span>
+		<a href="#">고객센터</a>
+		<span class="txt_bar">│</span>
+		<a href="#">상품바구니</a> <span class="txt_num">0</span>
+		<span class="txt_bar">│</span>
+		<a href="#">전체메뉴</a>
+	</div>
+  </header>
+  
+  <nav>
+	<div class="nav_top">
+		<div style="float:left;"><img src="jeju_logo.png" alt="제주여행로고"></div>
+		<div class="menu_list" style="float:left;">
+			<ul class="menu_ul">
+				<li>할인항공</li>
+				<li>숙박</li>
+				<li>렌터카</li>
+				<li style="width:110px;">레저/티켓</li>
+				<li>에어카텔</li>
+				<li>투어</li>
+				<li>맞춤여행</li>
+			</ul>
+		</div>
+		<div>
+		<img src="jeju_card.png" alt="카드이미지" style="padding-left:68px;"></div>
+	</div>
+  </nav>
+  
+  <section>
+	<span style="line-height:40px;">&nbsp</span>
+	<div class="section_main">
+		<span style="line-height:50px;">&nbsp</span>
+		<h1 align="center" style="font-size:35px;letter-spacing:-1px;">회원가입</h1>
+		<div class="section_txt1">회원이 되시고 회원만의 다양한 혜택을 받아가세요.
+		</div>
+		<table class="section_table1">
+			<tr>
+				<td colspan="2">
+					<button type="button" onclick="location='mem_register_pre.html'" class="btn_submit1">
+						<span class="span_login_txt">개인 회원가입</span>
+					</button>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<button type="button" onclick="location='https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=kV0wzuBC8VYEQNAs8AHo&redirect_uri=https%3A%2F%2Fwww.jeju.com%2Fmembers%2Fajax%2Feasylogin_callback_NaverPlus.php%3Fmode%3D%26agt%3Djeju%26returnUrl%3Dhttp%253A%252F%252Fwww.jeju.com%252F%253Fagt%253Djeju&state=naver_login'" class="btn_submit2">
+						<span class="btn_logo"><img src="n_logo.png"></span>
+						<span class="login_txt">네이버로 시작하기	</span>
+					</button>
+				</td>
+				<td>
+					<button type="button" onclick="location='https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=35c9baf19848ad3df2aaec527cbc9045&redirect_uri=https%3A%2F%2Fwww.jeju.com%2Fmembers%2Fajax%2Feasylogin_callback_KakaoSync.php%3Fagt%3Djeju%26sns%3Dkakao&state=http://www.jeju.com/?agt=jeju'" class="btn_submit3">
+						<span class="btn_logo"><img src="k_logo.png"></span>
+						<span class="login_txt">카카오로 시작하기	</span>
+					</button>
+				</td>
+			</tr>
+		</table>
+		<div class="section_txt2">SNS 가입으로 1초만에 가입하세요.(만 14세 이상 가능)
+		</div>
+		
+	</div>
+	
+  </section>
+  
+  <footer></footer> 
+  
+ </body>
+</html>

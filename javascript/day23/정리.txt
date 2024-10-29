@@ -1,0 +1,14 @@
+onMouseOver 마우스를 올렸을 경우
+onMouseOut 마우스가 벗어났을 경우
+onMouseMove 해당 요소(오브젝트)에서의 움직임을 감지(픽섹단위)
+<hr>
+
+onKeyUp 키를 누르고 놓았을 때, 가장 반응이 좋음
+onKeyPress 키를 누를때, 한템포 늦음
+onKeyDown 키 입력시, 한템포 늦음
+<hr>
+
+onClick 마우스 클릭 - 모든 오브젝트에 적용
+onChange <select> 상자에서 선택 변경 할때
+onLoad <body>에만 적용됨
+onFocus 커서의 상태를 감지하는 이벤트속성

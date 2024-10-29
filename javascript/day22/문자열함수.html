@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ 
+ <script>
+ 
+ let a1 = "100";
+ let a2 = "200";
+ 
+ //alert( Number(a1) + Number(a2) );
+ //alert( parseInt(a1) + parseInt(a2) );
+ 
+ let date = "2024-12-25";
+ let date_len = date.length;
+ document.write(date+"의 길이는 "+date_len + "<br>");
+ 
+ document.write("9번자리의 값은 "+date.charAt(9)+"<br>");
+ // charAt() : 특정 위치의 값을 얻어내는 함수
+ document.write("3번자리의 값은 "+date.charAt(3)+"<br>");
+ 
+ // 2024-12-25
+ document.write( "년 : "+date.substring(0,4)+"<br>" );	// 0~3
+ document.write( "월 : "+date.substring(5,7)+"<br>" );	// 5~6
+ document.write( "일 : "+date.substring(8,10)+"<br>" );	// 8~9
+ 
+ document.write("<hr>");
+ 
+ let number = 12345; // 형변환 : String (숫자 > 문자)
+ document.write( "number의 길이는 " + String(number).length +"<br>");
+ document.write( "number의 길이는 " + String(number).substring(0,3) +"<br>"); //0~2
+ 
+ document.write("<hr>");
+ // replace(old,new) 함수 :: 2024 -> 2025
+ document.write("내년 크리스마스 : " + date.replace("2024","2025") +"<br>");
+ 
+ // indexOf() 함수 :: search 함수 :: 결과 찾았을 경우: 자리번호, 없는 경우 :-1
+ // 2024-12-25에서 "12"라는 문자열의 존재 유무
+ document.write( "12라는 문자열의 존재 유무 : "+date.indexOf("12")+"<br>"); // 5
+ document.write( "15라는 문자열의 존재 유무 : "+date.indexOf("15")+"<br>"); // -1
+ document.write( "25라는 문자열의 존재 유무 : "+date.indexOf("25")+"<br>");
+ document.write( "30라는 문자열의 존재 유무 : "+date.indexOf("30")+"<br>");
+ document.write("<hr>");
+ 
+ let addr = "서울시 강남구 서초동 12-9 my house 빌라";
+ // 강남구 라는 글자를 찾아서 :: 존재함, 존재하지 않음
+ if ( addr.indexOf("구리시") > -1 ) {
+	document.write("존재함");
+ } else {
+	document.write("존재하지 않음");
+ }
+ 
+ document.write("<hr>");
+ document.write(addr.toLowerCase()+"<br>");
+ document.write(addr.toUpperCase()+"<br>");
+ 
+ document.write("<hr>");
+ 
+ var email = "himedia77@naver.com";
+ document.write("이메일 : "+email+"<br><br>");
+ 
+ //예제1
+ if (email.indexOf("@") > -1) {
+	document.write(email+"은 올바른 이메일 입니다.");
+ } else {
+	document.write(email+"은 올바르지 않은 이메일 입니다.");
+ }
+ 
+ document.write("<br>");
+ 
+ //예제2
+ document.write(email.replace("naver","korea")+"<br>");
+ 
+ //예제3
+ document.write("아이디 : "+email.substring(0,9)+", 도메인 : "+email.substring(10,19)+"<br>");
+ //다른방법, 끝번호 생략 가능
+ document.write("아이디 : "+email.substring(0,email.indexOf("@"))+", 도메인 : "+email.substring(email.indexOf("@")+1)+"<br>");
+ 
+ //예제4
+ document.write("아이디 길이 : "+email.substring(0,email.indexOf("@")).length +"<br>");
+ 
+ //예제5
+ document.write("아이디의 마지막 값 : "+email.charAt(email.indexOf("@")-1)+"<br>");
+ 
+ //다른 방법
+ document.write("아이디의 마지막 값 : "+email.substring(8,9)+"<br>");
+ 
+ let userid = email.substring(0,email.indexOf("@")); // himedia77
+ let userid_len = userid.length; //9
+ 
+ document.write("아이디의 마지막 값 : "+email.substring(userid_len-1,userid_len)+"<br>");
+ 
+ 
+ </script>
+ 
+ <body>
+  
+ </body>
+</html>

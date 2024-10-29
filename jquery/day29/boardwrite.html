@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  
+  <link rel="stylesheet" href="jquery-ui.css">
+  <script src="jquery-3.7.1.js"></script>
+  <script src="jquery-ui.js"></script> 
+  <script src ="boardWrite.js"></script>
+ 
+ </head>
+ 
+ <style>
+ table {
+	border-collapse:collapse;
+	width:700px;
+ }
+ 
+ th,td {
+	border:1px solid #cccccc;
+ }
+ 
+ </style>
+ <body>
+  
+  <!-- 웹 접근성 -->
+  
+  <form name="frm" id="frm" method="post" action="memberSave.jsp">
+  
+  <table border="1">
+	<tr>
+		<th><label for="title">제목</label></th>
+		<td><input type="text" name="title" id="title" autofocus placeholder="제목을 입력해주세요"></td> 
+	</tr>
+	<tr>
+		<th><label for="pass">암호</label></th>
+		<td><input type="password" name="pass" id="pass" placeholder="암호를 입력해주세요"></td> 
+	</tr>
+	<tr>
+		<th>이름</th>
+		<td><input type="text" name="name" id="name"></td> 
+	</tr>
+	<tr>
+		<th>이메일</th>
+		<td><input type="email" name="email" id="email"></td> 
+	</tr>
+	<tr>
+		<th>등록일</th>
+		<td><input type="text" name="rdate" id="rdate"></td> 
+	</tr>
+	<tr>
+		<th>숨김여부</th>
+		<td>
+			<input type="radio" name="style" value="Y"> 보임
+			<input type="radio" name="style" value="N"> 숨김
+		</td> 
+	</tr>
+	<tr>
+		<th>내용</th>
+		<td>
+			<textarea name="content" id="content" rows="7" cols="60"></textarea>
+		</td> 
+	</tr>
+	<tr>
+		<th colspan="2">
+			<button type="submit" id="btn1">저장</button>
+			<button type="reset" id="btn2">취소</button>
+		</th>		
+	</tr>
+  </table>
+  
+  </form>
+  
+ </body>
+</html>

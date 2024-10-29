@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>증감/가감</title>
+ </head>
+ 
+ <script>
+ 
+ var a = 1;	// a = 1;
+ a = a + 1;	// a = 2;
+ a = a + 1;	// a = 3;
+ document.write("a : " + a + "<br>");
+ 
+ a++;		// a = 4;
+ a++;		// a = 5;
+ a++;		// a = 6;
+ document.write("a : " + a + "<br>");
+ 
+ a += 1;	// a = 7;
+ a += 1;	// a = 8;
+ // a=+1; (x)
+ document.write("a : " + a + "<br>");
+ 
+ document.write("<hr>");
+ 
+ //2씩 증가
+ var b = 1; // b = 1;
+ document.write("b : " + b + "<br>");
+ 
+ b = b + 2; // b = 3;
+ b = b + 2; // b = 5;
+ document.write("b : " + b + "<br>");
+ 
+ b += 2;	// b = 7;
+ b += 2;	// b = 9;
+ document.write("b : " + b + "<br>");
+ document.write("<hr>");
+ 
+ 
+ //3씩 증가
+ var c = 1;	// c = 1;
+ document.write("c : " + c + "<br>");
+ 
+ c = c + 3;	// c = 4;
+ c = c + 3;	// c = 7;
+ document.write("c : " + c + "<br>");
+ 
+ c += 3;	// c = 10;
+ c += 3;	// c = 13;
+ document.write("c : " + c + "<br>");
+ document.write("<hr>");
+ 
+ // 가감 처리
+ 
+ // 1씩 가감 
+ var d = 10;	
+ d = d - 1;	// 9
+ d = d - 1;	// 8
+ d--;		// 7
+ d--;		// 6
+ d -= 1;	// 5
+ d -= 1;	// 4
+ document.write("d : " + d + "<br>");
+ document.write("<hr>");
+ 
+ // 3씩 가감
+ var f = 100;
+ f = f - 3;	// 97
+ f = f - 3;	// 94
+ 
+ f -= 3;	// 91
+ f -= 3;	// 88
+ document.write("f : " + f + "<br>");
+ document.write("<hr>");
+ 
+ // 곱하기
+ var g = 2;
+ g = g * 2;	// 4
+ g = g * 2;	// 8
+ g = g * 2;	// 16
+ document.write("g : " + g + "<br>");
+ 
+ g *= 2;	// 32
+ g *= 2;	// 64
+ document.write("g : " + g + "<br>");
+ document.write("<hr>");
+ 
+ // 나누기
+ var h = 100;
+ h = h / 2;	// 50
+ document.write("h : " + h + "<br>");
+ 
+ h /= 2;	// 25
+ document.write("h : " + h + "<br>"); 
+ document.write("<hr>");
+ 
+ </script>
+ 
+ <body>
+  
+ </body>
+</html>

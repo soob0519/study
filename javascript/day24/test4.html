@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ 
+ <script>
+ function fn_subject() {
+	
+	//let subject = ['html','css','java','jsp','oracle'];
+	let counter = 0;
+	let len = document.getElementsByName("subject").length;
+	let msg = "";
+	for (var i=0; i<len; i++)	{
+		if (document.getElementsByName("subject")[i].checked == true) {
+			msg += document.getElementsByName("subject")[i].value;
+			counter++;
+		}
+	}
+	if ( counter < 3 )	{
+		alert("3개이상 선택하시오.");
+		return false;
+	} else {
+		if (confirm(msg+" 가 맞습니까?") == true) {
+			alert("저장되었습니다.");
+		} else {
+			alert("다시 선택해주세요.");
+			return false;
+		}
+	}
+ } 
+ </script>
+ 
+ <body>
+  
+  <input type="checkbox" name="subject" value="html"> html <br>
+  <input type="checkbox" name="subject" value="css"> css <br>
+  <input type="checkbox" name="subject" value="java"> java <br>
+  <input type="checkbox" name="subject" value="jsp"> jsp <br>
+  <input type="checkbox" name="subject" value="oracle"> oracle <br>
+  
+  <button type="button" onclick="fn_subject()">선택완료</button>
+  
+ </body>
+</html>

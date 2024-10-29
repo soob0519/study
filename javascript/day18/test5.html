@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <style>
+ 
+ table {
+	border-collapse:collapse;
+ }
+ 
+ th, td {
+	border: 1px solid #cccccc;
+	padding: 10px;
+ }
+ 
+ 
+ </style>
+ 
+ <script>
+ 
+ document.write("<table>");
+ document.write("	<tr>");
+ var n=1;
+ while (n<=5) { //작거나 같다
+	document.write("<td>"+n+"</td>"); //n
+	n++; //n=n+1; n+=1;
+ }
+ document.write("	</tr>");
+ document.write("</table>");
+ 
+ document.write("<hr>");
+ 
+ 
+ document.write("<table>");
+ document.write("	<tr>");
+ var n=1;
+ while (n<=8) { //작거나 같다
+	document.write("<td>"+n+"</td>"); //n
+	if ( n == 4 ) {
+		document.write("</tr><tr>");
+	}
+	
+	n++; //n=n+1; n+=1;
+ }
+ document.write("	</tr>");
+ document.write("</table>");
+ 
+ 
+ </script>
+ 
+ <body>
+ <!--
+  <table>
+	<tr>
+		<td>1</td>
+		<td>2</td>
+		<td>3</td>
+		<td>4</td>
+	</tr>
+	<tr>
+		<td>5</td>
+		<td>6</td>
+		<td>7</td>
+		<td>8</td>
+	</tr>
+  </table>
+  -->
+ </body>
+</html>

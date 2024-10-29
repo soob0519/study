@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>회원가입</title>
+ </head>
+ 
+ <form name="frm" method="post" action="memberSave.jsp" autocomplete="off">
+ 
+ <style>
+ table {
+	border-collapse:collapse; /*셀 공백 제거*/
+	width:700px;
+	}
+ th, td {
+	border:1px solid #cccccc;
+	padding:5px;
+	}
+ 
+ </style>
+
+<body>
+
+<table>
+	<tr>
+		<th>아이디</th>
+		<td>
+			<input type="text" name="userid" size="50" placeholder="아이디를 입력해주세요." autofocus >
+			<button type="button">중복체크</button>
+		</td>
+	</tr>
+	<tr>
+		<th>암호</th>
+		<td><input type="password" name="pass"></td>
+	</tr>
+	<tr>
+		<th>이름</th>
+		<td><input type="text" name="username" placeholder="이름을 입력해주세요."></td>
+	</tr>
+	<tr>
+		<th>성별</th>
+		<td>
+		<input type="radio" name="gender" value="M" checked> 남
+		<input type="radio" name="gender" value="F"
+		> 여
+		</td>
+	</tr>
+	<tr>
+		<th>생일</th>
+		<td>
+			<input type="date" name="bday">
+		</td>
+	</tr>
+	<tr>
+		<th>영어점수</th>
+		<td><input type="number" name="score"></td>
+	</tr>
+	<tr>
+		<th>이메일</th>
+		<td><input type="email" name="email"></td>
+	</tr>
+	<tr>
+		<th>홈페이지</th>
+		<td><input type="url" name="url"></td>
+	</tr>
+	<tr>
+		<th>나이</th>
+		<td>
+			<input type="range" name="age">
+		</td>
+	</tr>
+	<tr>
+		<th>핸드폰</th>
+		<td><input type="text" name="mobile"></td>
+	</tr>
+	<tr>
+		<th>좋아하는 색</th>
+		<td><input type="color" name="mycolor"></td>
+	</tr>
+	<tr>
+		<th>주소</th>
+		<td>
+			<input type="text" name="zipcode" size="6" maxlength="6">
+			<br>
+			<input type="text" name="addr">
+		</td>
+	</tr>
+	<tr>
+		<th>취미</th>
+		<td>
+			<input type="checkbox" name="hobby" value="축구" checked> 축구
+			<input type="checkbox" name="hobby" value="야구"> 야구
+			<input type="checkbox" name="hobby" value="농구"> 농구
+		</td>
+	</tr>
+	<tr>
+		<th>하고싶은말</th>
+		<td>
+			<!-- cols:넓이, rows:높이 -->
+			<textarea name="content" cols="70" rows="10">하고싶은말 적어주세요</textarea>
+		</td>
+	</tr>
+	<tr>
+		<th colspan="2">
+			<button type="submit">전송</button>
+			<button type="reset">취소</button>
+		</th>
+	</tr>
+</table>
+
+</form>
+  
+</body>
+</html>

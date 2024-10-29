@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ 
+ <style>
+ 
+ .modal_1 {
+	position:absolute;
+	top:120px;
+	left:10px;
+	margin:auto;
+	padding:50px;
+	width:90%;
+	height:400px;
+	background-color:pink;
+	text-align:center;
+	vertical-align:middle;
+	opacity:0.3;
+ }
+ 
+ .div_image {
+	position:relative;
+	margin:auto;
+	width:320px;
+	height:350px;
+	text-align:center;
+	vertical-align:middle;
+	background-color:#6699ff;
+ }
+  
+ </style>
+ 
+ <script>
+ 
+ let popup;
+ 
+ function fn_popup1() {
+	let url = "popup1.html";
+	popup = window.open(url,"popup1","width=350,height=350,left=400,top=300");
+ }
+ 
+ function fn_popup2() {
+	popup.close();
+ }
+  
+ function fn_modalOpen() {
+	let m1 = document.getElementById("modal_1");
+	let m2 = document.getElementById("div_image");
+	m1.style.display = "block";
+	m2.style.display = "block";
+ }
+  
+ function fn_modalClose() {
+	let m1 = document.getElementById("modal_1");
+	let m2 = document.getElementById("div_image");
+	m1.style.display = "none";
+	m2.style.display = "none";
+ }
+ </script>
+ 
+ <body onload="fn_popup1()">
+  
+  <h1>메인화면</h1>
+  
+  <p>
+  <button type="button" onclick="fn_popup1()">팝업열기</button>
+  <button type="button" onclick="fn_popup2()">팝업닫기</button>
+  <button type="button" onclick="fn_modalOpen()">모달열기</button>
+  <button type="button" onclick="fn_modalClose()">모달닫기</button>
+  </p>
+  
+  <div style="width:500px;background:yellow;padding:50px;">
+	테스트 : <input type="text" name="title">
+			<button type="button">전송</button>
+  </div>
+  
+  <!-- 모달(modal)창 :: layer == div -->
+  <div class="modal_1" id="modal_1" onclick="fn_modalClose()"></div>
+  
+  <div class="div_image" id="div_image">
+  <img src="jeju.png" width="300" height="300"><br>
+  <button type="button" onclick="fn_modalClose()">닫기</button>
+  </div>
+ 
+ 
+ 
+ </body>
+</html>

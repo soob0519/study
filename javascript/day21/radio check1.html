@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>설문조사(라디오상자)</title>
+ </head>
+ 
+ <script>
+ function fn_submit() {
+	
+	if (document.frm.age[0].checked == false &&
+		document.frm.age[1].checked == false &&
+		document.frm.age[2].checked == false &&
+		document.frm.age[3].checked == false &&
+		document.frm.age[4].checked == false &&
+		document.frm.age[5].checked == false &&
+		document.frm.age[6].checked == false &&
+		document.frm.age[7].checked == false) {
+		
+		alert("선택된 내용이 없습니다.");
+		return false;
+	}
+	
+	document.frm.submit();
+ }
+ 
+ </script> 
+ 
+ <body>
+  
+  <form name="frm" method="post" action="save.jsp">
+  
+  여러분의 나이대를 골라보세요.<br>
+  <input type="radio" name="age" id="age1" value="10">
+  <label for="age1">10대</label><br>
+  
+  <input type="radio" name="age" id="age2" value="20">
+  <label for="age2">20대</label><br>
+  
+  <input type="radio" name="age" id="age3" value="30">
+  <label for="age3">30대</label><br>
+  
+  <input type="radio" name="age" id="age4" value="40">
+  <label for="age4">40대</label><br>
+  
+  <input type="radio" name="age" id="age5" value="40">
+  <label for="age5">50대</label><br>
+  
+  <input type="radio" name="age" id="age6" value="40">
+  <label for="age6">60대</label><br>
+  
+  <input type="radio" name="age" id="age7" value="40">
+  <label for="age7">70대</label><br>
+  
+  <input type="radio" name="age" id="age8" value="40">
+  <label for="age8">80대</label><br>
+  
+  <button type="submit" onclick="fn_submit(); return false;">다음</button>
+  
+  </form>
+  
+ </body>
+</html>

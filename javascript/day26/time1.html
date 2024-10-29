@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <!--
+  지연시간 후 페이지 이동하는 meta 태그의 하나의 기능
+  <meta http-equiv='refresh' content='1; url=time1.html'>
+  -->
+ </head>
+ 
+ <script>
+ 
+ function fn_zero(a) { // ex) 9 ->09, 3 ->03, 12 ->12,
+	if (a<10) {
+		a = "0"+a;
+	}
+	return a;
+ }
+ 
+ 
+ function fn_time() {
+	 let cal = new Date();	// 현재의 시점
+	 
+	 let yy = cal.getFullYear();	// 현재의 연도
+	 let mm = fn_zero(cal.getMonth() + 1);	// 현재의 달(월)
+	 let dd = fn_zero(cal.getDate());		// 현재의 날짜(일)
+	 //let day = cal.getDay();		// 현재의 요일 // 0(일),1(월) ~ 6(토)
+	 
+	 let hh = fn_zero(cal.getHours());
+	 let ms = fn_zero(cal.getMinutes());
+	 let ss = fn_zero(cal.getSeconds());
+	 
+	 let txt = "<font size='5'>";
+	 txt += yy+"-"+mm+"-"+dd+" "+hh+":"+ms+":"+ss;
+	 txt += "</font>";
+	 
+	 document.getElementById("clock1").innerHTML = txt;
+ }
+ // 다른함수를 호출하는 함수 (함수명,지연시간)
+ setInterval(fn_time,1000);
+ 
+ </script>
+ 
+ <body>
+  
+  <div id="clock1"></div>
+  
+  
+ </body>
+</html>

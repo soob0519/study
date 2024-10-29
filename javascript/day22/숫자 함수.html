@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ 
+ <script>
+ document.write(Math.max(77,55,100,98,54,150) +"<br>");
+ document.write(Math.min(77,55,33,18,110,-205) +"<br>");
+ document.write(Math.abs(-88) +"<br>");		// 양수표현 함수
+ document.write(Math.ceil(3.1) +"<br>");	// 4, 올림함수
+ document.write(Math.floor(3.1) +"<br>");	// 3, 내림함수
+ document.write(Math.round(3.1) +"<br>");	// 3, 반올림함수
+ document.write(Math.round(3.5) +"<br>");	// 4
+ document.write(Math.round(3.4) +"<br>");	// 3
+ document.write(Math.round(3.499) +"<br>");	// 3
+ 
+ document.write("<hr>");
+ 
+ let total = 381;
+ let totalPage = Math.ceil(total/10); // ceil(38.1) -> 39
+ //document.write( totalPage );
+ 
+ for (var p=1; p<=totalPage; p++) {
+	
+	document.write(p + " ");
+ 
+ }
+ 
+ 
+ 
+ </script>
+ 
+ <body>
+  
+ </body>
+</html>

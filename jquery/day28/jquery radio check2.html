@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>설문조사(라디오상자) jquery</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+ </head>
+ 
+ <script>
+ 
+ $(function(){
+	
+	let box="";
+	for (let i=1; i<=8; i++) {
+		  let age = i*10;
+		  box += "<input type='radio' name='age' id='age"+i+"' value='"+age+"'>";
+		  box += "<label for='age"+i+"'>"+age+"대</label><br><br>";
+	}
+	
+	//document.getElementById("div1").inner.HTML = box;
+	
+	$("#div1").html(box);
+	
+	$("#btn1").click(function(){
+		if ( $("input[name='age']").is(":checked") == true ) {
+			alert("저장처리 되었습니다.");
+		} else {
+			alert("선택항목이 없습니다.");
+			return false;
+		}
+	});
+ });
+ 
+ </script> 
+ 
+ <body>
+  
+  <form name="frm" method="post" action="save.jsp">
+  여러분의 나이대를 골라보세요.<br><br>
+  
+	<script>
+		/*for (let i=1; i<=8; i++) {
+			let age = i*10;
+			document.write("<input type='radio' name='age' id='age"+i+"' value='"+age+"'>");
+			document.write("<label for='age"+i+"'>"+age+"대</label><br><br>");
+		}*/
+	</script>
+	  
+	<hr>
+  <div id="div1"></div>
+  
+  <button type="submit" id="btn1">다음</button>
+  
+  </form>
+  
+ </body>
+</html>

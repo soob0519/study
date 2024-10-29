@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+  
+  <script>
+  function fn_div1() {
+	var box = document.getElementById("box1");
+	box.style.color="#fff";
+	box.style.width="100px";
+	box.style.height="100px";
+	box.style.border="1px solid #111111";
+	  
+	box.style.backgroundColor="blue";
+	box.style["borderColor"]="red";
+	box.style["margin-left"]="30px";
+ }
+ 
+ function fn_test1() {
+	let box = document.getElementById("box1");
+	let w1 = document.getElementById("w1").value;
+	let h1 = document.getElementById("h1").value;
+	let c1 = document.getElementById("c1").value;
+	
+	box.style.width = w1+"px";
+	box.style.height = h1+"px";
+	box.style.backgroundColor = c1;
+ }
+ 
+  </script>
+  
+ <body onload="fn_div1()">
+  
+  <p>
+	넓이 <input type="text" id="w1"> <br>
+	높이 <input type="text" id="h1"> <br>
+	배경색 <input type="color" id="c1"> <br>
+	<br>
+	<button type="button" onclick="fn_test1()">변경</button>
+  </p>
+  
+  <div id="box1">
+	<h1>테스트영역</h1>
+  </div>
+  
+ </body>
+</html>

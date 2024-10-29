@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <style>
+ body {
+	padding:5px;
+ 
+ }
+ </style>
+ <script>
+ function fn_add(){
+	// 오브젝트에 접근
+	let div1 = document.getElementById("div1");
+	
+	let newSpan = document.createElement("span");
+	
+	newSpan.innerHTML = "<input type='text' id='p1'><br>";
+	div1.appendChild(newSpan); // 증감 (더해짐)
+ }
+ 
+ 
+ function fn_minus() {
+	// 오브젝트에 접근
+	let div1 = document.getElementById("div1");
+	div1.removeChild(div1.lastElementChild);
+ }
+ </script>
+ 
+ <body>
+  
+  <button type="button" onclick="fn_add()">+</button>
+  <button type="button" onclick="fn_minus()">-</button>
+  
+  <br><br>
+  <div id="div1">
+  
+  
+  </div>
+ 
+ </body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ 
+ <script>
+ // (초기값;비교조건;증감조건)
+ for (var i=0; i<100; i++){
+	document.write("*");
+ }
+ document.write("<hr>");
+ 
+ for (var i=547; i<647; i++){
+	document.write("*");
+ }
+ document.write("<hr>");
+ 
+ for (var i=100; i>0; i--){
+	document.write("*");
+ }
+ 
+ // 내부 변수명의 임의로 가능
+ for (var b=1; b<=100; b++){
+	document.write("*");
+ }
+ document.write("<hr>");
+ 
+ //2씩 3씩 ==> j=j+2 ;;; j+=2
+ for (var j=2; j<=100; j+=2) { // 1 ~ 100 짝수만
+	document.write(j + " ");
+ }
+ document.write("<hr>");
+ 
+ for (var d=1; d<=31; d++) {
+	if (d<10) {
+		document.write("0");
+	}
+	document.write(d + "일 ");
+	if (d%7 == 0) {
+		document.write("<br>");
+	}
+ }
+ document.write("<hr>");
+ 
+ for (var i=1; i<=15; i++) {
+	
+	document.write("*");
+	if (i%5 == 0) {
+		document.write("<br>");
+	}
+ }
+ document.write("<hr>");
+ 
+ //1960 ~ 2020
+ //1960년생은 만 64세입니다.
+ //1961년생은 만 63세입니다.
+ //2020년생은 만 4세입니다.
+ 
+ for (var i=1960; i<=2020; i++) {
+		var age = 2024 - i;
+	document.write(i+"년생은 만"+age+"세 입니다.<br>");
+ }
+ document.write("<hr>");
+ 
+ </script>
+ 
+ <body>
+  
+ </body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ 
+ <script>
+ function fn_link(a){
+	 
+	let mylink = document.getElmentById("mylink");
+	
+	if (a == "naver") {
+		mylink.innerText = "네이버";
+		mylink.href = "http://naver.com";
+	} else if (a == "daum") {
+		mylink.innerText = "다음";
+		mylink.href = "http://daum.net";
+	}	
+ }
+ 
+ </script>
+ 
+ <body>
+  
+  <p>
+	도메인 이동 : <a href="http://google.com" id="mylink">구글</a>
+  </p>
+  
+  <button type="button" onclick="fn_link('naver')">네이버</button>
+  <button type="button" onclick="fn_link('daum')">다음</button>
+  
+  
+ </body>
+</html>

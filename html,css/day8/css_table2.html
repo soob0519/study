@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ 
+ <style>
+ table.table1 {
+	border-collapse:collapse; /*셀 공간 제거*/
+	width:600px;
+	border-top:1px solid #cccccc;
+ }
+ .table1 th,td {
+	border:0px solid #cccccc;
+	border-bottom:1px solid #cccccc;
+	padding:5px;
+	
+ }
+ .td1 {
+	text-align:center;
+ }
+ .caption1 {
+	font-size:25px;
+	font-weight:bold;
+	margin-bottom:10px;
+	border:1px solid #9966ff;
+ }
+ </style>
+ 
+ <body>
+  
+  <table class="table1">
+	
+	<caption class="caption1">학생정보</caption>
+  
+	<colgroup>
+		<col width="30%" />
+		<col width="30%" />
+		<col width="40%" />
+	</colgroup>
+	<thead>
+	<tr>
+		<th>학번</th>
+		<th>이름</th>
+		<th>학과</th>
+	</tr>
+	</thead>
+	<tbody style="background:yellow">
+	<tr>
+		<td class="td1">홍길동</td>
+		<td class="td1">2024123456</td>
+		<td class="td1">컴퓨터공학과</td>
+	</tr>
+	<tr>
+		<td class="td1">구리점</td>
+		<td class="td1">2024123458</td>
+		<td class="td1">으부엡개발괒어</td>
+	</tr>
+	</tbody>
+	<tfoot style="background:pink">
+	<tr>
+		<td class="td1">조수빙</td>
+		<td class="td1">2024123457</td>
+		<td class="td1">컴퓨터공학과</td>
+	</tr>
+	</tfoot>
+	
+	
+  </table>
+  
+ </body>
+</html>
