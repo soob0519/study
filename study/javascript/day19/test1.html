@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ 
+ <script>
+ 
+ function fn_test1() {
+ 	alert("안녕하세요."); // 메세지 팝업함수
+ }
+ 
+ function fn_test2() { // 함수 이름은 중복 절대 불가
+ 	alert("곤니치와~"); 
+ }
+ 
+ function fn_test3() {
+ 	alert("굿모닝~"); 
+ }
+ 
+ function fn_test4(name) { // 매개변수 : 함수 안에 세팅된 변수
+	//var name ="";
+ 	alert(name+"님 안녕하세요.");
+ }
+ 
+ function fn_hap1(eng,kor) { // 2개의 매개변수
+	//var eng = "";
+	//var kor = "";
+	var hap = eng + kor;
+	alert("합계: "+hap);
+	}
+	
+ function fn_hap2(eng,kor) { // 2개의 매개변수
+	// var hap = eng + kor;  // 8890
+	var hap = Number(eng) + Number(kor); //문자타입 > 숫자타입으로 변경
+	alert("합계: "+hap);
+	}
+ 
+ </script>
+ 
+ <body>
+  
+  <button type="button" onclick="fn_test1()">한국어 인사</button>
+  <button type="button" onclick="fn_test2()">일본어 인사</button>
+  <button type="button" onclick="fn_test3()">영어 인사</button>
+  <button type="button" onclick="fn_test4('rlacjftn')">홍길동 인사</button>
+  <button type="button" onclick="fn_hap1(88,90)">합계1</button>
+  <button type="button" onclick="fn_hap2('88','90')">합계2</button>
+  
+ </body>
+</html>

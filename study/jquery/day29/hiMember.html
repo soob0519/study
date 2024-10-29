@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.0/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+  <script src="jquery-ui.js"></script>
+  <!-- <script src="hiMember.js"></script> -->
+  
+ </head>
+
+ <style>
+ table {
+	border-collapse:collapse;
+	width:900px;
+	font-size:12px;
+ }
+ 
+ th,td {
+	border:1px solid #cccccc;
+ }
+ 
+ </style>
+ 
+ <script>
+ 
+ 
+ function fn_passck1(pass1,passck1){
+	if (pass1.length >=8 && pass1.length <= 12 ){
+		if (pass1 == passck1) {
+			$("#passck2").html("암호가 일치합니다.");
+			$("#passck2").css({'color':'green'});
+		} else if (pass1 != passck1) {
+			$("#passck2").html("암호가 일치하지 않습니다.");
+			$("#passck2").css({'color':'red'});
+			$("#passck1").focus();
+			return false;
+		}
+	} else {
+		$("#pass1").focus();
+		$("#passck1").val("");
+	}
+ }
+ 
+ function fn_pass1(pass1){
+	if (pass1.length < 8) {
+		$("#pass2").html("암호가 짧습니다.");
+		$("#pass2").css({'color':'red','font-family':'궁서체'});
+		$("#pass1").focus();
+		return false;
+		
+	} else if (pass1.length > 12 ) {
+		$("#pass2").html("암호가 12자리를 초과했습니다..");
+		$("#pass2").css({'color':'red','font-family':'궁서체'});
+		$("#pass1").focus();
+		return false;
+		
+	} else if (pass1.length >=8 && pass1.length <= 12 ){
+		$("#pass2").html("사용가능한 암호입니다.");
+		$("#pass2").css({'color':'green','font-family':'맑은고딕'});
+	}	
+ }
+ 
+ function fn_userid1(userid1) {
+	
+	if (userid1.length < 4) {
+		$("#userid2").html("아이디가 짧습니다.");
+		$("#userid2").css({'color':'red','font-family':'궁서체'});
+		
+		$("#userid1").focus();
+		return false;
+		
+	} else if (userid1.length > 15 ) {
+		$("#userid2").html("아이디가 15자리를 초과했습니다.");
+		$("#userid2").css({'color':'red','font-family':'궁서체'});
+		
+		$("#userid1").focus();
+		return false;
+		
+	} else if (userid1.length >=4 && userid1.length <= 15 ){
+		$("#userid2").html("사용가능한 아이디입니다.");
+		$("#userid2").css({'color':'green','font-family':'맑은고딕'});
+	}
+	 
+ }
+
+ $(function() {
+	
+	//해당요소 클릭시 달력출력 함수
+	$("#birth").datepicker();
+	
+	//선택값이 변경될때 인식하는 함수
+	$("#email3").change(function(){
+		let a1 = $("#email3").val();
+		$("#email2").val(a1);
+		if ( a1 == "" )	{
+			$("#email2").attr("readonly",false);	
+		} else { //도메인을 선택했을 경우
+			$("#email2").attr("readonly",true);
+		}	
+	});
+	
+	$("#userid1").keyup(function(){
+		let userid1 = $("#userid1").val();
+		// 함수실행
+		fn_userid1(userid1);		
+	});
+	
+	$("#pass1").keyup(function(){
+		let pass1 = $("#pass1").val();
+		fn_pass1(pass1);
+	});
+	
+	$("#passck1").keyup(function(){
+		let pass1 = $("#pass1").val();
+		let passck1 = $("#passck1").val();
+		fn_passck1(pass1,passck1);
+	});
+	
+	// 우편번호찾기
+	$("#btn3").click(function(){
+		let url = "https://post.cgimall.co.kr/zonecode/happy_zipcode.php?ht=1&hys=am9iLmhpbWVkaWEuY28ua3I&hyf=user_zip|user_addr1|user_addr2&encoding=utf8&ht=1";
+		window.open(url,"post1","width=500,height=400");
+	});
+	
+	$("input[name='gender']").click(function(){
+		$("#span_gender").html("성별을 체크했습니다.");
+		$("#span_gender").css({'color':'red','font-weight':'bold'});
+	});
+	
+	$("#btn1").click(function(){
+	
+		let cam		= $("#cam").val();
+		let userid1	= $("#userid1").val();
+		let pass1	= $("#pass1").val();
+		let passck1	= $("#passck1").val();
+		let name	= $("#name").val();
+		
+		// ture||false ->ture,, false || false -> false 
+		let gender	= $("input[name='gender']").is(":checked");
+		
+		// 캠퍼스 체크
+		if (cam == "") {
+			alert("캠퍼스를 입력해주세요.");
+			$("#cam").focus();
+			return false;
+		}
+		// 아이디체크
+		if (fn_userid1(userid1) == false) {
+			return false;
+		}
+		
+		// 암호체크	
+		if (fn_pass1(pass1) == false) {
+			return false;
+		}
+		
+		// 암호확인
+		if (fn_passck1(pass1,passck1) == false) {
+			return false;
+		}
+		
+		if (name == "") {
+			alert("이름을 입력해주세요.");
+			$("#name").focus();
+			return false;
+		}
+		
+		if (gender == false) {
+			$("#span_gender").html("성별을 선택해주세요.");
+			$("#span_gender").css({'color':'red','font-weight':'bold'});
+			return false;
+		}
+		
+		// 생년월일(4/2/2)
+		if (birth.length != 10) {
+			alert("생일을 확인해주세요.");
+			$("#birth").focus();
+			return false;
+		}
+		
+		$("#frm").attr("method","post");
+		$("#frm").attr("action","save.jsp");
+		$("#frm").submit();
+		
+		// 12/25/2024
+		/* let s1 = birth.charAt(2);
+		let s2 = birth.charAt(5);
+		
+		if (s1 != "/" || s2 != "/" ) {
+			alert("생일을 다시 확인해주세요.");
+			$("#birth").focus();
+			return false;
+		}
+		
+		
+		if (email1 == "") {
+			alert("이메일을 입력해주세요.");
+			$("#email1").focus();
+			return false;
+		}
+		
+		if (email2 == "") {
+			alert("도메인을 입력해주세요.");
+			$("#email2").focus();
+			return false;
+		}
+		
+		let index = email2.indexOf(".");
+		if (index == -1) {
+			alert("이메일 도메인을 확인해주세요.");
+			$("#email2").focus();
+			return false;
+		}
+		
+		if (num1 == "" || num2 == "" || num3 == "") {
+			alert("번호를 입력해주세요.");
+			$("#num1").focus();
+			return false;
+		}
+		
+		if (num2.length != 4 || num3.length != 4 ) {
+			alert("번호를 다시 확인해주세요.");
+			$("#num2").focus();
+			return false;
+		}
+		
+		if (hpage == "") {
+			alert("홈페이지를 입력해주세요.");
+			$("#hpage").focus();
+			return false;
+		}
+		
+		let index2 = hpage.indexOf("http");
+		let index3 = hpage.indexOf("https");
+		if (index2 == -1 && index3 == -1 ) {
+			alert("홈페이지 주소를 확인해주세요.");
+			$("#hpage").focus();
+			return false;
+		}
+		
+		if (zipcode == "") {
+			alert("우편번호를 입력해주세요.");
+			$("#zipcode").focus();
+			return false;
+		}
+		
+		if (addr == "") {
+			alert("주소를 입력해주세요.");
+			$("#addr").focus();
+			return false;
+		} */
+	});
+	
+	/*$("#btn2").click(function(){
+		if(confirm("화면 리셋을 진행 하시겠습니까?") == false) {
+			return false;
+		}		
+	}); */
+	
+	$("#btn_cam1").click(function(){
+		$("#cam").attr("size","3");
+	});
+	
+	$("#btn_cam2").click(function(){
+		$("#cam").attr("size","1");
+	});
+	
+ });
+ 
+ </script>
+ 
+ <body>
+  <form name="frm" id="frm">
+  
+  <table>
+	<tr>
+		<th>캠퍼스선택</th>
+		<td>
+			<select name="cam" id="cam">
+				<option value="" autofocus> 캠퍼스를 선택해주세요.</option>
+				<option value="강남">강남</option>
+				<option value="하남">하남</option>
+				<option value="구리">구리</option>
+			</select>
+			<button type="button" id="btn_cam1">늘리기</button>
+			<button type="button" id="btn_cam2">줄이기</button>
+		</td> 
+	</tr>
+	<tr>
+		<th><label for="userid1">아이디</label></th>
+		<td>
+			<input type="text" name="userid1" id="userid1" placeholder="아이디를 입력하세요.">
+			<span name="userid2" id="userid2"></span>
+			<span name="userid3" id="userid3">4자 이상 15자 이하로 입력해주세요.</span>
+		</td> 
+	</tr>
+	<tr>
+		<th><label for="pass1">암호</label></th>
+		<td>
+			<input type="password" name="pass1" id="pass1" placeholder="암호">
+			<span name="pass2" id="pass2"></span>
+			<span name="pass3" id="pass3">영문,숫자 조합 8자 이상 12자이하로 입력해 주세요.</span>
+		</td> 
+	</tr>
+	<tr>
+		<th><label for="passck1">암호확인</label></th>
+		<td>
+			<input type="password" name="passck1" id="passck1" placeholder="암호확인">
+			<span name="passck2" id="passck2"></span>
+			<span name="passck3" id="passck3">비밀번호를 다시 한 번 입력해주세요.</span>
+		</td> 
+	</tr>
+	<tr>
+		<th>이름</th>
+		<td>
+			<input type="text" name="name" id="name"> 실명으로 입력해 주세요. (실명인증 이용시 자동입력)
+		</td> 
+	</tr>
+	<tr>
+		<th>성별</th>
+		<td>
+			<input type="radio" name="gender" value="M"> 남자
+			<input type="radio" name="gender" value="F"> 여자
+			<span id="span_gender"></span>
+		</td> 
+	</tr>
+	<tr>
+		<th>생년월일</th>
+		<td><input type="text" name="birth" id="birth"></td>
+	</tr>
+	<tr>
+		<th>이메일</th>
+		<td>
+			<input type="text" name="email1" id="email1">@
+			<input type="text" name="email2" id="email2">
+			<select name="email3" id="email3">
+					<option value="">직접입력</option>
+					<option value="naver.com">naver.com</option>
+					<option value="google.com">google.com</option>
+					<option value="daum.net">daum.net</option>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<th>핸드폰</th>
+		<td>
+			<select name="num1" id="num1">
+				<option value="">번호선택</option>
+				<option value="010">010</option>
+				<option value="011">011</option>
+				<option value="017">017</option>
+			</select> -
+			<input type="number" name="num2" id="num2"> -
+			<input type="number" name="num2" id="num3">
+		</td> 
+	</tr>
+	<tr>
+		<th>개인홈페이지</th>
+		<td><input type="text" name="hpage" id="hpage"></td> 
+	</tr>
+	<tr>
+		<th>주소</th>
+		<td>
+			<input type="number" name="zipcode" id="zipcode" placeholder="우편번호">
+			<button type="button" id="btn3">우편번호찾기</button><br>
+			<input type="text" name="addr" id="addr">
+		</td>
+	</tr>
+	<tr>
+		<th colspan="2">
+			<button type="submit" id="btn1" onclick="return false;">저장</button>
+			<button type="reset" id="btn2">취소</button>
+		</th>		
+	</tr>
+  </table>
+  
+  </form>
+ </body>
+</html>

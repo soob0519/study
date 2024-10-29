@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ 
+ <script>
+ 
+ function fn_submit() {
+	
+	if (document.frm.userid.value == "") {
+		alert("아이디를 입력해주세요.");
+		document.frm.userid.focus();
+		return false; // 스크립트 함수 종료
+	}
+	
+	if (document.frm.userid.value.length < 4 ||
+		document.frm.userid.value.length > 20)
+	{
+		alert("아이디는 4자리에서 20자리 사이로 가능합니다.");
+		document.frm.userid.focus();
+		return false;
+	}
+	
+	if (document.frm.pass.value == "") {
+		alert("비밀번호를 입력해주세요.");
+		document.frm.pass.focus();
+		return false;
+	}
+	if (document.frm.pass.value.length < 4 ||
+		document.frm.pass.value.length > 30)
+	{
+		alert("비밀번호는 4자리에서 30자리 사이로 가능합니다.");
+		document.frm.pass.focus();
+		return false;
+	}
+	
+	if (document.frm.pass.value != document.frm.pass2.value) {
+		alert("암호값이 암호확인값과 서로 일치하지 않습니다.");
+		document.frm.pass.focus();
+		return false;
+	}
+	
+	if (document.frm.name.value == "") {
+		alert("이름을 입력해주세요.");
+		document.frm.name.focus();
+		return false;
+	}
+	if (document.frm.mobile1.value == "") {
+		alert("휴대번호1를 입력해주세요.");
+		document.frm.mobile1.focus();
+		return false;
+	}
+	
+	if (document.frm.mobile1.value.length != 3 ||
+		document.frm.mobile2.value.length != 4 ||
+		document.frm.mobile3.value.length != 4)
+	{
+		alert("핸드폰 번호를 다시 확인해주세요.");
+		document.frm.mobile1.focus();
+		return false;
+	}
+	
+	if (document.frm.mobile2.value == "") {
+		alert("휴대번호2를 입력해주세요.");
+		document.frm.mobile2.focus();
+		return false;
+	}
+	if (document.frm.mobile3.value == "") {
+		alert("휴대번호3를 입력해주세요.");
+		document.frm.mobile3.focus();
+		return false;
+	}
+	
+	//checked : 선택상태 (true : 선택 false : 비선택)
+	if (document.frm.gender[0].checked == false &&
+		document.frm.gender[1].checked == false )
+	{
+		alert("성별을 체크해주세요.");
+		document.frm.gender[0].focus();
+		return false;
+	}
+	
+	if (document.frm.year.value == "") {
+		alert("생년을 입력해주세요.");
+		document.frm.year.focus();
+		return false;
+	}
+	if (document.frm.month.value == "") {
+		alert("생년월을 입력해주세요.");
+		document.frm.month.focus();
+		return false;
+	}
+	if (document.frm.day.value == "") {
+		alert("생년일을 입력해주세요.");
+		document.frm.day.focus();
+		return false;
+	}
+ }
+ 
+ </script>
+ 
+ <body>
+ 
+<form name="frm" method="post" action="">
+ 
+		<table class="table_member">
+			<tr>
+				<td colspan="2" class="title">
+				■ 로그인 정보 입력
+				</td>
+			</tr>
+			<tr>
+				<td>*아이디</td>
+				<td>
+					<input type="text" name="userid" class="input1">
+					<button type="button" class="button2">중복확인</button>
+				</td>
+			</tr>
+			<tr>
+				<td>*비밀번호</td>
+				<td>
+					<input type="password" name="pass" class="input2">
+				</td>
+			</tr>
+			<tr>
+				<td>*비밀번호 확인</td>
+				<td>
+					<input type="password" name="pass2" class="input2">
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+				<hr>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="title">
+				■ 회원 정보 입력
+				</td>
+			</tr>
+			<tr>
+				<td>이름</td>
+				<td>
+					<input type="text" name="name" class="input2">
+				</td>
+			</tr>
+			<tr>
+				<td>*연락처</td>
+				<td>
+					<input type="text" name="mobile1" class="tel">
+					 - 
+					<input type="text" name="mobile2" class="tel">
+					 - 
+					<input type="text" name="mobile3" class="tel">
+			</tr>
+			<tr>
+				<td>*성별</td>
+				<td>
+					<input type="radio" name="gender" value="M">남
+					<input type="radio" name="gender" value="F">여
+				</td>
+			</tr>
+			<tr>
+				<td>*생일</td>
+				<td>
+					<select name="year">
+						<option value="">년도선택</option>
+						<script>
+						for (var y=1930; y<=2020; y++) {
+							document.write("<option value='"+y+"'>"+y+"년</option>");
+						}
+						</script>
+					</select>
+					<select name="month">
+						<option value="">월선택</option>
+						<script>
+						for (var m=1; m<=12; m++) {
+						document.write("<option value='"+m+"'>"+m+"월</option>");
+						}
+						</script>
+					</select>
+					<select name="day">
+						<option value="">일선택</option>
+						<script>
+						for (var d=1; d<=31; d++) {
+						document.write("<option value='"+d+"'>"+d+"일</option>");
+						}
+						</script>
+					</select>
+				</td>
+			</tr>
+			<!--
+			<tr>
+				<td>*이메일</td>
+				<td>
+					<input type="text" name="" class="mail">
+					&nbsp;&nbsp;&nbsp;@&nbsp;&nbsp;&nbsp;
+					<input type="text" name="" class="mail">
+					&nbsp;&nbsp;&nbsp;
+					<select name="" class="mail">
+						<option value="">직접입력</option>
+						<option value="">naver.com</option>
+						<option value="">google.com</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+				<hr>
+				</td>
+			</tr>
+			<tr>
+				<td class="event1">
+				■ 상품 및 이벤트 정보 수신 동의
+				</td>
+				<td class="event2">
+				<input type="checkbox" name="">&nbsp;이메일&nbsp;&nbsp;&nbsp;
+				<input type="checkbox" name="">&nbsp;문자
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">서비스만료 및 서비스정보에 관련된 내용은 수신동의 여부와 관계없이 발송됩니다.
+				</td>
+			</tr>
+			-->
+			<tr>
+				<td colspan="2">
+				<hr>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+				<!--
+				<input type="text" name="" class="cabs1">
+				<input type="text" name="" class="cabs2">
+				<br>
+				<br>
+				-->
+				<p align="center">
+				<button type="button" class="button1" onclick="fn_submit()">가입하기</button>
+				</p>
+				</td>
+			</tr>
+			
+		</table>
+	</form>
+ </body>
+</html>

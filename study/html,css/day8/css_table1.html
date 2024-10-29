@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ 
+ <style>
+ table.table1 {
+	border-collapse:collapse; /*셀 공간 제거*/
+	width:600px;
+ }
+ .table1 th,td {
+	border:1px solid #cccccc;
+	padding:10px;
+ }
+ .td1 {
+	text-align:center;
+ }
+ 
+ </style>
+ 
+ <body>
+  
+  <table class="table1">
+  
+	<colgroup>
+		<col width="30%" style="background-color:lightpink" />
+		<col width="30%" style="background-color:lightpink" />
+		<col width="40%" />
+	</colgroup>
+
+	<tr>
+		<th>학번</th>
+		<th>이름</th>
+		<th>학과</th>
+	</tr>
+	<tr>
+		<td class="td1">홍길동</td>
+		<td class="td1">2024123456</td>
+		<td class="td1">컴퓨터공학과</td>
+	</tr>
+	<tr>
+		<td class="td1">조수빙</td>
+		<td class="td1">2024123457</td>
+		<td class="td1">컴퓨터공학과</td>
+	</tr>
+  </table>
+  
+ </body>
+</html>

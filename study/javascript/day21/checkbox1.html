@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ 
+ <script>
+ 
+ 
+ function fn_allchk() { // 모두선택 상자를 선택했을 경우
+	
+	var allchk = document.frm.allchk.checked;
+	if (allchk == true)	{ //전체선택
+		document.frm.chk[0].checked = true;
+		document.frm.chk[1].checked = true;
+		document.frm.chk[2].checked = true;
+		document.frm.chk[3].checked = true;
+		document.frm.chk[4].checked = true;
+	} else { //전체해제
+		document.frm.chk[0].checked = false;
+		document.frm.chk[1].checked = false;
+		document.frm.chk[2].checked = false;
+		document.frm.chk[3].checked = false;
+		document.frm.chk[4].checked = false;
+	}
+ 
+ }
+ 
+ function fn_submit() {
+	
+	if (document.frm.chk[0].checked == false &&
+		document.frm.chk[1].checked == false &&
+		document.frm.chk[2].checked == false &&
+		document.frm.chk[3].checked == false &&
+		document.frm.chk[4].checked == false)
+	{
+		alert("1개 이상 선택해주세요.");
+		return false;
+	}
+	
+	document.frm.submit();
+ }
+ 
+ </script>
+ 
+ <body>
+  
+  <form name="frm" method="post" action="save.jsp">
+  <h2>수강과목 선택</h2>  
+  <input type="checkbox" name="chk" value="html"> html <br>
+  <input type="checkbox" name="chk" value="css"> css <br>
+  <input type="checkbox" name="chk" value="java"> java <br>
+  <input type="checkbox" name="chk" value="oracle"> oracle <br>
+  <input type="checkbox" name="chk" value="mysql"> mysql <br>
+  <br>
+  모두선택 <input type="checkbox" name="allchk" onclick="fn_allchk()">
+  <br><br>  
+  <button type="submit" onclick="fn_submit();return false;">전송</button>
+  </form>
+  
+ </body>
+</html>

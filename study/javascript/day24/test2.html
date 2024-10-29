@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ 
+ <script>
+ 
+ function fn_submit() {
+	
+	if ( document.getElementsByName("userid")[0].value == "") {
+		alert("아이디를 입력해주세요");
+	}
+	if ( document.getElementsByName("pass")[0].value == "") {
+		alert("암호를 입력해주세요");
+	}
+	
+ } //배열 
+ 
+ </script>
+ 
+ <body>
+ 
+ 아이디 <input type="text" name="userid" id="user_id"> <br>
+ 암호 <input type="password" name="pass" id="user_pass"><br>
+ 성별 <input type="radio" name="gender" value="M">남,
+	<input type="radio" name="gender" value="F">여
+	
+ <button type="button" onclick="fn_submit();">로그인</button>
+ 
+ 
+ </body>
+</html>

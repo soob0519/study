@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ 
+ <style>
+ 
+ #user_id {
+	width:150px;
+	padding:10px; 
+ }
+ 
+ 
+ </style>
+ 
+ <script>
+ 
+ function fn_submit() {
+	//if (document.frm.userid.value == "") {
+	if (document.getElementById("user_id").value == "") {
+		alert("아이디를 입력해주세요.");
+		return false;
+	}
+	//if (document.frm.pass.value == ""){
+	if (document.getElementById("user_pass").value == "") {
+		alert("비밀번호를 입력해주세요.");
+		return false;
+	}
+	document.frm.submit();
+	}
+ </script>
+ 
+ <body>
+ 
+ <form name="frm" method="post" action="login.jsp">
+ 
+ 아이디 <input type="text" name="userid" id="user_id"> <br>
+ 암호 <input type="password" name="pass" id="user_pass"><br>
+ <button type="submit" onclick="fn_submit();return false;">로그인</button>
+ 
+ </form>
+  
+ </body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ 
+ <script>
+  // 문제풀이4-3
+ // A: 90이상, B: 80이상, C: 70이상, D: 60이상, F: 60이하,
+ 
+ var name = prompt("학생명","");
+ var html = prompt("학생점수","");
+ 
+ if (html <=100 && html >= 90){
+	score = "A";
+ } else if ( html < 90 && html >= 80) {
+	score = "B";
+ } else if ( html < 80 && html >= 70) {
+	score = "C";
+ } else if ( html < 70 && html >= 60) {
+	score = "D";
+ } else if ( html < 60 && html >= 0) {
+	score = "F";
+ } else {
+	score = "오류";
+ }
+ 
+ document.write("<font color='blue'>" + name + "</font>학생의 점수는 " + html + "점으로 <font color='red'> "+ score + "학점</font>입니다.");
+ 
+ document.write("<br>")
+ 
+ document.write("<span style='color:blue'>" + name + "</span>학생의 점수는 " + html + "점으로 <span style='color:red'>"+ score + "학점</span>입니다.");
+ 
+ //학점세팅
+ 
+ //학생명(파란색),학점은(붉은색)
+ //홍길동학생의 점수는 88점으로 B학점 입니다.
+ 
+ 
+ 
+ </script>
+ 
+ <body>
+  
+ </body>
+</html>

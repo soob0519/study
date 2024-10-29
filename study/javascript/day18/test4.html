@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ 
+ <style>
+ 
+ table {
+	border-collapse:collapse;
+ }
+ 
+ th, td {
+	border: 1px solid #cccccc;
+	padding: 10px;
+ }
+ 
+ 
+ </style>
+ 
+ 
+ <script>
+ 
+ //풀어보기1
+ var age = 8;
+ 
+ while (age<=19) {
+	if (age == 8){
+		document.write("초등학생 : ");
+	} else if (age == 14){
+		document.write("<br> 중학생 : ");
+	} else if (age == 17){
+		document.write("<br> 고등학생 : ");
+	}	
+	document.write(age+" ");
+	age++;
+ } 
+ document.write("<hr>"); 
+ 
+ //풀어보기1 다른 방법
+ var age = 8;
+ while (age<=19) {
+	if (age == 8) document.write("초등학생 : ");
+	else if (age == 14) document.write("중학생 : ");
+	else if (age == 17) document.write("고등학생 : ");
+	
+	document.write(age+" ");
+	
+	if (age == 13 || age == 16){
+		document.write("<br>");
+	}
+	age++;
+ } 
+ document.write("<hr>");
+ 
+ //풀어보기1 누적
+ var age = 8;
+ var h1 = "초등학생 : ";
+ var h2 = "중학생 : ";
+ var h3 = "고등학생 : ";
+ 
+ while (age<=19) {
+	if (age>=8 && age<=13) { 
+		h1=h1+age+" ";		 
+	} else if (age>=14 && age<=16)	{ 
+		h2=h2+age+" ";
+	} else {
+		h3=h3+age+" ";
+	}
+	age++;
+ }
+ document.write( h1 + "<br>" + h2 + "<br>" + h3);
+ 
+ document.write("<hr>"); 
+ 
+ //풀어보기2
+  document.write("<table>");
+  document.write("<tr>");
+  var a = 1;
+  while (a<=5) {
+	  document.write("<td>" + a + "</td>");
+	a++;
+  }
+  document.write("</tr>");
+  document.write("</table>");
+  
+  document.write("<hr>");
+  
+  //풀어보기3
+  document.write("<table>");
+  document.write("<tr>");
+  var a = 1;
+  while (a<=8) {
+	  if (a == 5) {
+		document.write("</tr><tr>");
+	  }
+	  document.write("<td>" + a + "</td>");
+	a++;
+  }
+  document.write("</tr>");
+  document.write("</table>");
+  
+  document.write("<hr>");
+  
+  
+  
+ </script>
+ 
+ <body>
+  
+ </body>
+</html>

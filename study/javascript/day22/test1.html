@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ 
+ <script>
+ function fn_popup() {
+	
+	let w1 = (window.screen.width / 2) -200;
+	let h1 = (window.screen.height / 2) -100;
+	
+	//alert("스크린 넓이:" +w1+", 높이:"+h1);
+		
+	let url = "login_sample.html";
+	window.open(url,"login","width=400,height=200,left="+w1+",top="+h1);
+ }
+ 
+ function fn_popup2() {
+	
+	let w1 = (window.screen.width / 2) -200;
+	let h1 = (window.screen.height / 2) -100;
+		
+	let url = "boardWrite.html";
+	window.open(url,"login","width=400,height=200,left="+w1+",top="+h1);
+ }
+ 
+ // 팝업창 이름을 같은 이름으로 두면 같은 팝업창에서 교체 되듯이 나타남.
+ 
+ function fn_eval() {
+	
+	let box1 = document.frm.box1.value;
+	let result = eval(box1); // 10+2*20
+	alert(result);
+ }
+ 
+ 
+ </script>
+ 
+ <body>
+ 
+ <form name="frm">
+ 
+ <h2>로그인하기</h2>
+ 
+	<button type="button" onclick="fn_popup()">로그인</button>
+	<br><br>
+	
+	<button type="button" onclick="fn_popup2()">게시판</button>
+	<br><br>
+	
+	<input type="text" name="box1"> 
+	<button type="button" onclick="fn_eval()">연산하기</button>
+ 
+ </form>
+  
+ </body>
+</html>

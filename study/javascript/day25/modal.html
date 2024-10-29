@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ 
+ <style>
+ #div_modal {
+	position:relative;
+	top:30%;
+	left:30%;
+	width:400px;
+	height:300px;
+	background-color:#9933ff;
+	color:#fff;
+	text-align:center;
+	border-radius:30px;
+ }
+ 
+ </style>
+ 
+ <script>
+ 
+ function fn_modal(a){
+	let div_modal = document.getElementById("div_modal");
+	if (a == "+") {
+		div_modal.style.display ="block";
+	} else {
+		div_modal.style.display ="none";	
+	}
+ }
+ 
+ </script>
+ 
+ <body>
+  
+  <div>
+	<button type="button" onclick="fn_modal('+')">모달창 열기</button>
+	<button type="button" onclick="fn_modal('-')">모달창 닫기</button>
+  </div>
+  
+  <div id="div_modal" style="display:block;">
+	<h1>모달창입니다.</h1>
+  </div>
+  <!-- 모달(Modal)창: 창 내부에서 상위 레이러를 띄우는 방식을 사용하는 창
+					이목을 집중시키기 위한 용도로 제작되는 그래픽 인터페이스 창-->
+  
+  
+  
+ </body>
+</html>

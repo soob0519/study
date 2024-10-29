@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <script>
+ 
+ var name = prompt("사원명","");
+ var year = prompt("근무년수","");
+ var lev="";
+ 
+ if (year >= 15){
+	lev = "특급";
+ } else if (year >= 10) {
+	lev = "고급";
+ } else if (year >= 6) {
+	lev = "중급";
+ } else if (year < 6) {
+	lev = "초급";
+ }
+ 
+ document.write("<b>" + name + " 사원의 년차는 " + year + "년으로 "+ lev + "입니다." + "</b>");
+ 
+ 
+ </script>
+ 
+ 
+ <body>
+  
+ </body>
+</html>

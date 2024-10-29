@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <style>
+ 
+ .table1 {
+	width:800px;
+	border-collapse:collapse;
+ }
+ 
+ .table1 th,td {
+	border:1px solid #cccccc;
+	padding:3px;
+ }
+ 
+ </style>
+ 
+ <script>
+ 
+ document.write("<table class='table1'>");
+ document.write("	<tr>");
+ for (var i=11; i<=22; i++){
+	 
+	if (i<21) {
+	document.write("<td>");
+	document.write("<img src='"+i+".jpg' width='200' height='150'><br>");
+	document.write("<span style='font-size:12px;color:red;'>제조사 : 현대 <br> 가격 : 1500만원 </span>");
+	document.write("</td>");
+	} else {
+		document.write("<td></td>");
+	}
+	
+	if ( i == 14 || i ==18 )	{
+		document.write("</tr><tr>");
+	}
+ }
+  document.write("	</tr>");
+  document.write("</table>");
+  
+  </script>
+ <body>
+  
+ </body>
+</html>

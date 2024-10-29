@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ 
+ <style>
+ div.sticky	{
+	position:sticky;
+	bottom:20px;
+	
+	width:1300px;
+	height:100px;
+	padding:5px;
+	background-color:#f0f0f0;
+	
+	border:2px solid #dddddd;
+	border-radius:10px;	/*둥근모서리설정*/
+	
+	/* margin-left:17% */
+	margin:auto;	/* 외부 정렬 */
+	text-align:center;	/* text-align : 내부정렬/글자배치 */
+	line-height:100px;	/* 줄높이 간격 */
+ }
+ div.side1	{
+	position:sticky;
+	bottom:250px;
+	left:90%;
+	width:70px;
+	height:130px;
+	padding-top:20px;
+	background:#b3b3b3;
+	border:2px solid #808080;
+	color:#ffffff;
+	border-radius:10px;
+	font-size:13px;
+	font-weight:bold;
+	text-align:center;
+	vertical-align:middle;
+	line-height:1.7;
+ }
+ 
+ .side1 hr{
+	border:0px;
+	height:1px;
+	background: #808080;
+ }
+ 
+ .select1{
+	width:160px;
+	height:42px;
+	border-radius:5px;
+	border-color:#d3d2d2;
+ }
+ 
+ .input1 {
+ 	width:160px;
+	height:38px;
+	border-radius:5px;
+	border-color:#d3d2d2;
+	border:1px solid #cccccc;
+ }
+ 
+ .checkbox1 {
+	position:absolute;
+	left:71%;
+	top:38px;
+	width:150px;
+	height:60px;
+	/*background-color:#4f4f4f;*/
+	font-size:11px;
+	line-height:1.4;
+	text-align:left;
+}
+
+.button1 {
+	position:absolute;
+	right:30px;
+	top:25px;
+	width:200px;
+	height:60px;
+	font-size:25px;
+	color:#ffffff;
+	font-weight:bold;
+	
+	background-image:url("https://www.himediaacademy.kr//home/images/main/c_btn.jpg");
+	/*background-color:#0033cc;*/
+	
+	border:0px;
+	border-radius:10px;
+}
+
+.div101 {
+	position:absolute;
+	left:200px;
+	
+}
+.div102 {
+	position:absolute;
+	left:25px;
+	top:24px;
+	width:150px;
+	height:50px;
+	line-height:1.4;
+	font-weight:bold;
+	font-size:20px;
+}
+ 
+ </style>
+ 
+ <body>
+  
+<p>스크롤 테스트</p>
+
+<div style="height:500px;">111111</div>
+<div style="height:500px;">222222</div>
+<div style="height:500px;">333333</div>
+<div style="height:500px;">444444</div>
+
+<div class="side1">
+	온라인<br>상담
+	<hr class="side1 hr">
+	국민내일<br>
+	배움카드
+</div>
+
+<div class="sticky">
+	
+	<div class="div102">
+		<img src="c_img.png"><br>
+		간편상담신청
+	</div>
+	
+	<div class="div101">
+	
+	<select class="select1" name="">
+		<option value="">강남캠퍼스</option>
+		<option value="">구리캠퍼스</option>
+		<option value="">신촌캠퍼스</option>
+	</select>
+	&nbsp;&nbsp;
+	<select class="select1" name="">
+		<option value="">관심분야</option>
+		<option value="">IT프로그래밍</option>
+		<option value="">컴퓨터활용OA</option>
+		<option value="">웹디자인.웹퍼블리셔</option>
+	</select>
+	&nbsp;&nbsp;
+	<input type="text"class="input1" name="" placeholder="이름">
+	&nbsp;&nbsp;
+	<input type="text"class="input1" name="" placeholder="휴대폰 번호(-없이입력)">
+	
+	</div>
+	&nbsp;&nbsp;
+	<div class="checkbox1">
+		 개인정보수집 및 <br>
+		 이용동의안내 <input type="checkbox" name="" value="">동의함
+	</div>
+	
+	<button type="button" class="button1">상담신청</button>
+
+</div>
+
+  
+ </body>
+</html>

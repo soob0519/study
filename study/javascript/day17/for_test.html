@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>실습문제(for문)</title>
+ </head>
+ 
+ <script>
+ 
+ //문제1
+ for(var i=1; i<=120; i++){
+	if (i%2 == 0){
+		document.write(i+" ");
+	}
+ }
+ document.write("<hr>");
+ 
+ //문제2
+ for(var i=-5; i<=5; i++){
+	if (i < 0){
+		document.write(i+" ");
+	}
+ }
+ document.write("<hr>");
+ 
+ //문제3
+ for(var i=-5; i<=5; i++){
+	if (i == -5) {
+		document.write("음수 : ");
+	} else if (i == 1) {
+			document.write("양수 : ");
+		}
+		if (i < 0) {
+			document.write(i+" ");
+			if (i == -1) {
+				document.write("<br>");
+			}
+		} else if (i > 0) {
+			document.write(i+" ");
+		}
+ }
+ document.write("<hr>");
+ 
+ //문제3 선생님과 함께
+ for(var i=-5; i<=5; i++) { // -5 -4 -3 -2 -1 0 1 2 3 4 5
+	
+	if (i == -5) {
+		document.write("음수 : ");
+	}
+	if (i == 1) {
+		document.write("양수 : ");
+	}
+	if (i != 0) {
+		document.write( i + " ");
+	}
+	if ( i == 0)	{
+		document.write("<br>");
+	}
+ }
+ document.write("<hr>");
+
+ //문제4
+ for(var i=3; i<=5; i++){
+	if ( i<=4 ){
+		document.write("8x"+i+"="+(8*i)+", ");
+	} else {
+		document.write("8x"+i+"="+(8*i)+" ");
+	}
+ }
+ document.write("<hr>");
+ 
+ //문제4 다른 풀이
+ for(var i=1; i<=9; i++){
+	if ( i>2 && i<6 ){ // i==3 || i==4 || i==5
+		document.write("8x"+i+"="+(8*i));
+		if (i<=4) {
+			document.write(", ");
+		}
+	} 
+ }
+ document.write("<hr>");
+ 
+ //문제4 선생님과함께
+ for(var i=3; i<=5; i++){
+	document.write("8x"+i+"="+(8*i));
+		if (i!=5) {
+			document.write(", ");
+		} 
+ }
+ document.write("<hr>");
+ 
+ //문제5
+ for(var i=1; i<=10; i++){
+	document.write("<input type='text'><button>+</button><button>-</button><br>");
+ }
+ document.write("<hr>");
+ 
+ //문제5 선생님과 함께
+ for(var i=1; i<=10; i++){
+	document.write("<input type='text'>");
+	document.write("<button>+</button>");
+	document.write("<button>-</button>");
+	document.write("<br>");
+ }
+ document.write("<hr>");
+ 
+ </script>
+ 
+ <body>
+  
+ </body>
+</html>

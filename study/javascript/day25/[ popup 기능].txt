@@ -1,0 +1,3 @@
+[ popup 기능]
+1. window.open();
+2. Modal 윈도우 => div

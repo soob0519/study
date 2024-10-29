@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ 
+ <style>
+ 
+ .input {
+	width:60px;
+	padding:3px;
+	font-size:12px;
+	font-family:궁서체;
+ }
+ 
+ .button1 {
+	
+ 
+ }
+ 
+ 
+ </style>
+ 
+ <script>
+ function fn_test1() {
+	var a1 = document.frm.a1.value;
+	var a2 = document.frm.a2.value;
+	var result = Number(a1) + Number(a2);
+	alert("덧셈 : "+result);
+ }
+ 
+ function fn_test2() {
+	var a1 = document.frm.a1.value;
+	var a2 = document.frm.a2.value;
+	var result = Number(a1) - Number(a2);
+	alert("뺄셈 : "+result);
+ }
+ 
+ function fn_test3() {
+	var a1 = document.frm.a1.value;
+	var a2 = document.frm.a2.value;
+	var result = Number(a1) * Number(a2);
+	alert("곱셈 : "+result);
+ }
+ 
+ function fn_test4() {
+	var a1 = document.frm.a1.value;
+	var a2 = document.frm.a2.value;
+	var result = Number(a1) / Number(a2);
+	alert("나눗셈 : "+result);
+ }
+ 
+ function fn_test5() {
+	var a3 = document.frm.a3.value;
+	a3 = Number(a3)
+	var txt = "";
+	
+	if (a3 == 0){
+		txt="zero";
+	} else if (a3%2 == 0){
+		txt="짝수";
+	} else {
+		txt="홀수";
+	}
+	alert(a3 + "는" + txt + "입니다.");
+ }
+ 
+ function fn_test6() {
+	var a4 = document.frm.a4.value;
+	a4 = Number(a4)
+	var txt = "";
+	
+	if (a4 >= 60){
+		txt = "합격";
+	} else {
+		txt = "불합격"
+	}
+	alert(txt + "입니다.");
+ }
+ 
+ </script>
+ 
+ <body>
+  
+  <h2>연산처리기</h2>
+  <form name="frm">
+  <input type="text" name="a1" class="input">
+  <input type="text" name="a2" class="input">
+  <button type="button" onclick="fn_test1()" class="button1">+</button>
+  <button type="button" onclick="fn_test2()" class="button1">-</button>
+  <button type="button" onclick="fn_test3()" class="button1">×</button>
+  <button type="button" onclick="fn_test4()" class="button1">÷</button>
+  
+  <hr>
+  
+  <input type="text" name="a3" class="input">
+  <button type="button" onclick="fn_test5()">홀수/짝수</button>
+  
+  <hr>
+  
+  <input type="text" name="a4" class="input">
+  <button type="button" onclick="fn_test6()">합격여부</button>
+  
+  </form>
+  
+  
+ </body>
+</html>

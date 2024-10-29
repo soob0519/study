@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ 
+ <style>
+ body {
+	font-size:12px;
+	color:gray;
+	background-color:pink;
+ }
+ 
+ 
+ </style>
+ 
+ <script>
+ function setFontColor(c) {
+	document.getElementById("box").style.color = c;
+	document.getElementById("box").style.fontSize = "12px";
+ }
+ 
+ function setBgColor(c) {
+	document.getElementById("box").style.backgroundColor = c;
+ }
+ 
+ function hideOnOff(c) {
+	// display:none;		// 숨김
+	// display:block; '';	// 출력
+	document.getElementById("box").style.display = c;
+ }
+ 
+ </script>
+ 
+ <body>
+  
+  <button type="button" onclick="setFontColor('red')">폰트RED</button>
+  <button type="button" onclick="setFontColor('blue')">폰트BLUE</button>
+  
+  <button type="button" onclick="setBgColor('red')">배경RED</button>
+  <button type="button" onclick="setBgColor('blue')">배경BLUE</button>
+  
+  <button type="button" onclick="hideOnOff('')">on 적용</button>
+  <button type="button" onclick="hideOnOff('none')">off 적용</button>
+  
+  <div id="box" class="box1" style="">
+	<h1>테스트 영역</h1>
+  </div>
+  
+  
+ </body>
+</html>

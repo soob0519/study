@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ 
+ <script>
+ // 팝업창(메세지창)
+ // 알림
+ alert("아이디를 입력해주세요."); // [확인]
+ 
+ // 참, 거짓의 의견을 받고자 하는 경우 // [확인] [취소]
+ confirm("서울지역 거주자 입니까?");
+ 
+ // 사용자의 메세지를 받고자 하는 경우
+ prompt("주소를 입력해주세요.",""); // 한줄 입력상자 제공
+ 
+ // 상수(const),일반변수(var,let)
+ 
+ defult
+ title = "aa";	// var title = "aa";
+ eng = 90;		// var eng = 90;
+ kor = 70;		// var kor = 70;
+ 
+ // 상수 : 변수값을 재정의 불가 
+ const title = "자바스크립트"; // (o)
+ 
+ var eng = 90; // (o)
+ let kor = 70; // (o)
+ 
+ const title = "오라클"; // (x) - 오류
+ var eng = 80; // (o) - 정상코딩
+ let kor = 88; // (x) - 오류
+ 
+ title = "오라클"; // (x) - 오류
+ eng = 80; // (o) - 정상코딩
+ kor = 88; // (o) - 정상코딩
+ 
+ var hap = eng + kor; // +,-,*,/,%(나눈 나머지값)
+ var number = 14;
+ var result1 = number%7; // 결과 : 0, 7의 배수
+ var result2 = number%2; // 결과 : 0, 짝수
+ 
+ if (result2 == 0) {
+	document.write( number +"는 짝수입니다.");
+ } else if (result2 == 1) {
+	document.write( number +"는 홀수입니다.");
+ }
+ 
+ 
+ </script>
+ 
+ <body>
+  
+ </body>
+</html>

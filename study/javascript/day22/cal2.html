@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ 
+ <style>
+ .total_price {
+	border:0px;
+ }
+ 
+ .total_price:focus {
+	outline:none;
+ }
+ 
+ </style>
+ 
+ <script>
+ 
+ let price = 1000; // 전역변수
+ 
+ function fn_start() {
+	 
+	document.frm.total_price.value = price * 1;
+	
+ }
+
+ function fn_plus(a) { // 매개변수
+	
+	let box1 = document.frm.box1.value;
+	
+	if (a == "+")		box1++;
+	else if (a == "-")	box1--;
+	
+	if (box1<0) box1 = 0; // 실행 라인이 한개 밖에 없는 경우에는 중괄호 생략가능
+	
+	let total_price = box1 * price;
+	
+	document.frm.box1.value = box1;
+	document.frm.total_price.value = total_price;
+	
+ }
+ 
+ 
+ </script>
+ 
+ <body onload="fn_start()"> <!-- body에 넣으면 화면이 열리는 순간 실행 :: onload는 body에만 쓸수있음 -->
+  
+  <form name="frm">
+  
+	<input type="text" name="box1" value="1" size="3" readonly style="text-align:right;">
+	<button type="button" onclick="fn_plus('+')">+</button>
+	<button type="button" onclick="fn_plus('-')">-</button> <br><br>
+	
+	
+	총 가격 : <input type="text" name="total_price" size="4" class="total_price" readonly>
+  
+  
+  </form>
+  
+ </body>
+</html>

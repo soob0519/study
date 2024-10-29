@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ 
+ <script>
+ function fn_div1(a){ // 매개변수
+	let div1 = document.getElementById("div1");
+	let msg = "";
+	
+	if ( a == "t" ) {
+		msg = div1.innerText;
+	} else if ( a == "h" ) {
+		msg = div1.innerHTML;
+	}
+	document.getElementById("div2").innerHTML = msg;
+ }
+ 
+ </script>
+ 
+ <body>
+  
+  <div id="div1">
+		<h3>java,oracle</h3>
+  </div>
+  
+  <button type="button" onclick="fn_div1('t')">innerText</button>
+  <button type="button" onclick="fn_div1('h')">innerText</button>
+  
+  <p>
+  <div id="div2" style="height:50px;background:pink;"></div>
+  </p>
+ </body>
+</html>

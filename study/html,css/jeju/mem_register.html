@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+ </head>
+ 
+ <style>
+ 
+ 
+ div.section_main {
+ 	margin:auto;
+	width:710px;
+	height:800px;
+	background-color:#ffffff;
+	letter-spacing:-1px;
+ }
+ .section_txt1 {
+	float:left;
+	font-size:35px;
+	font-weight:bold;
+	letter-spacing:-3px;
+	margin-top:40px;
+	margin-left:25px;
+ }
+ .section_txt2 {
+	font-size:15px;
+	font-weight:bold;
+	color:#808080;
+	padding-left:140px;
+	margin-top:10px;
+	margin-left:25px;
+	margin-bottom:30px;
+ }
+  
+ .button1 {
+	border:1px solid #cccccc;
+	width:325px;
+	font-size:15px;
+	height:50px;
+	cursor:pointer;
+	font-weight:bold;
+	background-color:#ffffff;
+	color:#ebebeb;
+	margin-left:25px;
+ }
+ .button2 {
+	border:0px solid #dedede;
+	width:325px;
+	font-size:15px;
+	height:50px;
+	cursor:pointer;
+	font-weight:bold;
+	background-color:#37B7B5;
+	color:#ffffff;
+	margin-left:-10px;
+ }
+ 
+ .mem_table1 {
+    margin:auto;
+	margin-top:30px;
+	border:0px solid #cccccc;
+ } 
+ 
+ .mem_table1 input {
+	border-radius:5px;
+ } 
+ 
+ 
+ input{
+	border:1px solid #cccccc;
+	width:420px;
+	height:40px;
+	text-indent:10px; /*placeholder 위치 조정*/
+ }
+ 
+ .mem_table2 {
+	margin:auto;
+	margin-top:20px;
+	border:0px solid #cccccc;
+	border-collapse:collapse;
+	border-spacing:0px;
+ } 
+  
+ .mem_table3 {
+	margin:auto;
+	margin-top:20px;
+	border:0px solid #cccccc;
+	border-collapse:collapse;
+	border-spacing:0px;
+	width:420px;
+ } 
+ 
+ .mem_table3 th,td {
+	border:0px solid #cccccc;
+	border-collapse:collapse;
+	border-spacing:0px;
+ } 
+ 
+ .input1 {
+	border:1px solid #cccccc;
+	width:300px;
+	height:40px;
+	text-indent:10px;
+	border-top-left-radius:10px;
+	border-top-right-radius:10px;
+ } 
+ 
+ .input2 {
+	border:1px solid #cccccc;
+	width:300px;
+	height:40px;
+	text-indent:10px;
+ } 
+ 
+  .radio1 {
+	border:1px solid #cccccc;
+	height:10px;
+	width:40px;
+  }
+ 
+  .mem_table3 select{
+	border:1px solid #cccccc;
+	margin-top:-5px;
+	width:420px;
+	height:45px;
+	text-indent:10px;
+ }
+  .inp_first {
+	border-top-left-radius:10px;
+	border-top-right-radius:10px;
+	vertical-align:0px;
+  }
+  
+  .inp_last {
+	border-bottom-left-radius:10px;
+	border-bottom-right-radius:10px;
+  }
+  
+  .mem_table4 {
+	margin:auto;
+	margin-top:20px;
+	border-collapse:collapse;
+	border-spacing:0px;
+	width:420px;
+	font-size:14px;
+	vertical-align:middle;
+ }
+ 
+  .tel {
+	width:85px;
+	height:40px;
+	border-radius:5px;
+	text-align:center;
+	margin-left:15px;
+ }
+ 
+ .mail1 {
+	width:60px;
+ }
+ 
+ .mail2 {
+	width:320px;
+	height:45px;
+	border-radius:5px;
+	margin-top:20px;
+	margin-left:25px;
+	text-indent:10px;
+ }
+ 
+ .button3 {
+	margin-top:30px;
+	border:0px solid #cccccc;
+	border-radius:5px;
+	width:180px;
+	font-size:15px;
+	height:50px;
+	cursor:pointer;
+	font-weight:bold;
+	background-color:#FF5722;
+	color:#ffffff;
+ }
+ 
+ .button3:hover {
+	background-color:#f23d00;
+ }
+   
+ </style>
+ 
+ <script>
+ 
+ function fn_submit() {
+	
+	if (document.frm.userid.value == "") {
+		alert("아이디를 입력해주세요.");
+		document.frm.userid.focus();
+		return false;
+	}
+	
+	if (document.frm.userid.value.length < 6 ||
+		document.frm.userid.value.length > 20)
+	{
+		alert("아이디는 6자리에서 20자리 사이로 가능합니다.");
+		document.frm.userid.focus();
+		return false;
+	}
+	
+	if (document.frm.pass.value == "") {
+		alert("비밀번호를 입력해주세요.");
+		document.frm.pass.focus();
+		return false;
+	}
+	if (document.frm.pass.value.length < 4 ||
+		document.frm.pass.value.length > 20)
+	{
+		alert("비밀번호는 4자리에서 20자리 사이로 가능합니다.");
+		document.frm.pass.focus();
+		return false;
+	}
+	
+	if (document.frm.pass.value != document.frm.pass2.value) {
+		alert("비밀번호 값이 비밀번호확인 값과 서로 일치하지 않습니다.");
+		document.frm.pass.focus();
+		return false;
+	}
+	
+	if (document.frm.username.value == "") {
+		alert("이름을 입력해주세요.");
+		document.frm.username.focus();
+		return false;
+	}
+	
+	if (document.frm.gender[0].checked == false &&
+		document.frm.gender[1].checked == false )
+	{
+		alert("성별을 체크해주세요.");
+		document.frm.gender[0].focus();
+		return false;
+	}
+	
+	if (document.frm.birth.value == "") {
+		alert("생년월일을 입력해주세요.");
+		document.frm.birth.focus();
+		return false;
+	}
+	
+	if (document.frm.birth.value.length != 8 )
+	{
+		alert("생년월일 8자리를 입력해주세요.");
+		document.frm.birth.focus();
+		return false;
+	}
+	
+	if (document.frm.birthcalendar[0].checked == false &&
+		document.frm.birthcalendar[1].checked == false )
+	{
+		alert("양력 또는 음력을 체크해주세요.");
+		document.frm.birthcalendar[0].focus();
+		return false;
+	}
+	
+	if (document.frm.tel1.value == "") {
+		alert("전화번호를 입력해주세요.");
+		document.frm.tel1.focus();
+		return false;
+	}
+	
+	if (document.frm.tel1.value.length != 3 ||
+		document.frm.tel2.value.length != 4 ||
+		document.frm.tel3.value.length != 4)
+	{
+		alert("전화번호를 다시 확인해주세요.");
+		document.frm.tel1.focus();
+		return false;
+	}
+	
+	if (document.frm.tel2.value == "") {
+		alert("전화번호를 입력해주세요.");
+		document.frm.tel2.focus();
+		return false;
+	}
+	if (document.frm.tel3.value == "") {
+		alert("전화번호를 입력해주세요.");
+		document.frm.tel3.focus();
+		return false;
+	}
+	
+	if (document.frm.email.value == "") {
+		alert("이메일을 입력해주세요.");
+		document.frm.email.focus();
+		return false;
+	}
+	
+	location="login.html"
+ }
+ 
+ </script>
+ 
+ <body>
+ 
+  <header>
+	<div class="quick_top">
+		<a href="#">회원가입</a>
+		<span class="txt_bar">│</span>
+		<a href="#">로그인</a>
+		<span class="txt_bar">│</span>
+		<a href="#">마이페이지</a>
+		<span class="txt_bar">│</span>
+		<a href="#">이벤트</a>
+		<span class="txt_bar">│</span>
+		<a href="#">고객센터</a>
+		<span class="txt_bar">│</span>
+		<a href="#">상품바구니</a> <span class="txt_num">0</span>
+		<span class="txt_bar">│</span>
+		<a href="#">전체메뉴</a>
+	</div>
+  </header>
+  
+  <nav>
+	<div class="nav_top">
+		<div style="float:left;"><img src="jeju_logo.png" alt="제주여행로고"></div>
+		<div class="menu_list" style="float:left;">
+			<ul class="menu_ul">
+				<li>할인항공</li>
+				<li>숙박</li>
+				<li>렌터카</li>
+				<li style="width:110px;">레저/티켓</li>
+				<li>에어카텔</li>
+				<li>투어</li>
+				<li>맞춤여행</li>
+			</ul>
+		</div>
+		<div>
+		<img src="jeju_card.png" alt="카드이미지" style="padding-left:68px;"></div>
+	</div>
+  </nav>
+  
+  <section>
+  <form name="frm" method="post" action="" autocomplete="">
+	<span style="line-height:40px;">&nbsp</span>
+	<div class="section_main">
+		<span style="line-height:50px;">&nbsp</span>
+		<div class="section_txt1">
+		회원가입
+		</div>			
+		<div class="section_txt2">
+		제주닷컴 회원이 되시고 회원만의 다양한 혜택을 받아가세요
+		</div>
+			
+		<table>
+			<tr>
+				<th><button type="button" class="button1">약관동의</button></th>
+				<th><button type="button" class="button2">정보입력</button></th>
+				</tr>
+		</table>
+		<table class="mem_table1">
+			<tr>
+				<td>
+				<input type="text" tabIndex="1" name="userid" id="userid" placeholder="아이디" autofocus><label for="userid"></label>
+				</td>
+			</tr>
+		</table>
+		<table class="mem_table2">
+			<tr>
+				<td>
+				<input type="password" tabIndex="2" name="pass" id="pass" placeholder="비밀번호" class="inp_first"><label for="pass"></label>
+				</td>
+			</tr>
+			<tr>
+				<td>
+				<input type="password" tabIndex="3" name="pass2" id="pass2" placeholder="비밀번호 확인" class="inp_last" style="margin-top:-3px;"><label for="pass2"></label>
+				</td>
+			</tr>
+		</table>
+		<table class="mem_table3">
+			<tr>
+				<td>
+				<input type="text" tabIndex="4" name="username" id="username" placeholder="이름" class="input1"><label for="username"></label>
+				</td>
+				<td>
+				<input type="radio" class="radio1" name="gender" id="male" value="male"><label for="male">남자</label>
+				<input type="radio" class="radio1" name="gender" id="female" value="female"><label for="female">여자</label>
+				</td>
+			</tr>
+			<tr>
+				<td>
+				<input type="number" tabIndex="5" name="birth" id="birth" placeholder="생년월일(예:19880505)" style="margin-top:-3px;" class="input2"><label for="birth"></label>
+				</td>
+				<td>
+				<input type="radio" class="radio1" name="birthcalendar" id="solar" value="solar"><label for="solar">양력</label>
+				<input type="radio" class="radio1" name="birthcalendar" id="lunar" value="lunar"><label for="lunar">음력</label>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<select class="inp_last" name="adr" id="adr" tabIndex="6">
+					<option value="">거주지선택(시/도)</option>
+					<option>서울</option>
+					<option>부산</option>
+					<label for="adr"></label>
+					</select>
+				</td>
+			</tr>
+		</table>
+		<table class="mem_table4">
+			<tr>
+				<td><label for="tel1">전화번호</label></td>
+				<td>
+					<input type="number" name="tel1" id="tel1" class="tel" tabIndex="7">&nbsp;&nbsp;-
+					<input type="number" name="tel2" id="tel2" class="tel" tabIndex="8">&nbsp;&nbsp;-
+					<input type="number" name="tel3" id="tel3" class="tel" tabIndex="9">
+				</td>
+			</tr>
+			<tr>
+				<td class="mail1"><label for="email">이메일</label></td>
+				<td>
+					<input type="email" name="email" id="email" class="mail2" placeholder="jeju@domian.com" tabIndex="10">
+				</td>
+			</tr>
+		</table>
+		<table align="center">
+			<tr>
+				<th>
+				<button type="submit" class="button3" onclick="fn_submit();return false;">가입하기</button>
+				</th>
+			</tr>
+		</table>
+	</div>
+  </form>
+  </section>
+  
+  <footer></footer>
+ 
+  
+ </body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>설문조사(라디오상자) 확장버젼</title>
+ </head>
+ 
+ <script>
+ function fn_submit() {
+	
+	var cnt = 0;
+	var len = document.frm.age.length; // age 라는 이름으로 된 요소(오브젝트) 개수
+	
+	// age요소 개수만큼 반복문 설정을 한다.
+	for (var i=0; i<=(len-1); i++) {
+		// age요소 중 선택된 내용이 있으면 cnt값을 1로 변경한다.
+		if (document.frm.age[i].checked == true ) {
+			cnt = 1;
+		}
+	}
+	if ( cnt == 0 ) {
+		alert("선택된 내용이 없습니다.");
+		return false; // 스크립트 중지
+	}
+	
+	document.frm.submit();
+ }
+ 
+ </script> 
+ 
+ <body>
+  
+  <form name="frm" method="post" action="save.jsp">
+  
+  여러분의 나이대를 골라보세요.<br>
+  <input type="radio" name="age" id="age1" value="10">
+  <label for="age1">10대</label><br>
+  
+  <input type="radio" name="age" id="age2" value="20">
+  <label for="age2">20대</label><br>
+  
+  <input type="radio" name="age" id="age3" value="30">
+  <label for="age3">30대</label><br>
+  
+  <input type="radio" name="age" id="age4" value="40">
+  <label for="age4">40대</label><br>
+  
+  <input type="radio" name="age" id="age5" value="40">
+  <label for="age5">50대</label><br>
+  
+  <input type="radio" name="age" id="age6" value="40">
+  <label for="age6">60대</label><br>
+  
+  <input type="radio" name="age" id="age7" value="40">
+  <label for="age7">70대</label><br>
+  
+  <input type="radio" name="age" id="age8" value="40">
+  <label for="age8">80대</label><br>
+  
+  <button type="submit" onclick="fn_submit();return false;">다음</button>
+  
+  </form>
+  
+ </body>
+</html>
