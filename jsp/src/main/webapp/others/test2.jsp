@@ -17,7 +17,7 @@ double a3 = 3.14;
 
 out.print("<font size='5'>"+a1+"</font><br>"); // 브라우저 출력
 
-out.println("웹개발자"); 
+out.println("웹개발자");	// "ln" 줄바꿈의 역할이 없어짐
 out.println("웹개발자"); 
 out.println("웹개발자"); 
 
