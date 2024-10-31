@@ -6,7 +6,7 @@
     pageEncoding="UTF-8"%>
 
 <%@
-include file = "/include/oracleCon.jsp"
+include file ="/include/oracleCon.jsp"
 %>
     
 <%
@@ -29,18 +29,18 @@ String sql2="SELECT COUNT(*) cnt FROM DEPT WHERE deptno='"+deptno+"' ";
 ResultSet rs2 = stmt.executeQuery(sql2);
 rs2.next();
 int cnt = rs2.getInt("cnt");
-if(cnt>0){
+if(cnt==0){
 %>
 	<script>
-	alert("이미 사용중인 부서번호입니다.");
+	alert("존재하지 않는 부서번호입니다.");
 	history.back();	// 이전화면으로 이동
 	</script>
 <%	
 	return;
 }
 
-String sql="INSERT INTO dept(deptno,dname,loc) "
-			+"	VALUES('"+deptno+"','"+dname+"','"+loc+"')";
+String sql="UPDATE dept SET dname='"+dname+"',loc='"+loc+"' "
+			+ " WHERE deptno='"+deptno+"' ";
 
 out.print(sql);
 
@@ -48,14 +48,14 @@ int result = stmt.executeUpdate(sql);
 if(result == 1){
 %>
 	<script>
-	alert("저장완료");
+	alert("수정완료");
 	location="deptList.jsp";
 	</script>
 <%
 } else {
 %>
 	<script>
-	alert("저장실패");
+	alert("수정실패");
 	history.back();
 	</script>
 <%

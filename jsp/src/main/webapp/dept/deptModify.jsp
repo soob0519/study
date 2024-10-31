@@ -1,10 +1,54 @@
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Connection"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ 
+<%
+String deptno= request.getParameter("deptno");
+if(deptno == null || deptno.equals("")){
+%>	
+	<script>
+	alert("잘못된 접근입니다.");
+	location ="deptList.jsp";
+	</script>
+	
+<%	
+	return;
+}
+%>
+  
+<%@
+include file ="/include/oracleCon.jsp"
+%>
+<%
+String sql1="select deptno,dname,loc from dept "
+			+" 	where deptno = '"+deptno+"' ";
+ResultSet rs1 = stmt.executeQuery(sql1);
+
+String dname="";
+String loc="";
+
+if(rs1.next()){
+	dname = rs1.getString("dname");
+	loc = rs1.getString("loc");
+} else {
+%>		
+	<script>
+	alert("잘못된 부서번호입니다.");
+	location ="deptList.jsp";
+	</script>
+<%
+	return;
+}
+%>
+    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>부서정보등록</title>
+<title>부서정보수정</title>
 </head>
 <style>
 
@@ -63,26 +107,27 @@ function fn_action(){
 		document.frm.dname.focus();
 		return false;
 	}
+	
 	document.frm.submit();
 }
 
 </script>
 
 <body>
-<form name="frm" method="post" action="deptWriteSave.jsp">
+<form name="frm" method="post" action="deptModifySave.jsp">
 <table>
-	<caption>부서정보등록</caption>
+	<caption>부서정보수정</caption>
 	<tr>
 		<th>부서번호</th>
-		<td><input type="text" name="deptno" class="input1" maxlength="2" autofoucus></td>
+		<td><input type="text" name="deptno" value="<%=deptno %>" readonly class="input1" maxlength="2" autofoucus></td>
 	</tr>
 	<tr>
 		<th>부서이름</th>
-		<td><input type="text" name="dname" class="input1"></td>
+		<td><input type="text" name="dname" value="<%=dname %>" class="input1"></td>
 	</tr>
 	<tr>
 		<th>부서위치</th>
-		<td><input type="text" name="loc" class="input1"></td>
+		<td><input type="text" name="loc" value="<%=loc %>" class="input1"></td>
 	</tr>
 
 </table>
