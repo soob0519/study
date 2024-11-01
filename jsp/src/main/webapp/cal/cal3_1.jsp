@@ -11,6 +11,8 @@ int yy = cal.get(Calendar.YEAR);
 int mm = cal.get(Calendar.MONTH);
 int dd = cal.get(Calendar.DATE);
 
+String today =yy+"-"+(mm+1)+"-"+dd;
+
 if(year != null && month != null && !year.equals("") && !month.equals("")){
 	yy = Integer.parseInt(year);
 	mm = Integer.parseInt(month)-1;
@@ -57,7 +59,7 @@ caption {
 }
 
 button{
-	padding:10px;
+	padding:3px;
 	background-color:pink;
 	border-radius:10px;
 	border:1px solid orange;
@@ -75,19 +77,56 @@ button{
 	font-family:맑은 고딕;
 }
 
+a{
+	text-decoration:none;
+}
+
 </style>
 
 <body>
 	<div>
-	<form name="frm" method="post" action="cal2.jsp">
+	<form name="frm" method="post" action="cal3.jsp">
 	<input type="text" name="year" size="4">년
 	<input type="text" name="month" size="4">월
 	<button type="submit">달력보기</button>
 	
 	</form>
 	</div>
-	<div style="font-size:20px;" >
-		<%=yy %>년 <%=mm+1 %>월
+<%
+int t_mm = mm+1;
+
+int b_yy = yy;
+int b_mm = t_mm-1;
+
+if(b_mm == 0){
+	b_yy--;
+	b_mm = 12;
+}
+
+int n_yy = yy;
+int n_mm = t_mm+1;
+
+if(n_mm > 12){
+	n_yy++;
+	n_mm = 1;
+}
+
+%>	
+	
+	<div style="font-size:20px; margin:10px;" >
+		<a href="cal3.jsp?year=<%=b_yy %>&month=<%=b_mm %>">◁</a>
+		<%=yy %>년 
+		<%
+		if(mm+1 < 10){
+			out.print("0"+(mm+1));
+		} else{
+			out.print(mm+1);
+		}		
+		%>월
+		<a href="cal3.jsp?year=<%=n_yy %>&month=<%=n_mm %>">▷</a>
+		
+		<button type="button" onclick="location='cal3.jsp'">오늘</button>
+		<button type="button">전체</button>
 	</div>
 	<table>
 		<tr>
@@ -109,10 +148,13 @@ button{
 			nn++;
 			out.print("<td></td>");
 		}
+		String color="#000";
+		String bgcolor="#fff";
+		
+		
 		// 실제 날짜를 출력하는 역활
 		for(int d=1; d<=lastday; d++){
 			nn++;
-			String color="#000";
 			if(nn%7 == 1) {
 				color="red";
 			} else if(nn%7 == 0) {
@@ -120,9 +162,14 @@ button{
 			} else{
 				color="#000";
 			}
-			
+			String v_date = yy+"-"+(mm+1)+"-"+d;
+			if(today.equals(v_date)){
+				bgcolor="#ccc";
+			} else{
+				bgcolor="#fff";
+			}
 		%>
-			<td style="color:<%=color%>;"><%=d %></td>
+			<td style="color:<%=color%>;background-color:<%=bgcolor %>"><%=d %></td>
 			<%
 			if(nn%7 == 0){
 				out.print("</tr><tr>");
