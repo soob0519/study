@@ -8,7 +8,7 @@
 </head>
 <body>
 	<div>
-		<ul class="menu_li1">
+		<ul class="menu_list">
 			<li><a href="write.jsp">회원등록</a></li>
 			<li><a href="list.jsp">회원목록</a></li>
 			<li><a href="myList.jsp">친구현황조회</a></li>
