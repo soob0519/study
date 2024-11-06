@@ -3,7 +3,7 @@
     pageEncoding="UTF-8"%>
     
 <%@ include file="../include/oracleCon.jsp" %>
-<!-- 파라메터 설정 -->
+
 <%
 String unq = request.getParameter("unq");
 if(unq==null || unq.equals("")){
@@ -30,31 +30,7 @@ if(cnt == 0){
 	return;
 }
 %>
-<!-- 조회수 증가 -->
-<%
-String sql3 ="update nboard set hits=hits+1 where unq='"+unq+"' ";
-stmt.executeUpdate(sql3);
-%>
 
-<!-- 상세보기 SQL 작성/적용 -->
-<%
-String sql="SELECT title,name,content,to_char(rdate,'yyyy-mm-dd') rdate ,hits FROM NBOARD "
-			+" where unq='"+unq+"'";
-ResultSet rs = stmt.executeQuery(sql);
-rs.next();
-
-String title = rs.getString("title");
-String name = rs.getString("name");
-String content = rs.getString("content");
-String rdate = rs.getString("rdate");
-String hits = rs.getString("hits");
-
-// \n => <br>
-content = content.replace("\n", "<br>");
-
-%>
-
-<!-- 화면출력 -->
 <!DOCTYPE html>
 <html lang="en">
  <head>
@@ -76,6 +52,17 @@ content = content.replace("\n", "<br>");
  }
  
  </style>
+ 
+<script>
+	function fn_submit(){
+		if(document.frm.pass.value == ""){
+			alert("암호를 입력해주세요.");
+			document.frm.pass.focus();
+			return false;
+		}
+		document.frm.submit();	
+	}
+</script>
 
  <body>
   
@@ -102,49 +89,23 @@ content = content.replace("\n", "<br>");
 	</div>
 	
 	<div class="div_agrees">
-		<form name="frm" method="post" action="boardWriteSave.jsp">
+		<form name="frm" method="post" action="boardDelete.jsp">
+		<input type="hidden" name="unq" value="<%=unq %>">
 		<table class="table_member">
 			<colgroup>
 				<col width="20%"/>
 				<col width="*%"/>
 			</colgroup>
 			<tr>
-				<th>제목</th> 
-				<td><%=title %></td>
-			</tr>
-			<tr>
-				<th>이름</th> 
-				<td><%=name %></td>
-			</tr>
-			<tr>
-				<th>내용</th> 
-				<td>
-					<div style="width:98%;
-								height:150px;
-								padding-left:10px;
-								background-color:yellow;
-								overflow-y:scroll;"><%=content %></div>
-				</td>
-			</tr>
-			<tr>
-				<th>등록일</th> 
-				<td><%=rdate %></td>
-			</tr>
-			<tr>
-				<th>조회수</th> 
-				<td><%=hits %></td>
-			</tr>
-			
+				<th>암호</th> 
+				<td><input type="text" name="pass" class="input1"></td>
+			</tr>		
 			
 		</table>
 		
 		<div style="margin-top:10px; text-align:center;">
-			<button type="button" class="button4"
-			 			onclick="location='boardModify.jsp?unq=<%=unq %>'">수정</button>
-			<button type="button" class="button4" 
-						onclick="location='passWrite.jsp?unq=<%=unq %>'">삭제</button>
-			<button type="button" class="button4" 
-						onclick="location='boardList.jsp'">목록</button>
+			<button type="submit" class="button4" onclick="fn_submit();return false;">삭제</button>
+			<button type="reset" class="button4" onclick="">취소</button>
 			
 		</div>
 		</form>

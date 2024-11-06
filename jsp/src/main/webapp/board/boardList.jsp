@@ -10,8 +10,21 @@ ResultSet rs1 = stmt.executeQuery(sql1);
 rs1.next();
 int total = rs1.getInt(1);
 
-String sql2 = "SELECT UNQ,TITLE,NAME,HITS,to_char(RDATE,'yyyy.mm.dd') RDATE FROM NBOARD "
-				+" ORDER BY UNQ DESC ";
+// 일련번호 초기 세팅
+int rownum = total;
+
+// 마지막 페이지 번호
+int lastpage = (int)Math.ceil((double)total/10);
+
+
+String sql2 = "SELECT B.* FROM ( "
+				+" 	SELECT ROWNUM RN, A.* FROM ( "
+				+" 		SELECT "
+				+" 			UNQ,TITLE,NAME,HITS,to_char(RDATE,'yyyy.mm.dd') RDATE "
+				+" 		FROM NBOARD "
+				+" 			ORDER BY UNQ DESC) A ) B "
+				+" WHERE "
+				+"			RN BETWEEN 1 AND 10 ";
 ResultSet rs2 = stmt.executeQuery(sql2);
 %>
 
@@ -90,7 +103,7 @@ ResultSet rs2 = stmt.executeQuery(sql2);
 				String hits = rs2.getString("hits");
 			%>
 			<tr>
-				<td>968</td>
+				<td><%=rownum %></td>
 				<td>업데이트</td>
 				<td style="text-align:left;"><a href="boardDetail.jsp?unq=<%=unq %>"><%=title %></a></td>
 				<td><%=rdate %></td>
@@ -98,6 +111,7 @@ ResultSet rs2 = stmt.executeQuery(sql2);
 			</tr>
 			
 			<%
+				rownum--;
 			}
 			%>
 			
@@ -112,6 +126,16 @@ ResultSet rs2 = stmt.executeQuery(sql2);
 		<div style="margin-top:10px; text-align:center;">
 			<a href="#" class="num first"> << </a>
 			<a href="#" class="num bef"> < </a>
+			<%
+			for(int p=1; p<=lastpage; p++){
+				out.print("<a href=\"#\" class=\"num\"> "+ p +" </a> ");
+			}
+			%>
+			<a href="#" class="num bef"> > </a>
+			<a href="#" class="num last"> >> </a>
+		<!--
+			<a href="#" class="num first"> << </a>
+			<a href="#" class="num bef"> < </a>
 			<a href="#" class="num"> 1 </a>
 			<a href="#" class="num"> 2 </a>
 			<a href="#" class="num on"> 3 </a>
@@ -119,6 +143,8 @@ ResultSet rs2 = stmt.executeQuery(sql2);
 			<a href="#" class="num"> 5 </a>
 			<a href="#" class="num bef"> > </a>
 			<a href="#" class="num last"> >> </a>
+		 -->
+
 		</div>	
 		
 	</div>
