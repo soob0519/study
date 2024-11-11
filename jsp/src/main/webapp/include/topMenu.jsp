@@ -13,7 +13,7 @@
 		<li class="menu_li"><a href="../member/loginWrite.jsp">로그인</a></li>
 		<li class="menu_li"><a href="../board/boardList.jsp">게시판</a></li>
 		<li class="menu_li"><a href="../emp/history.jsp">이력서</a></li>
-		<li class="menu_li"><a href="../member/possstList.jsp">주소검색</a></li>
+		<li class="menu_li"><a href="../member/postList.jsp">주소검색</a></li>
 	</ul> 
 </body>
 </html>

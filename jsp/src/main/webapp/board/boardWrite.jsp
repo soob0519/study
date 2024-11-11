@@ -69,7 +69,7 @@ ResultSet rs2 = stmt.executeQuery(sql2);
   </nav>
   
   <aside>
-  aside영역
+   	<%@ include file="../include/aside.jsp" %>
   </aside>
   
   <section>

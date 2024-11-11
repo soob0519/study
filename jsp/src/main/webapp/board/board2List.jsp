@@ -29,11 +29,11 @@ if(pageNo==null){
 }
 
 // 한 화면당 출력 데이터 개수
-int unitData = 5;
+int unitData = 10;
 // 한 화면당 출력 페이지 개수
 int unitPage = 10;
 
-String sql1="SELECT COUNT(*) FROM NBOARD" + Where;
+String sql1="SELECT COUNT(*) FROM BOARD2" + Where;
 ResultSet rs1 = stmt.executeQuery(sql1);
 rs1.next();
 int total = rs1.getInt(1);
@@ -53,8 +53,8 @@ int eno = sno+(unitData-1);
 String sql2 = "SELECT B.* FROM ( "
 				+" 	SELECT ROWNUM RN, A.* FROM ( "
 				+" 		SELECT "
-				+" 			UNQ,TITLE,NAME,HITS,to_char(RDATE,'yyyy.mm.dd') RDATE "
-				+" 		FROM NBOARD "
+				+" 			UNQ,TITLE,WRITER,GUBUN,HITS,to_char(RDATE,'yyyy.mm.dd') RDATE "
+				+" 		FROM BOARD2 "
 				+ Where
 				+" 			ORDER BY UNQ DESC) A ) B "
 				+" WHERE "
@@ -91,17 +91,17 @@ ResultSet rs2 = stmt.executeQuery(sql2);
   </nav>
   
   <aside>
-   	<%@ include file="../include/aside.jsp" %>
+  	<%@ include file="../include/aside.jsp" %>
   </aside>
   
   <section>
   
 	<div class="div_title">
-		공지사항
+		분실물/습득물
 	</div>
 	
 	<div class="div_search">
-	<form name="searchForm" method="post" action="boardList.jsp">
+	<form name="searchForm" method="post" action="board2List.jsp">
 		<select name="searchField" class="select1">
 			<option value="all">전체</option>
 			<option value="title">제목</option>
@@ -134,14 +134,25 @@ ResultSet rs2 = stmt.executeQuery(sql2);
 			while(rs2.next()){
 				String unq = rs2.getString("unq");
 				String title = rs2.getString("title");
-				String name = rs2.getString("name");
+				String writer = rs2.getString("writer");
 				String rdate = rs2.getString("rdate");
+				String gubun = rs2.getString("gubun");
 				String hits = rs2.getString("hits");
+				
+				if(gubun.equals("1")){
+					gubun = "분실";
+				} else if(gubun.equals("2")) {
+					gubun = "습득";
+				}
+				String sql3 ="select count(*) from board2sub where punq='"+unq+"'";
+				ResultSet rs3 = stmt2.executeQuery(sql3);
+				rs3.next();
+				int cnt = rs3.getInt(1);
 			%>
 			<tr>
 				<td><%=rownum %></td>
-				<td>업데이트</td>
-				<td style="text-align:left;"><a href="boardDetail.jsp?unq=<%=unq %>"><%=title %></a></td>
+				<td><%=gubun %></td>
+				<td style="text-align:left;"><a href="board2Detail.jsp?unq=<%=unq %>"><%=title %></a></td>
 				<td><%=rdate %></td>
 				<td><%=hits %></td>
 			</tr>
@@ -156,22 +167,22 @@ ResultSet rs2 = stmt.executeQuery(sql2);
 		</table>
 		
 		<div style="margin-top:10px; text-align:right;">
-			<button type="button" class="button4" onclick="location='boardWrite.jsp'">글쓰기</button>
+			<button type="button" class="button4" onclick="location='board2Write.jsp'">글쓰기</button>
 		</div>
 		
 		<div style="margin-top:10px; text-align:center;">
-			<a href="boardList.jsp?page=1" class="num first"> 《 </a>
+			<a href="board2List.jsp?page=1" class="num first"> 《 </a>
 			<a href="#" class="num bef"> 〈 </a>
 			<%
 			for(int p=1; p<=lastpage; p++){
 			%>
-				<a href="boardList.jsp?page=<%=p %>" class ="num"> <%=p %> </a>
+				<a href="board2List.jsp?page=<%=p %>" class ="num"> <%=p %> </a>
 				<!--  out.print("<a href='boardList.jsp?page="+p+"' class=\"num\"> "+ p +" </a> "); -->
 			<%
 			}
 			%>
 			<a href="#" class="num bef"> 〉 </a>
-			<a href="boardList.jsp?page=<%=lastpage %>" class="num last"> 》 </a>
+			<a href="board2List.jsp?page=<%=lastpage %>" class="num last"> 》 </a>
 		<!--
 			<a href="#" class="num first"> << </a>
 			<a href="#" class="num bef"> < </a>
