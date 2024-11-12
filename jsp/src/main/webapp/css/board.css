@@ -110,6 +110,7 @@
 	background-color:#fefdd6;
  }
  
+ 
  .title {
 	font-weight:bold;
 	font-size:14px;
@@ -160,35 +161,4 @@
 	color:#ffffff;
  }
  
- /*
- .tel {
-	width:22%;
-	padding:7px;
- }
  
- .mail {
-	width:25%;
-	padding:7px;
- }
- 
- .event1 {
-	width:30%;
-	font-weight:bold;
-	font-size:14px;
- }
- .event2 {
-	float:right;
-	margin-right:30px;
- }
- 
- .cabs1 {
-	width:50%;
-	padding:7px;
- }
- .cabs2 {
-	width:15%;
-	padding:7px;
-	float:right;
-	margin-right:30px;
- }
- */

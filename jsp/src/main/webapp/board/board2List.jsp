@@ -152,7 +152,10 @@ ResultSet rs2 = stmt.executeQuery(sql2);
 			<tr>
 				<td><%=rownum %></td>
 				<td><%=gubun %></td>
-				<td style="text-align:left;"><a href="board2Detail.jsp?unq=<%=unq %>"><%=title %></a></td>
+				<td style="text-align:left;">
+				<a href="board2Detail.jsp?unq=<%=unq %>"><%=title %> </a>
+				(<%=cnt %>)
+				</td>
 				<td><%=rdate %></td>
 				<td><%=hits %></td>
 			</tr>
@@ -177,23 +180,12 @@ ResultSet rs2 = stmt.executeQuery(sql2);
 			for(int p=1; p<=lastpage; p++){
 			%>
 				<a href="board2List.jsp?page=<%=p %>" class ="num"> <%=p %> </a>
-				<!--  out.print("<a href='boardList.jsp?page="+p+"' class=\"num\"> "+ p +" </a> "); -->
 			<%
 			}
 			%>
 			<a href="#" class="num bef"> 〉 </a>
 			<a href="board2List.jsp?page=<%=lastpage %>" class="num last"> 》 </a>
-		<!--
-			<a href="#" class="num first"> << </a>
-			<a href="#" class="num bef"> < </a>
-			<a href="#" class="num"> 1 </a>
-			<a href="#" class="num"> 2 </a>
-			<a href="#" class="num on"> 3 </a>
-			<a href="#" class="num"> 4 </a>
-			<a href="#" class="num"> 5 </a>
-			<a href="#" class="num bef"> > </a>
-			<a href="#" class="num last"> >> </a>
-		 -->
+		
 
 		</div>	
 		
