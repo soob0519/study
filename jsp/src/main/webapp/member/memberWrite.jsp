@@ -1,237 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<%@include file="/include/oracleCon.jsp" %>    
 <!DOCTYPE html>
 <html lang="en">
  <head>
   <meta charset="UTF-8">
   <title>Document</title>
   
-  <link rel="stylesheet" href="../css/style.css" />
- 
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/member.css" />
+  <script type="text/javascript" src="/js/memberWrite.js"></script>
+  
  </head>
- 
- <style>
- 
- .div_title{
-	position:relative;
-	left:30px;
-	top:40px;
-	font-size:40px;
-	font-weight:bold;
-	color:#2f2f2f;
-	width:840px;
-	text-align:center;
- }
- 
- .div_agrees {
-	position:relative;
-	left:30px;
-	top:60px;
-	width:840px;
-	height:850px;	
-	border:1px solid #cccccc;
-	padding:10px;
-	font-size:12px;
-	line-height:3.0;
- }
- 
- 
- .button1{
-	width:200px;
-	padding:10px;
-	font-size:14px;
-	font-weight:bold;
-	color:#ffffff;
-	background-color:#0099ff;
-	border:0px;
-	cursor:pointer;/*pointer,help,progress,wait,cell*/
- }
- /*	hover  : 마우스 올렸을 경우 상태
-	focus  : 커서가 위치하는 경우
-	active : 클릭 순간의 경우
- */
- .button1:hover {
-	background-color:#0000ff;
-	box-shadow: 20px 5px 5px 0px #ffccff;
-	/* 세로(공간),가로(공간),둥근모서리,그림자크기 */
- }
- .button1:focus {
-	background-color:#cc0000;
- }
- .button1:active {
-	background-color:#ffff00;
- }
- 
- .button2{
-	width:15%;
-	padding:7px;
-	font-size:14px;
-	color:#ffffff;
-	background-color:#0099ff;
-	border:0px;
-	cursor:pointer;/*pointer,help,progress,wait,cell*/
-	margin-left:25px;
- }
- 
- .table_member {
-	width:100%;
- }
- .table_member td {
-	padding:10px;
- }
- .title {
-	font-weight:bold;
-	font-size:14px;
- }
- 
- .input1 {
-	width:70%;
-	padding:7px;
- }
- 
- .input2 {
-	width:90%;
-	padding:7px;
- }
- 
- hr {
-	border:0px;
-	height:1px;
-	background:#e2e2e2;
- }
- 
- .tel {
-	width:22%;
-	padding:7px;
- }
- 
- .mail {
-	width:25%;
-	padding:7px;
- }
- 
- .event1 {
-	width:30%;
-	font-weight:bold;
-	font-size:14px;
- }
- .event2 {
-	float:right;
-	margin-right:30px;
- }
- 
- .cabs1 {
-	width:50%;
-	padding:7px;
- }
- .cabs2 {
-	width:15%;
-	padding:7px;
-	float:right;
-	margin-right:160px;
- }
- 
-
- </style>
- 
- <script>
- function fn_select() {
-	
-	var ss = document.frm.mail3.value; //select 상자 값
-	if (ss != "") {
-		document.frm.mail2.value = ss;
-		document.frm.mail2.readOnly = true;
-	} else {
-		document.frm.mail2.value = "";
-		document.frm.mail2.readOnly = false;
-	}	
-	
- }
- 
- function fn_submit() {
-	
-	if (document.frm.userid.value == "") {
-		alert("아이디를 입력해주세요.");
-		document.frm.userid.focus();
-		return false;
-	}
-	
-	if (document.frm.userid.value.length < 4 ||
-		document.frm.userid.value.length > 12)
-	{
-		alert("아이디는 4자리에서 12자리까지 가능합니다.");
-		document.frm.userid.focus();
-		return false;
-	}
-	
-	if (document.frm.pass.value == "") {
-		alert("비밀번호를 입력해주세요.");
-		document.frm.pass.focus();
-		return false;
-	}
-	if (document.frm.pass.value.length < 4 ||
-		document.frm.pass.value.length > 20)
-	{
-		alert("비밀번호는 4자리에서 20자리까지 가능합니다.");
-		document.frm.pass.focus();
-		return false;
-	}
-	
-	if (document.frm.pass2.value == "") {
-		alert("비밀번호확인을 입력해주세요.");
-		document.frm.pass2.focus();
-		return false;
-	}
-	
-	if (document.frm.pass.value != document.frm.pass2.value) {
-		alert("비밀번호와 비밀번호확인이 일치하지 않습니다.");
-		document.frm.pass.focus();
-		return false;
-	}
-	
-	if (document.frm.name.value == "") {
-		alert("이름을 입력해주세요.");
-		document.frm.name.focus();
-		return false;
-	}
-	if (document.frm.tel1.value == "") {
-		alert("휴대번호1를 입력해주세요.");
-		document.frm.tel1.focus();
-		return false;
-	}
-	
-	if (document.frm.tel1.value.length != 3 ||
-		document.frm.tel2.value.length != 4 ||
-		document.frm.tel3.value.length != 4)
-	{
-		alert("휴대번호를 다시 확인해주세요.");
-		document.frm.tel1.focus();
-		return false;
-	}
-	
-	if (document.frm.tel2.value == "") {
-		alert("휴대번호2를 입력해주세요.");
-		document.frm.tel2.focus();
-		return false;
-	}
-	if (document.frm.tel3.value == "") {
-		alert("휴대번호3를 입력해주세요.");
-		document.frm.tel3.focus();
-		return false;
-	}
-	
-	if (document.frm.mail1.value == "" ||
-		document.frm.mail2.value == "" 
-		) {
-		alert("메일을 입력해주세요.");
-		document.frm.mail1.focus();
-		return false;
-	}
-	
-	location = "http://dothome.co.kr";
- }
- 
- </script>
  
  <body>
   
@@ -248,7 +29,7 @@
   </nav>
   
   <aside>
-  aside영역
+  	<%@ include file="../include/aside.jsp" %>
   </aside>
   
   <section>
@@ -325,6 +106,17 @@
 				</td>
 			</tr>
 			<tr>
+				<td>주소</td>
+				<td>
+					<input type="text" name="zipcode" id = "zipcode" class="mail">
+					<input type="button" onclick="postcode()" value="우편번호 찾기" class="button2"><br>
+					<input type="text" name="addr1" id = "addr1" class="input2"><br>
+					<input type="text" name="addr2" id = "addr2" class="input2"><br>
+					
+					
+				</td>
+			</tr>
+			<tr>
 				<td colspan="2">
 				<hr>
 				</td>
@@ -350,9 +142,10 @@
 			<tr>
 				<td colspan="2">
 				<input type="text" name="" class="cabs1">
-				<input type="text" name="" class="cabs2">
+				<img src="../images/pic1.png" style="margin-bottom:-12px;">
+				<button type="button" class="button2">새로고침</button>
 				<br>
-				<br>
+				<br>    
 				<p align="center">
 				<button type="button" class="button1" onclick="fn_submit()">가입하기</button>
 				</p>
@@ -366,6 +159,57 @@
 	
   </section>
   
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+    function postcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var addr = ''; // 주소 변수
+                var extraAddr = ''; // 참고항목 변수
+
+                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                    addr = data.roadAddress;
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    addr = data.jibunAddress;
+                }
+
+                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+                if(data.userSelectedType === 'R'){
+                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                        extraAddr += data.bname;
+                    }
+                    // 건물명이 있고, 공동주택일 경우 추가한다.
+                    if(data.buildingName !== '' && data.apartment === 'Y'){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                    if(extraAddr !== ''){
+                        extraAddr = ' (' + extraAddr + ')';
+                    }
+                    // 조합된 참고항목을 해당 필드에 넣는다.
+                    //document.getElementById("sample6_extraAddress").value = extraAddr;
+                
+                } else {
+                    //document.getElementById("sample6_extraAddress").value = '';
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById("zipcode").value = data.zonecode;
+                document.getElementById("addr1").value = addr;
+                // 커서를 상세주소 필드로 이동한다.
+                document.getElementById("addr2").focus();
+            }
+        }).open();
+    }
+</script>
+
   <footer>
   	<!-- footer S -->
 	<%@ include file="../include/footer.jsp" %>

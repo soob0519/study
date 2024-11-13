@@ -3,9 +3,12 @@
     pageEncoding="UTF-8"%>
     
 <%@ include file="../include/oracleCon.jsp" %>
+<%@ include file="../include/code.jsp" %>
 
 <%
 String unq = request.getParameter("unq");
+String tbl = request.getParameter("tbl");
+
 if(unq==null || unq.equals("")){
 %>
 	<script>
@@ -16,26 +19,14 @@ if(unq==null || unq.equals("")){
 	return;
 }
 
-String sql2="select count(*) from nboard where unq='"+unq+"'";
-ResultSet rs2 = stmt.executeQuery(sql2);
-rs2.next();
-int cnt = rs2.getInt(1);
-if(cnt == 0){
-%>
-	<script>
-	alert("잘못된 접근입니다.");
-	location="boardList.jsp";
-	</script>
-<%
-	return;
-}
+
 %>
 
 <!DOCTYPE html>
 <html lang="en">
  <head>
   <meta charset="UTF-8">
-  <title>Document</title>
+  <title><%=msg %></title>
   
   <link rel="stylesheet" href="../css/style.css" />
   <link rel="stylesheet" href="../css/board.css" />
@@ -79,18 +70,19 @@ if(cnt == 0){
   </nav>
   
   <aside>
-  aside영역
+  <%@ include file="../include/aside.jsp" %>
   </aside>
   
   <section>
   
 	<div class="div_title">
-		공지사항
+		<%=msg %>
 	</div>
 	
 	<div class="div_agrees">
-		<form name="frm" method="post" action="boardDelete.jsp">
+		<form name="frm" method="post" action="<%=url1 %>">
 		<input type="hidden" name="unq" value="<%=unq %>">
+		<input type="hidden" name="code" value="<%=code %>">
 		<table class="table_member">
 			<colgroup>
 				<col width="20%"/>

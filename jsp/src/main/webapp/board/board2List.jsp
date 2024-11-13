@@ -3,25 +3,27 @@
     pageEncoding="UTF-8"%>
     
 <%@ include file="../include/oracleCon.jsp" %>
+<%@ include file="../include/code.jsp" %>
 
 <%
 String searchField = request.getParameter("searchField");
 String searchText = request.getParameter("searchText");
 
-String Where = "";
+String Where = " WHERE gubun='"+code+"' ";
 if(searchText != null && !searchText.trim().equals("")){
 	
 	switch(searchField) {
-		case "all" 		: Where = " WHERE TITLE LIKE '%"+searchText+"%' OR CONTENT LIKE '%"+searchText+"%' ";
+		case "all" 		: Where += " and TITLE LIKE '%"+searchText+"%' OR CONTENT LIKE '%"+searchText+"%' ";
 			break;
-		case "title" 	: Where = " WHERE TITLE LIKE '%"+searchText+"%' ";
+		case "title" 	: Where += " and TITLE LIKE '%"+searchText+"%' ";
 			break;
-		case "content" 	: Where = " WHERE CONTENT LIKE '%"+searchText+"%' ";
-			break;	
-		
+		case "content" 	: Where += " and CONTENT LIKE '%"+searchText+"%' ";
+			break;		
 	}
-	
 }
+
+String search = "searchField="+searchField+"&"+"searchText"+searchText;
+
 // 출력 페이지 번호
 String pageNo = request.getParameter("page");
 if(pageNo==null){
@@ -66,7 +68,7 @@ ResultSet rs2 = stmt.executeQuery(sql2);
 <html lang="en">
  <head>
   <meta charset="UTF-8">
-  <title>Document</title>
+  <title><%=msg %> 게시판</title>
   
   <link rel="stylesheet" href="../css/style.css" />
   <link rel="stylesheet" href="../css/board.css" />
@@ -97,7 +99,7 @@ ResultSet rs2 = stmt.executeQuery(sql2);
   <section>
   
 	<div class="div_title">
-		분실물/습득물
+		<%=msg %> 게시판
 	</div>
 	
 	<div class="div_search">
@@ -138,12 +140,7 @@ ResultSet rs2 = stmt.executeQuery(sql2);
 				String rdate = rs2.getString("rdate");
 				String gubun = rs2.getString("gubun");
 				String hits = rs2.getString("hits");
-				
-				if(gubun.equals("1")){
-					gubun = "분실";
-				} else if(gubun.equals("2")) {
-					gubun = "습득";
-				}
+		
 				String sql3 ="select count(*) from board2sub where punq='"+unq+"'";
 				ResultSet rs3 = stmt2.executeQuery(sql3);
 				rs3.next();
@@ -151,9 +148,9 @@ ResultSet rs2 = stmt.executeQuery(sql2);
 			%>
 			<tr>
 				<td><%=rownum %></td>
-				<td><%=gubun %></td>
+				<td><%=msg %></td>
 				<td style="text-align:left;">
-				<a href="board2Detail.jsp?unq=<%=unq %>"><%=title %> </a>
+				<a href="board2Detail.jsp?code=<%=code%>&unq=<%=unq %>"><%=title %> </a>
 				(<%=cnt %>)
 				</td>
 				<td><%=rdate %></td>
@@ -170,21 +167,21 @@ ResultSet rs2 = stmt.executeQuery(sql2);
 		</table>
 		
 		<div style="margin-top:10px; text-align:right;">
-			<button type="button" class="button4" onclick="location='board2Write.jsp'">글쓰기</button>
+			<button type="button" class="button4" onclick="location='board2Write.jsp?code=<%=code %>'">글쓰기</button>
 		</div>
 		
 		<div style="margin-top:10px; text-align:center;">
-			<a href="board2List.jsp?page=1" class="num first"> 《 </a>
+			<a href="board2List.jsp?code=<%=code %>&page=1&<%=search %>" class="num first"> 《 </a>
 			<a href="#" class="num bef"> 〈 </a>
 			<%
 			for(int p=1; p<=lastpage; p++){
 			%>
-				<a href="board2List.jsp?page=<%=p %>" class ="num"> <%=p %> </a>
+				<a href="board2List.jsp?<%=code %>&page=<%=p %>&<%=search %>" class ="num"> <%=p %> </a>
 			<%
 			}
 			%>
 			<a href="#" class="num bef"> 〉 </a>
-			<a href="board2List.jsp?page=<%=lastpage %>" class="num last"> 》 </a>
+			<a href="board2List.jsp?<%=code %>&page=<%=lastpage %>&<%=search %>" class="num last"> 》 </a>
 		
 
 		</div>	

@@ -1,14 +1,15 @@
 <%@page import="java.sql.ResultSet"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+
 <%@ include file="../include/oracleCon.jsp" %>
+<%@ include file="../include/code.jsp" %>
 
 <!DOCTYPE html>
 <html lang="en">
  <head>
   <meta charset="UTF-8">
-  <title>Document</title>
+  <title><%=msg %></title>
   
   <link rel="stylesheet" href="../css/style.css" />
   <link rel="stylesheet" href="../css/board.css" />
@@ -64,7 +65,7 @@
   <section>
   
 	<div class="div_title">
-		분실물
+		<%=msg %>
 	</div>
 	
 	<div class="div_agrees">
@@ -89,8 +90,12 @@
 			<tr>
 				<th>구분</th> 
 				<td>
-					<input type="radio" name="gubun" value="1" checked>분실물
-					<input type="radio" name="gubun" value="2">습득물
+					<input type="radio" name="gubun" value="1" 
+					<%if(code.equals("1")){out.print("checked");} %> >분실물
+					<input type="radio" name="gubun" value="2"
+					<%if(code.equals("2")){out.print("checked");} %> >습득물
+					<input type="radio" name="gubun" value="3"
+					<%if(code.equals("3")){out.print("checked");} %> >보관함
 				</td>
 				
 			</tr>

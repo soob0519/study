@@ -3,6 +3,8 @@
     pageEncoding="UTF-8"%>
     
 <%@ include file="../include/oracleCon.jsp" %>
+<%@ include file="../include/code.jsp" %>
+
 <!-- 파라메터 설정 -->
 <%
 String unq = request.getParameter("unq");
@@ -44,6 +46,7 @@ String sql="SELECT title"
 			+"		,to_char(rdate,'yyyy-mm-dd') rdate "
 			+"		,to_char(udate,'yyyy-mm-dd') udate "
 			+"		,hits "
+			+"		,gubun "
 			+"	FROM BOARD2 "
 			+" where unq='"+unq+"'";
 ResultSet rs = stmt.executeQuery(sql);
@@ -55,6 +58,8 @@ String content = rs.getString("content");
 String rdate = rs.getString("rdate");
 String udate = rs.getString("udate");
 String hits = rs.getString("hits");
+String gubun = rs.getString("gubun");
+
 
 if(udate == null){
 	udate = "변경없음";
@@ -64,8 +69,8 @@ if(udate == null){
 content = content.replace("\n", "<br>");
 
 String sql4="select "
-			+"		(select nvl(max(unq),0) from board2 where unq <'"+unq+"') bef, "
-			+"		(select nvl(min(unq),0) from board2 where unq >'"+unq+"') nex "
+			+"		(select nvl(max(unq),0) from board2 where gubun='"+gubun+"' and unq <'"+unq+"') bef, "
+			+"		(select nvl(min(unq),0) from board2 where gubun='"+gubun+"' and unq >'"+unq+"') nex "
 			+"	from dual ";
 ResultSet rs4 = stmt3.executeQuery(sql4);
 rs4.next();
@@ -73,11 +78,11 @@ rs4.next();
 int bef_unq = rs4.getInt(1);
 int nex_unq =  rs4.getInt(2);
 
+// 댓글 출력 SQL
 String sql5 = "select unq,content,to_char(rdate,'yy.mm.dd') rdate, lev "
 				+"	from board2sub "
 				+"	where punq='"+unq+"' order by unq asc";
 ResultSet rs5 = stmt.executeQuery(sql5);
-
 %>
 
 <!-- 화면출력 -->
@@ -85,7 +90,7 @@ ResultSet rs5 = stmt.executeQuery(sql5);
 <html lang="en">
  <head>
   <meta charset="UTF-8">
-  <title>Document</title>
+  <title><%=msg %> 상세보기</title>
   
   <link rel="stylesheet" href="../css/style.css" />
   <link rel="stylesheet" href="../css/board.css" />
@@ -165,7 +170,7 @@ function fn_submit(nn) {
   <section>
   
 	<div class="div_title">
-		분실물/습득물
+		<%=msg %> 상세보기
 	</div>
 	
 	<div class="div_agrees">
@@ -234,9 +239,10 @@ function fn_submit(nn) {
 			<button type="button" class="button4"
 			 			onclick="location='board2Modify.jsp?unq=<%=unq %>'">수정</button>
 			<button type="button" class="button4" 
-						onclick="location='pass2Write.jsp?unq=<%=unq %>'">삭제</button>
+						onclick="location='passWrite.jsp?unq=<%=unq %>&tbl=board2&code=<%=code %>'">
+			삭제</button>
 			<button type="button" class="button4" 
-						onclick="location='board2List.jsp'">목록</button>
+						onclick="location='board2List.jsp?tbl=board2&code=<%=code %>'">목록</button>
 			
 		</div>
 		

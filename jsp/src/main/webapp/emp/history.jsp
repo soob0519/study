@@ -37,7 +37,7 @@
   </nav>
   
   <aside>
-  aside영역
+  <%@ include file="../include/aside.jsp" %>
   </aside>
   
  <section>
