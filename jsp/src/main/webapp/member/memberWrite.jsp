@@ -1,18 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@include file="/include/oracleCon.jsp" %>    
+<%@include file="/include/oracleCon.jsp" %>
+    
 <!DOCTYPE html>
 <html lang="en">
  <head>
   <meta charset="UTF-8">
-  <title>Document</title>
+  <title>회원가입</title>
   
   <link rel="stylesheet" href="/css/style.css" />
   <link rel="stylesheet" href="/css/member.css" />
   <script type="text/javascript" src="/js/memberWrite.js"></script>
   
  </head>
+ 
+ <script>
+ 	console.log("~~~ 회원정보 등록화면 ~~~");
+ </script>
  
  <body>
   
@@ -84,17 +89,17 @@
 			<tr>
 				<td>*연락처</td>
 				<td>
-					<input type="text" name="tel1" class="tel">
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;
-					<input type="text" name="tel2" class="tel">
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;
-					<input type="text" name="tel3" class="tel">
+					<select name="tel1" class="tel">
+						<option value="010">010</option>
+						<option value="010">010</option>
+					</select> - 
+					<input type="number" name="tel2" class="tel" maxlength="4" > - 
+					<input type="number" name="tel3" class="tel" maxlength="4">
 			</tr>
 			<tr>
 				<td>*이메일</td>
 				<td>
-					<input type="text" name="mail1" class="mail">
-					&nbsp;&nbsp;&nbsp;@&nbsp;&nbsp;&nbsp;
+					<input type="text" name="mail1" class="mail">@
 					<input type="text" name="mail2" class="mail">
 					&nbsp;&nbsp;&nbsp;
 					<select name="mail3" class="mail" onchange="fn_select()">
@@ -108,10 +113,10 @@
 			<tr>
 				<td>주소</td>
 				<td>
-					<input type="text" name="zipcode" id = "zipcode" class="mail">
+					<input type="text" name="post" id = "zipcode" class="mail" placeholder = "우편번호">
 					<input type="button" onclick="postcode()" value="우편번호 찾기" class="button2"><br>
-					<input type="text" name="addr1" id = "addr1" class="input2"><br>
-					<input type="text" name="addr2" id = "addr2" class="input2"><br>
+					<input type="text" name="addr1" id = "addr1" class="input2" placeholder = "일반주소"><br>
+					<input type="text" name="addr2" id = "addr2" class="input2" placeholder = "상세주소"><br>
 					
 					
 				</td>
@@ -126,8 +131,8 @@
 				■ 상품 및 이벤트 정보 수신 동의
 				</td>
 				<td class="event2">
-				<input type="checkbox" name="">&nbsp;이메일&nbsp;&nbsp;&nbsp;
-				<input type="checkbox" name="">&nbsp;문자
+				<input type="checkbox" name="mailyn" value="Y">이메일
+				<input type="checkbox" name="smsyn" value="Y">문자
 				</td>
 			</tr>
 			<tr>

@@ -1,5 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<%
+String SESSION_ID2 = (String) session.getAttribute("sessionId");
+if(SESSION_ID2 == null){
+%> 
+	<script>
+	alert("로그인 후 이용 가능합니다.");
+	location="loginWrite.jsp";
+	</script>	
+<%
+	return;
+}
+%>
+    
 <!DOCTYPE html>
 <html lang="en">
  <head>

@@ -237,7 +237,7 @@ function fn_submit(nn) {
 		
 		<div style="margin-top:10px; text-align:center;">
 			<button type="button" class="button4"
-			 			onclick="location='board2Modify.jsp?unq=<%=unq %>'">수정</button>
+			 			onclick="location='board2Modify.jsp?code=<%=code%>&unq=<%=unq %>'">수정</button>
 			<button type="button" class="button4" 
 						onclick="location='passWrite.jsp?unq=<%=unq %>&tbl=board2&code=<%=code %>'">
 			삭제</button>
@@ -251,6 +251,7 @@ function fn_submit(nn) {
 		<input type="hidden" name="punq" value="<%=unq %>">
 		<input type="hidden" name="mode" value="I">
 		<input type="hidden" name="munq" value="">
+		<input type="hidden" name="code" value="<%=code %>">
 		
 		<div style="margin-top:20px;">
 		<table class="table_member" style="width:900;">

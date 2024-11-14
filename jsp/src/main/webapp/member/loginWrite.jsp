@@ -156,7 +156,7 @@
 		로그인
 	</div>
 	<div class="div_agrees">
-		
+		<form name="frm" method="post" action="loginSession.jsp">
 		<table class="table_member" align="center">
 			<tr>
 				<td>
@@ -207,7 +207,7 @@
 				</td>
 			</tr>
 		</table>
-		
+		</form>
 	</div>
 	
   </section>
