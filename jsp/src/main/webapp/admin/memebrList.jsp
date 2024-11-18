@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-footer
-<a href="/admin/login.jsp">&nbsp;&nbsp;&nbsp;&nbsp;</a>
+
 </body>
 </html>

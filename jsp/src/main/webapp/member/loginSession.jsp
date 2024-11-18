@@ -1,4 +1,5 @@
-<%@page import="java.sql.ResultSet"%>
+<%@ page import="conn.Cookies" %>
+<%@ page import="java.sql.ResultSet"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -6,10 +7,12 @@
 <%
 String id = request.getParameter("userid");
 String pass = request.getParameter("pass");
+String chk = request.getParameter("chk");
+
 if(id == null || pass == null) {
 %>
 	<script>
-	alert("신고합니다 돌아가세요");
+	alert("잘못된 접근입니다.");
 	location="loginWrite.jsp";
 	</script>
 <%
@@ -32,8 +35,17 @@ if(cnt == 0){
 
 }
 
-//세션생성
 session.setAttribute("sessionId", id);
+session.setMaxInactiveInterval(30); // 초단위, 60*60
+
+if(chk == null){
+	response.addCookie(Cookies.createCookie("CookieId","","/",-1));
+} else {
+// 세션생성
+// 기본 30분
+									// 변수아이디,변수값,모든폴더,유지시간(-1 : 시간제한없음)
+response.addCookie(Cookies.createCookie("CookieId",id,"/",-1));
+}
 %>
 
 	<script>

@@ -1,19 +1,37 @@
-<%@ page import="conn.Cookies" %>
+<%@page import="java.util.Calendar"%>
+<%@page import="java.sql.ResultSet"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@include file="../include/oracleCon.jsp" %>
 
 <%
-Cookies cookies = new Cookies(request);
-String saveId = cookies.getValue("CookieId");
-if(saveId == null) saveId = "";
-%>
+String id = request.getParameter("id");
+String nm = request.getParameter("name");
+String tel = request.getParameter("tel");
 
-    
+Calendar cal = Calendar.getInstance();
+long unix = cal.getTimeInMillis();
+
+String msg = "";
+
+if(id != null && nm != null && tel != null) {
+	msg = "검색된 내용이 없습니다.";
+	String sql = "SELECT count(*) FROM MEMBER WHERE ID='"+id+"' AND NAME = '"+nm+"' AND TEL = '"+tel+"'";
+	ResultSet rs = stmt.executeQuery(sql);
+	rs.next();
+	if( rs.getInt(1) > 0 ){
+		String sql1 = "UPDATE member SET pass ='"+unix+"' WHERE ID ='"+id+"' ";
+		stmt.executeUpdate(sql1);
+		msg = "임시패스워드 :" + unix;
+	}
+}
+%>
 <!DOCTYPE html>
 <html lang="en">
  <head>
   <meta charset="UTF-8">
-  <title>Document</title>
+  <title>비밀번호찾기</title>
   
   <link rel="stylesheet" href="../css/style.css" />
  
@@ -161,44 +179,38 @@ if(saveId == null) saveId = "";
   </aside>
   
   <section>
-	<div class="div_title">
-		로그인
-	</div>
-	<div class="div_agrees">
-		<form name="frm" method="post" action="loginSession.jsp">
+		<div class="div_title">
+			비밀번호 찾기
+		</div>
+		<div class="div_agrees">
+		<form name="frm" method="post" action="<%=request.getRequestURI() %>">
 		<table class="table_member" align="center">
 			<tr>
 				<td>
-				<span class="span_id">ID</span><input type="text" name="userid" class="input_id" value = "<%=saveId %>" placeholder="아이디를 입력하세요.">
+				<span class="span_id">아디</span><input type="text" name="id" class="input_id" placeholder="아이디를 입력하세요.">
 				</td>
 			</tr>
 			<tr>
 				<td>
-				<span class="span_id">PW</span><input type="password" name="pass" class="input_id" placeholder="비밀번호를 입력하세요." style="width:294px;">
+				<span class="span_id">이름</span><input type="text" name="name" class="input_id" placeholder="이름을 입력하세요.">
+				</td>
+			</tr>
+			<tr>
+				<td>
+				<span class="span_id">전번</span><input type="text" name="tel" class="input_id" placeholder="전화번호를 입력하세요." style="width:294px;">
 				</td>
 			</tr>
 			<tr>
 				<td valign="middle">
 					<button type="submit" class="btn_submit">
 						<span class="span_dot"><img src="../images/logo_dot.png"></span>
-						<span class="span_login_txt">로그인</span>
-					</button>
-				</td>
-			</tr>
-			<tr>
-				<td valign="middle">
-					<button type="button" class="btn_submit">
-						<span class="span_naver"><img src="../images/logo_naver.png"></span>
-						<span class="span_login_txt">
-							<a href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=OBEC7aY268pfOvZ94CGi&state=dce27c17484f6c4d2d778ef08c96c26c&redirect_url=https%3A%2F%2Fwww.dothome.co.kr%2Flogin_naver_check.php" target="_blank">네이버 아이디로 로그인</a>
-						</span>
+						<span class="span_login_txt">비밀번호찾기</span>
 					</button>
 				</td>
 			</tr>
 			<tr>
 				<td>
-				<input type="checkbox" name="chk" value="Y"
-				<%if(saveId != null) {out.print("checked");} %> >아이디저장
+				<input type="checkbox" name="chk">아이디저장
 				</td>
 			</tr>
 			<tr>
@@ -206,19 +218,13 @@ if(saveId == null) saveId = "";
 				<hr>
 				</td>
 			</tr>
-			<tr>
-				<td>
-				<button type="button" class="btn_search" onclick="location='idSearch.jsp'">아이디찾기</button>
-				<span>|</span>
-				<button type="button" class="btn_search" onclick="location='pwSearch.jsp'">비밀번호찾기</button>
-				<span>|</span>
-				<button type="button" class="btn_search">
-				<a href="memberAgree.jsp">회원가입</a></button>
-				</td>
-			</tr>
 		</table>
+		<div style="width:100%;text-align:center;">
+		<%=msg %>
+		</div>
+				
 		</form>
-	</div>
+		</div>
 	
   </section>
   
