@@ -4,7 +4,7 @@
 <html lang="en">
  <head>
   <meta charset="UTF-8">
-  <title>main</title>
+  <title>회원등록</title>
   <!-- ".." 상위 폴더란 의미 -->
   <link rel="stylesheet" href="../css/style.css" />
  
@@ -29,7 +29,7 @@
   </aside>
   
   <section>
-  section영역
+   회원등록
   </section>
   
   

@@ -2,12 +2,10 @@
     pageEncoding="UTF-8"%>
 
 <%
+// 현재 웹주소를 가져오는 메소드 (도메인 제외)
 String uri  = request.getRequestURI();
 // out.print(uri);
 %>
-
-
-
     
 <!DOCTYPE html>
 <html>
@@ -18,12 +16,15 @@ String uri  = request.getRequestURI();
 <body>
  	<div style="text-align:center;margin-top:20px;">
 	<%
-	if(uri.indexOf("board") > -1) {
+	if(uri.indexOf("member") > -1) {
 	%>
-	<a href="http://localhost:9090/board/boardList.jsp">공지사항</a><br>
-	<a href="http://localhost:9090/board/board2List.jsp?code=1">분실물</a><br>
-	<a href="/board/board2List.jsp?code=2">습득물</a><br>
-	<a href="../board/board2List.jsp?code=3">보관함</a>
+	<a href="/admin/memberList.jsp">회원목록</a><br>
+	<a href="/admin/memberWrite.jsp">회원등록</a>
+	<%
+	} else if(uri.indexOf("board") > -1) {
+	%>
+	<a href="admin/boardList.jsp">공지사항 목록</a><br>
+	<a href="admin/boardWrite.jsp">공지사항 등록</a>
 	<%
 	}
 	%>
