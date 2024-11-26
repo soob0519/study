@@ -8,7 +8,12 @@ public interface EmpService {
 	 * 사원목록 출력
 	 */
 	List<?> selectEmpList(SampleDefaultVO defaultVO) throws Exception;
-
+	
+	/*
+	 * 사원정보 출력(상세)
+	 */
+	EmpVO selectEmpDetail(EmpVO vo) throws Exception;
+	
 	/*
 	 * 등록 사원번호 가져오기
 	 */
@@ -32,7 +37,17 @@ public interface EmpService {
 	/*
 	 * 사원정보 등록
 	 */
-	int insertEmp(EmpVO vo) throws Exception; 
+	int insertEmp(EmpVO vo) throws Exception;
+	
+	/*
+	 * 사원정보 수정
+	 */
+	int updateEmp(EmpVO vo) throws Exception;
+	
+	/*
+	 * 사원정보 삭제
+	 */
+	int deleteEmp(EmpVO vo)throws Exception; 
 	
 	
 }

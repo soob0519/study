@@ -7,10 +7,24 @@ public class EmpVO {
 	String job;
 	int mgr;
 	String hiredate;
-	int sal;
+	String sal;
 	int comm;
 	int deptno;
+	String mgrname;
+	String dname;
 	
+	public String getmgrname() {
+		return mgrname;
+	}
+	public void setmgrname(String mgrname) {
+		this.mgrname = mgrname;
+	}
+	public String getDname() {
+		return dname;
+	}
+	public void setDname(String dname) {
+		this.dname = dname;
+	}
 	public int getEmpno() {
 		return empno;
 	}
@@ -41,10 +55,10 @@ public class EmpVO {
 	public void setHiredate(String hiredate) {
 		this.hiredate = hiredate;
 	}
-	public int getSal() {
+	public String getSal() {
 		return sal;
 	}
-	public void setSal(int sal) {
+	public void setSal(String sal) {
 		this.sal = sal;
 	}
 	public int getComm() {

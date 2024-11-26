@@ -46,4 +46,19 @@ public class EmpServiceImpl implements EmpService {
 		return mapper.selectEmpMgrList();
 	}
 
+	@Override
+	public EmpVO selectEmpDetail(EmpVO vo) throws Exception {
+		return mapper.selectEmpDetail(vo);
+	}
+
+	@Override
+	public int updateEmp(EmpVO vo) throws Exception {
+		return mapper.updateEmp(vo);
+	}
+
+	@Override
+	public int deleteEmp(EmpVO vo) throws Exception {
+		return mapper.deleteEmp(vo);
+	}
+
 }

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="egovframework.example.sample.service.impl.EmpMapper">
+
+	<select id="selectEmpList" resultType="hashmap">
+		SELECT B.* FROM(
+			SELECT A.*,ROWNUM RN FROM(
+				SELECT 	 EMPNO
+						,ENAME
+						,JOB
+						,MGR
+						,TO_CHAR(HIREDATE,'YYYY.MM.DD') HIREDATE 
+						,DEPTNO
+						,(SELECT DNAME FROM DEPT WHERE DEPTNO=EMP.DEPTNO) DNAME 
+				  FROM 
+				  		EMP) A ) B
+		WHERE 
+			RN BETWEEN #{firstIndex} AND #{lastIndex}
+		  		
+	</select>
+	
+	<select id="selectEmpDetail" resultType="empVO">
+	SELECT 
+		EMPNO
+		 ,ENAME
+		 ,JOB
+		 ,MGR
+		 ,(SELECT ENAME FROM EMP E1 WHERE EMPNO=E2.MGR) MGRNAME
+		 ,TO_CHAR(HIREDATE,'YYYY')||'년'
+         || TO_CHAR(HIREDATE,'MM')||'월'
+         || TO_CHAR(HIREDATE,'DD')||'일' HIREDATE
+		 ,TO_CHAR(SAL,'FM999,999,999') SAL
+		 ,COMM
+		 ,DEPTNO
+		 ,(SELECT DNAME FROM DEPT WHERE DEPTNO=E2.DEPTNO) DNAME
+	FROM
+		EMP E2
+	WHERE
+		EMPNO = '${empno}'
+	</select>
+	
+	<select id="selectEmpTotal" resultType="int">
+		SELECT COUNT(*) FROM EMP
+	</select>
+	
+	<select id="selectEmpJobList" resultType="hashmap">
+		SELECT DISTINCT(JOB) JOB FROM EMP
+	</select>
+	
+	<select id="selectEmpMgrList" resultType="hashmap">
+		SELECT EMPNO,ENAME FROM EMP WHERE JOB = 'MANAGER'
+	</select>
+	
+	<select id="selectEmpnoNew" resultType="int">
+		SELECT NVL(MAX(EMPNO),1000)+1 FROM EMP
+	</select>
+	
+	<insert id="insertEmp">
+		INSERT INTO EMP ( EMPNO
+						 ,ENAME
+						 ,JOB
+						 ,MGR
+						 ,HIREDATE
+						 ,SAL
+						 ,COMM
+						 ,DEPTNO ) 
+			VALUES(  '${empno}'
+					,'${ename}'
+					,'${job}'
+					,'${mgr}'
+					,'${hiredate}'
+					,'${sal}'
+					,'${comm}'
+					,'${deptno}' )
+	</insert>	
+
+	<update id="updateEmp">
+		UPDATE EMP SET ENAME	= '${ename}'
+					 ,JOB		= '${job}'
+					 ,MGR		= '${mgr}'
+					 ,HIREDATE	= '${hiredate}'
+					 ,SAL		= '${sal}'
+					 ,COMM		= '${comm}'
+					 ,DEPTNO	= '${deptno}'
+		WHERE 
+					EMPNO = '${empno}'
+	</update>
+	
+	<delete id="deleteEmp">
+		DELETE EMP WHERE EMPNO = #{empno}
+	</delete>
+
+</mapper>
+
+
+
+
+
+
+

@@ -13,4 +13,7 @@ public interface EmpMapper {
 	int selectEmpnoNew();
 	List<?> selectEmpJobList();
 	List<?> selectEmpMgrList();
+	EmpVO selectEmpDetail(EmpVO vo);
+	int updateEmp(EmpVO vo);
+	int deleteEmp(EmpVO vo);
 }

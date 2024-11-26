@@ -19,7 +19,7 @@
     
 	$( "#hiredate" ).datepicker();
     
-    $("#btn_save").click(function(){
+    $("#btn1").click(function(){
     	
     if($("#empno").val() == ""){
     	alert("다시 시도해주세요.");
@@ -52,24 +52,28 @@
 	&nbsp;&nbsp;&nbsp;
 	<a herf="/empList.do">목록</a>
 	</div>
-<form name="frm" method="post" action="/empSave.do">
+<form name="frm" id="frm" method="post" action="/empUpdate.do">
 	<table border="1" width="600">
 		<tr>
 			<th width="20%">사원번호</th>
-			<td><input type="text" name="empno" id="empno" value="${empno}" readonly></td>
+			<td><input type="text" name="empno" id="empno" value="${empvo.empno}" readonly></td>
 		</tr>
 		<tr>
 			<th>사원이름</th>
-			<td><input type="text" name="ename" id="ename"></td>
+			<td><input type="text" name="ename" id="ename" value="${empvo.ename}"></td>
 		</tr>
 		<tr>
 			<th>업무</th>
 			<td>
 				<select name="job" id="job">
-				<option value="">-선택-</option>
-			<c:forEach var="joblist" items="${joblist}">
-				<option value="${joblist.JOB }">${joblist.JOB }</option>
-			</c:forEach>
+					<option value="">-선택-</option>
+					
+				<c:forEach var="joblist" items="${joblist}">
+					<option value="${joblist.JOB }"
+					<c:if test="${joblist.JOB==empvo.job }">selected</c:if>
+					>${joblist.JOB }</option>
+				</c:forEach>
+				
 				</select>
 			</td>
 		</tr>
@@ -77,39 +81,43 @@
 			<th>매니저</th>
 			<td>
 				<select name="mgr" id="mgr">
-				<option value="">-선택-</option>
-			<c:forEach var="mgrlist" items="${mgrlist}">
-				<option value="${mgrlist.EMPNO }">${mgrlist.ENAME }</option>
-			</c:forEach>
+					<option value="">-선택-</option>
+				<c:forEach var="mgrlist" items="${mgrlist}">
+					<option value="${mgrlist.EMPNO }"
+					<c:if test="${mgrlist.EMPNO == empvo.mgr}">selected</c:if>
+					>${mgrlist.ENAME }</option>
+				</c:forEach>
 				</select>
 			</td>
 		</tr>
 		<tr>
 			<th>입사일</th>
-			<td><input type="text" name="hiredate" id="hiredate"></td>
+			<td><input type="text" name="hiredate" id="hiredate" value="${empvo.hiredate}" ></td>
 		</tr>
 		<tr>
-			<th>급여</th>
-			<td><input type="text" name="sal" id="sal"></td>
+			<th>급여 ${empvo.sal}</th>
+			<td><input type="number" name="sal" id="sal" value="${empvo.sal}"></td>
 		</tr>
 		<tr>
 			<th>커미션</th>
-			<td><input type="text" name="comm" id="comm"></td>
+			<td><input type="number" name="comm" id="comm" value="${empvo.comm}"></td>
 		</tr>
 		<tr>
 			<th>부서</th>
 			<td>
 				<select name="deptno" id="deptno">
-				<option value="">-선택-</option>
-			<c:forEach var="deptlist" items="${deptlist}">
-				<option value="${deptlist.DEPTNO }">${deptlist.DNAME }</option>
-			</c:forEach>
+					<option value="">-선택-</option>
+				<c:forEach var="deptlist" items="${deptlist}">
+					<option value="${deptlist.DEPTNO }"
+					<c:if test="${deptlist.DEPTNO==empvo.deptno }">selected</c:if>
+					>${deptlist.DNAME }</option>
+				</c:forEach>
 				</select>
 			</td>
 		</tr>
 	</table>
-	<div>
-		<button type="submit" id="btn_save">저장</button>
+	<div style="width:600px;text-align:center;margin-top:30px;">
+		<button type="submit" id="btn1">저장</button>
 	</div>
 </form>
 </body>

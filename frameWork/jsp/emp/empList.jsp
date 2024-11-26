@@ -59,7 +59,12 @@ function fn_delete(deptno) {
 }
 </script>
 <body>
-
+	<div style="padding:20px;background-color:skyblue;margin-bottom:30px;">
+	<a herf="/empWrite.do">등록</a>
+	&nbsp;&nbsp;&nbsp;
+	<a herf="/empList.do">목록</a>
+	</div>
+	
 	Total : ${total}
 	<table>
 		<caption>사원정보 목록</caption>
@@ -92,7 +97,7 @@ function fn_delete(deptno) {
 			<tr>
 				<td>${number}</td>
 				<td>${lst.EMPNO}</td>
-				<td>${lst.ENAME}</td>
+				<td><a href="/empDetail.do?empno=${lst.EMPNO}">${lst.ENAME}</a></td>
 				<td>${lst.HIREDATE}</td>
 				<td>${lst.DNAME}</td>
 				<td><a href="javascript:fn_delete('${lst.EMPNO}')">del</a></td>
