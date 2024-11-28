@@ -15,8 +15,14 @@ public class BoardServiceImpl implements BoardService {
 	BoardMapper boardMapper;
 	
 	@Override
-	public List<?> selectBoardList(BoardVO vo) throws Exception {
+	public List<?> selectBoardList(DefaultVO vo) throws Exception {
 		return boardMapper.selectBoardList(vo);
 	}
+
+	@Override
+	public int selectBoardTotal(DefaultVO vo) throws Exception {
+		return boardMapper.selectBoardTotal(vo);
+	}
+
 
 }

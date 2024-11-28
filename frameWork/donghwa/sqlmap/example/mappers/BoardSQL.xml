@@ -1,18 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="donghwa.mapper.BoardMapper">
+
 	<select id="selectBoardList" resultType="hashmap">
-		SELECT UNQ
-				,TITLE
-				,PASS
-				,WRITER
-				,CONTENT
-				,GUBUN
-				,RDATE
-				,UDATE
-				,HITS
-		FROM
-			BOARD2
+		SELECT B.* FROM (
+			SELECT ROWNUM RN, A.* FROM ( 
+					SELECT   UNQ
+							,TITLE
+							,PASS
+							,WRITER
+							,CONTENT
+							,GUBUN
+							,RDATE
+							,UDATE
+							,HITS
+					FROM
+						BOARD2   
+					WHERE 1=1
+
+					<if test="searchKeyword != null">
+						<if test="searchKeyword != ''">
+							AND (TITLE LIKE '%'||#{searchKeyword}||'%'
+								OR
+							 CONTENT LIKE '%'||#{searchKeyword}||'%	)
+						</if>
+					</if>
+						
+				) A ) B
+		
+		WHERE  
+				RN BETWEEN #{firstIndex} AND #{lastIndex} 
 	</select>
+
+	<select id="selectBoardTotal" resultType="int">
+		SELECT 
+			COUNT(*) 
+		FROM 
+			BOARD2
+		WHERE 1=1
+				<if test="searchKeyword != null">
+					<if test="searchKeyword != ''">
+						AND (TITLE LIKE '%'||#{searchKeyword}||'%'
+							OR
+						 CONTENT LIKE '%'||#{searchKeyword}||'%	)
+					</if>
+				</if>
+	</select>
+
 
 </mapper>

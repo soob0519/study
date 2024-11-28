@@ -4,7 +4,9 @@ import java.util.List;
 
 public interface BoardService {
 	
-	List<?> selectBoardList(BoardVO vo) throws Exception;
+	List<?> selectBoardList(DefaultVO vo) throws Exception;
+
+	int selectBoardTotal(DefaultVO vo)throws Exception;
 	
 	
 }

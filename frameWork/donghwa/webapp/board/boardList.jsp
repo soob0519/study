@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"      uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -74,9 +75,9 @@
                         <div class="item_wrap">
                             <div class="search">
                                 <div class="search_inner">
-                                    <form data-aos="fade-down" data-aos-duration="1000" data-aos-delay="300">
+                                    <form name="searchForm" method="post" action="/boardList.do" data-aos="fade-down" data-aos-duration="1000" data-aos-delay="300">
                                         <div class="form_inner">
-                                            <input type="text" placeholder="검색어를 입력해주세요.">
+                                            <input type="text" name="searchKeyword" placeholder="검색어를 입력해주세요.">
                                             <button type="submit"></button>
                                         </div>
                                     </form>
@@ -89,7 +90,7 @@
                                         <a href="#none">2010년대</a>
                                         <a href="#none">2020년대</a>
                                     </div>
-                                    <p>전체 48개</p>
+                                    <p>전체 ${total }개</p>
                                 </div>
                                 <ul class="bb_list">
                                     <li class="bb_tit">
@@ -98,75 +99,24 @@
                                         <h3>등록일</h3>
                                         <h3>첨부</h3>
                                     </li>
-                                    <li class="bb_contents">
-                                        <h4>48</h4>
-                                        <h4><a href="/boardDetail.do">2023년 4분기 사업보고서</a></h4>
-                                        <h4>2024.01.11</h4>
-                                        <p><a href="20240320084800_[동화약품]사업보고서(2024.03.19).pdf" target="_blank"><span class="blind">첨부파일 다운로드</span></a></p>
-                                    </li>
-                                    <li class="bb_contents">
-                                        <h4>47</h4>
-                                        <h4><a href="/boardDetail.do">2023년 3분기 사업보고서</a></h4>
-                                        <h4>2023.10.13</h4>
-                                        <p><a href="20240320084800_[동화약품]사업보고서(2024.03.19).pdf" target="_blank"><span class="blind">첨부파일 다운로드</span></a></p>
-                                    </li>
-                                    <li class="bb_contents">
-                                        <h4>46</h4>
-                                        <h4><a href="/boardDetail.do">2023년 2분기 사업보고서</a></h4>
-                                        <h4>2023.07.08</h4>
-                                        <p><a href="20240320084800_[동화약품]사업보고서(2024.03.19).pdf" target="_blank"><span class="blind">첨부파일 다운로드</span></a></p>
-                                    </li>
-                                    <li class="bb_contents">
-                                        <h4>45</h4>
-                                        <h4><a href="/boardDetail.do">2023년 1분기 사업보고서</a></h4>
-                                        <h4>2023.04.18</h4>
-                                        <p><a href="20240320084800_[동화약품]사업보고서(2024.03.19).pdf" target="_blank"><span class="blind">첨부파일 다운로드</span></a></p>
-                                    </li>
-                                    <li class="bb_contents">
-                                        <h4>44</h4>
-                                        <h4><a href="/boardDetail.do">2022년 4분기 사업보고서</a></h4>
-                                        <h4>2023.01.09</h4>
-                                        <p><a href="20240320084800_[동화약품]사업보고서(2024.03.19).pdf" target="_blank"><span class="blind">첨부파일 다운로드</span></a></p>
-                                    </li>
-                                    <li class="bb_contents">
-                                        <h4>43</h4>
-                                        <h4><a href="/boardDetail.do">2022년 3분기 사업보고서</a></h4>
-                                        <h4>2022.10.14</h4>
-                                        <p><a href="20240320084800_[동화약품]사업보고서(2024.03.19).pdf" target="_blank"><span class="blind">첨부파일 다운로드</span></a></p>
-                                    </li>
-                                    <li class="bb_contents">
-                                        <h4>42</h4>
-                                        <h4><a href="/boardDetail.do">2022년 2분기 사업보고서</a></h4>
-                                        <h4>2022.07.24</h4>
-                                        <p><a href="20240320084800_[동화약품]사업보고서(2024.03.19).pdf" target="_blank"><span class="blind">첨부파일 다운로드</span></a></p>
-                                    </li>
-                                    <li class="bb_contents">
-                                        <h4>41</h4>
-                                        <h4><a href="/boardDetail.do">2022년 1분기 사업보고서</a></h4>
-                                        <h4>2022.04.15</h4>
-                                        <p><a href="20240320084800_[동화약품]사업보고서(2024.03.19).pdf" target="_blank"><span class="blind">첨부파일 다운로드</span></a></p>
-                                    </li>
-                                    <li class="bb_contents">
-                                        <h4>40</h4>
-                                        <h4><a href="/boardDetail.do">2021년 4분기 사업보고서</a></h4>
-                                        <h4>2022.01.08</h4>
-                                        <p><a href="20240320084800_[동화약품]사업보고서(2024.03.19).pdf" target="_blank"><span class="blind">첨부파일 다운로드</span></a></p>
-                                    </li>
-                                    <li class="bb_contents">
-                                        <h4>39</h4>
-                                        <h4><a href="/boardDetail.do">2021년 3분기 사업보고서</a></h4>
-                                        <h4>2021.10.12</h4>
-                                        <p><a href="20240320084800_[동화약품]사업보고서(2024.03.19).pdf" target="_blank"><span class="blind">첨부파일 다운로드</span></a></p>
-                                    </li>
+                                    
+                                    <c:forEach var="lst" items="${boardlist }">									
+	                                    <li class="bb_contents">
+	                                        <h4>${recordCountPerPage }</h4>
+	                                        <h4><a href="/boardDetail.do?unq=${lst.UNQ }">${lst.TITLE }</a></h4>
+	                                        <h4>${lst.RDATE }</h4>
+	                                        <p><a href="20240320084800_[동화약품]사업보고서(2024.03.19).pdf" target="_blank"><span class="blind">첨부파일 다운로드</span></a></p>
+	                                    </li>
+	                                    <c:set var="recordCountPerPage" value="${recordCountPerPage-1 }" />
+                                    </c:forEach>
+                                    
                                 </ul>
                                 <ul class="pro_btn">
                                     <li><a href="#none"><span class="blind">처음으로</span></a></li>
                                     <li><a href="#none"><span class="blind">이전버튼</span></a></li>
-                                    <li><a href="#none">1</a></li>
-                                    <li><a href="#none">2</a></li>
-                                    <li><a href="#none">3</a></li>
-                                    <li><a href="#none">4</a></li>
-                                    <li><a href="#none">5</a></li>
+                                <c:forEach var="p" begin="1" end="${totalpage}">
+                                    	<li><a href="/boardList.do?pageIndex=${p}">${p}</a></li>
+                                </c:forEach>
                                     <li><a href="#none"><span class="blind">다음버튼</span></a></li>
                                     <li><a href="#none"><span class="blind">맨끝으로</span></a></li>
                                 </ul>
