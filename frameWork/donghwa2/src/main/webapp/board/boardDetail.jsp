@@ -48,8 +48,14 @@
                             <p>2023년 4분기 사업보고서</p>
                         </a>
                     </div>
+<<<<<<< .mine
                     <div class="bb_sub_text">
                         ${boardvo.content }
+||||||| .r20
+=======
+                    <div class="bb_sub_text">  
+                       ${boardvo.content }
+>>>>>>> .r34
                     </div>
                     <div class="bb_sub_list">
                         <a href="/boardList.do">목록</a>

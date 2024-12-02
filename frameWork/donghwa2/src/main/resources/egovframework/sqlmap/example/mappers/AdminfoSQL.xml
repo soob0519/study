@@ -21,4 +21,9 @@
 							,'${state}'
 							,SYSDATE )
 	</insert>
+	
+	<select id = "selectAdminfoUserid" resultType="int">
+		SELECT COUNT(*) FROM ADMINFO WHERE USERID = #{userid}
+	</select>
+	
 </mapper>

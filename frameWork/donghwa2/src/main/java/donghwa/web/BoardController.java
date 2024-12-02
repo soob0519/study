@@ -56,10 +56,15 @@ public class BoardController {
 	
 	@RequestMapping(value="/boardDetail.do")
 	public String selectBoardDetail(BoardVO vo,ModelMap model) throws Exception {
-		BoardVO vo1 =boardService.selectBoardDetail(vo);
-		
+		BoardVO vo1 = boardService.selectBoardDetail(vo);
 		model.addAttribute("boardvo",vo1);
-		
 		return "board/boardDetail";
 	}
 }
+
+
+
+
+
+
+

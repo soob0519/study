@@ -6,6 +6,123 @@
 <head>
   <meta charset="UTF-8">
   <title>동화제약 관리모드</title>
+  <link rel="stylesheet" href="/css/jquery-ui.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/jquery-3.7.1.js"></script>
+  <script src="/js/jquery-ui.js"></script>
+  
+<script>
+  $( function() {
+    $( "#birth" ).datepicker({
+      changeMonth: true,
+      changeYear: true
+    }); 
+    
+ 	// 실시간 키입력시 반응 하는 함수
+	$("#userid").keyup(function(){ 
+		let	len = $("#userid").val().length;
+		if(len<4){
+			$("#span_userid").html("<font color='red'> 4자리 이상 입력해주세요 </font>");
+		} else {
+			$("#span_userid").html("");
+		}
+		
+		$.ajax({
+    		type:"POST",
+    		url:"/admUseridCheck.do",
+    		data: "userid="+$("#userid").val(),
+    		
+    		datatype: "text",
+    		success : function(returnData){
+    			if(returnData == "ok"){
+    				$("#span_userid").html("<font color='green'> 사용가능한 아이디입니다. </font>");
+    			} else {
+    				$("#span_userid").html("<font color='blue'> 사용 불가능한 아이디입니다. </font>");
+    			}
+    		},
+    		error : function(){
+    			alert("오류!!!!");
+    		}    		
+    	});
+		
+	});  
+	      
+    $("#btnSave").click(function(){
+    	
+    	let id = $("#userid").val();
+    	let pw = $("#userpass").val();
+    	
+    	id = id.replaceAll(" ","");
+    	$("#userid").val(id);
+    	
+    	pw = pw.replace(" ","");
+    	$("#userpass").val(pw);
+    	
+    	if(id == ""){
+    		alert("아이디를 입력하세요");
+    		$("#userid").focus();
+    		return false;
+    	}
+    	
+    	if( pw == ""){
+    		alert("비밀번호를 입력하세요");
+    		$("#userpass").focus();
+    		return false;
+    	}
+    	
+    	let nm = $("#username").val();
+    	let birth = $("#birth").val();
+    	let grade = $("#grade").val();
+    	
+    	// get 방식
+    	// let datas ="userid="+id+"&userpass="+pw+"&username"+nm+
+    	//			"&birth="+birth+"&grade="+grade;
+    	
+    	// JSON 제이슨 형식
+    	let datas = {
+    			// 변수명 (vo의 변수명과 일치): 변수값
+    			userid:id,
+    			userpass:pw,
+    			username:nm,
+    			birth:birth,
+    			grade:grade    			
+    	};
+    	
+		// let form = $("#frm").serialize();	// 폼에 대한 인식 :: ajax는 스스로 form(frm)을 인식하지 못함
+    	
+    	$.ajax({
+    		// 전송방식
+    		type:"POST",	// get,post
+    		// 전송장소
+    		url:"/admInsert.do",
+    		// 전송데이터
+    		data: form,
+    		
+    		// 결과 값의 타입 (전송 이후의 상황)
+    		datatype: "text",
+    		
+    		// 전송(자바까지의 도달)에 성공했을 경우
+    		success : function(returnData){
+    			if(returnData == "ok"){
+    				alert("저장완료");
+    				location="/admList.do"
+    			} else {
+    				alert("저장실패");
+    			}
+    		},
+    		error : function(){
+    			alert("저장실패~");
+    		}    		
+    	});  	
+    	
+			
+    }); 
+    
+    
+  } );
+</script>
+
+
 </head>
 
 <style>
@@ -103,20 +220,6 @@ table.type08 td {
 </style>
 
 
-<script>
-function fn_action() {
-	var f = document.frm;
-	if(f.title.value == "") {
-		alert("제목을 입력해주세요.");
-		f.title.focus();
-		return false;
-	}
-	// f.action = "courseWriteSave.php";
-	f.submit();
-}
-
-</script>
-
 <style>
 .locTd {
 	font-size:15px;
@@ -170,30 +273,33 @@ input,textarea,select {
 		</tr>
 	</table>
 	<br>
-	<form name="frm" method="post" action="/admInsert.do">
+	<form name="frm" id="frm" method="post" action="/admInsert.do">
 		<table class="type08" align="center">
 			<tr>
 				<th width="20%">아이디</th>
-				<td width="80%"><input type="text" name="userid"></td>
+				<td width="80%">
+				<input type="text" name="userid" id="userid" placeholder="4자이상">
+				<span id="span_userid"></span>
+				</td>
 			</tr>
 			<tr>
 				<th>암호</th>
-				<td><input type="password" name="userpass"></td>
+				<td><input type="password" name="userpass" id="userpass"></td>
 			</tr>
 			<tr>
 				<th>이름</th>
-				<td><input type="text" name="username"></td>
+				<td><input type="text" name="username" id="username"></td>
 			</tr>
 			<tr>
 				<th>생일</th>
-				<td><input type="text" name="birth"></td>
+				<td><input type="text" name="birth" id="birth"></td>
 			</tr>
 			<tr>
 				<th>등급</th>
 				<td>
-					<select name="grade">
+					<select name="grade" id="grade">
 					<option value="1">레벨1</option>
-					<option value="2">레벨2</option>
+					<option value="2" selected>레벨2</option>
 					<option value="3">레벨3</option>
 					</select>
 				</td>
@@ -203,9 +309,8 @@ input,textarea,select {
 		<table align="center" style="width:940px;">
 			<tr>
 				<th style="font-size:20px;">
-			
-				<button type="button" onclick="location='/admList.do'" class="button1">목록</button>
-				<button type="submit" class="button1">저장</button>
+				<button type="submit" id="btnSave" class="button1" onclick="return false;">저장</button>
+				<button type="reset" id="btnReset" class="button1">취소</button>
 				</th>
 			</tr>
 		</table>
