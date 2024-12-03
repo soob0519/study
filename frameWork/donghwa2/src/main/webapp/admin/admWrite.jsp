@@ -6,6 +6,7 @@
 <head>
   <meta charset="UTF-8">
   <title>동화제약 관리모드</title>
+  <link rel="stylesheet" href="/css/admStyle.css">
   <link rel="stylesheet" href="/css/jquery-ui.css">
   <link rel="stylesheet" href="/css/style.css">
   <script src="/js/jquery-3.7.1.js"></script>
@@ -20,34 +21,51 @@
     
  	// 실시간 키입력시 반응 하는 함수
 	$("#userid").keyup(function(){ 
-		let	len = $("#userid").val().length;
-		if(len<4){
-			$("#span_userid").html("<font color='red'> 4자리 이상 입력해주세요 </font>");
-		} else {
-			$("#span_userid").html("");
-		}
 		
-		$.ajax({
-    		type:"POST",
-    		url:"/admUseridCheck.do",
-    		data: "userid="+$("#userid").val(),
-    		
-    		datatype: "text",
-    		success : function(returnData){
-    			if(returnData == "ok"){
-    				$("#span_userid").html("<font color='green'> 사용가능한 아이디입니다. </font>");
-    			} else {
-    				$("#span_userid").html("<font color='blue'> 사용 불가능한 아이디입니다. </font>");
-    			}
-    		},
-    		error : function(){
-    			alert("오류!!!!");
-    		}    		
-    	});
+		let	len = $("#userid").val().length;
+		let chk = $("#userid").val().indexOf("%");
+		
+		if(chk > -1) {
+			$("#span_userid").html("<font color='orange'> 특수문자는 불가능 합니다. </font>");
+		} else if(len < 4){
+			$("#span_userid").html("<font color='red'> 4자리 이상 입력해주세요. </font>");
+		} else {
+			$("#span_userid").html("");		
+		
+			$.ajax({
+	    		type:"POST",
+	    		url:"/admUseridCheck.do",
+	    		data: "userid="+$("#userid").val(),
+	    		
+	    		datatype: "text",
+	    		success : function(returnData){
+	    			$("#userchk").val("2");
+	    			if(returnData == "1"){
+	    				$("#span_userid").html("<font color='green'> 사용가능한 아이디입니다. </font>");
+	    				// 아이디 체크 값을 1번으로 덮어씀
+	    				$("#userchk").val("1");	
+	    			} else if(returnData == "4") {
+	    				$("#span_userid").html("<font color='blue'> 이미 사용중인 아이디입니다. </font>");
+	    			} else if(returnData == "2") {
+	    				$("#span_userid").html("<font color='orange'> 형식에 어긋나는 아이디입니다.(영소문자 4~12) </font>");
+	    			}
+	    		},
+	    		error : function(){
+	    			alert("오류!!!!");
+	    		} 
+	    	});
+		}
 		
 	});  
 	      
     $("#btnSave").click(function(){
+    	
+    	let userchk =$("#userchk").val();
+    	if(userchk != "1"){
+    		alert("아이디 체크를 다시해주세요");
+    		$("#userid").focus();
+    		return false;
+    	}
     	
     	let id = $("#userid").val();
     	let pw = $("#userpass").val();
@@ -96,18 +114,22 @@
     		// 전송장소
     		url:"/admInsert.do",
     		// 전송데이터
-    		data: form,
+    		data: datas,
     		
     		// 결과 값의 타입 (전송 이후의 상황)
     		datatype: "text",
     		
     		// 전송(자바까지의 도달)에 성공했을 경우
     		success : function(returnData){
-    			if(returnData == "ok"){
+    			if(returnData == "1"){
     				alert("저장완료");
     				location="/admList.do"
-    			} else {
+    			} else if(returnData == "2") {
+    				alert("아이디 값이 형식에 어긋납니다.");
+    			} else if(returnData == "3") {
     				alert("저장실패");
+    			} else if(returnData == "4") {
+    				alert("이미 사용중인 아이디 입니다.");
     			}
     		},
     		error : function(){
@@ -124,101 +146,6 @@
 
 
 </head>
-
-<style>
-html {
-	overflow-y:scroll;
-}
-/*body { font-family: 'nsd','돋움'; line-height: 1; font-size:12px; letter-spacing: -0.3px ;color: #5c5c5c;}*/
-body{
-	font-size:15px;
-	line-height:1.6;
-	color:#777;
-	font-family: "Noto Sans KR","Nanum Gothic","Malgun Gothic","Dotum",sans-serif ;
-	position:relative;
-}
-
-a {
-	text-decoration:none;
-}
-
-.adminTop {
-	width:100%;
-	margin: 0px auto;
-	padding: 20px;
-	margin-bottom: 0px;
-	border: 1px solid #bcbcbc;
-	background-color:#474747;
-}
-.adminTop a {
-	color:#ffffff;
-}
-
-.adminMain {
-	width:1200px;
-	margin: 0px auto;
-	padding: 30px;
-	border: 0px solid #bcbcbc;
-}
-.topMenu {
-	text-align:center;
-	vertical-align:middle;
-}
-
-table.type09 {
-    border-collapse: collapse;
-    line-height: 1.5;
-    border: 1px solid #ccc;
-    margin: 20px 10px;
-	width:1200px;
-}
-
-table.type09 tbody th {
-    padding: 10px;
-    font-weight: bold;
-    vertical-align: middle;
-    border: 1px solid #ccc;
-    background: #ececec;
-}
-table.type09 td {
-    padding: 5px;
-    vertical-align: top;
-    border-right: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
-}
-table.type08 {
-    border-collapse: collapse;
-    line-height: 1.5;
-    border: 1px solid #ccc;
-	width:940px;
-}
-
-table.type08 tbody th {
-    padding: 10px;
-    font-weight: bold;
-    vertical-align: middle;
-    border: 1px solid #ccc;
-    background: #ececec;
-}
-table.type08 td {
-    padding: 5px;
-    vertical-align: top;
-    border-right: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
-}
-.botton1 {
-	width:70px;height:27px;
-}
-.topTitle {
-	width:920px; 
-	text-align:center; 
-	padding:10px;
-	font-size:20px;
-	font-weight:bold;
-	border:1px solid #ccc;
-}
-</style>
-
 
 <style>
 .locTd {
@@ -242,24 +169,7 @@ input,textarea,select {
 
 <body>
 <div class="adminTop">
-	<div class="topMenu">
-		<!--<a href="adminPassChange1.php">관리암호변경</a> -->
-		<a href="/">홈으로</a>
-		&nbsp;&nbsp;&nbsp;
-		<a href="/admList.do">관리계정</a>
-		&nbsp;&nbsp;&nbsp;
-		<a href="/admBoardList.do?g=1">공시</a>
-		&nbsp;&nbsp;&nbsp;
-		<a href="/admBoardList.do?g=2">사업보고서</a>
-		&nbsp;&nbsp;&nbsp;
-		<a href="/admBoardList.do?g=3">전자공고</a>
-		&nbsp;&nbsp;&nbsp;
-		<a href="/admGoodsList.do">제품관리</a>
-		&nbsp;&nbsp;&nbsp;
-		<a href="/admPollList.do">설문관리</a>
-		&nbsp;&nbsp;&nbsp;
-		<a href="/admLogout.do">로그아웃</a>
-	</div>
+	<%@ include file = "../include/admMenu.jsp" %>
 </div>
 
 
@@ -268,12 +178,13 @@ input,textarea,select {
 	<table class="type08" align="center">
 		<tr>
 			<th style="font-size:20px;">
-		공시등록
+		관리자등록
 			</th>
 		</tr>
 	</table>
 	<br>
 	<form name="frm" id="frm" method="post" action="/admInsert.do">
+		<input type="hidden" id="userchk" value="2">
 		<table class="type08" align="center">
 			<tr>
 				<th width="20%">아이디</th>

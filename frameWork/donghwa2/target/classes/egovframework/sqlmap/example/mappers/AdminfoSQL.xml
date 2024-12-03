@@ -18,12 +18,32 @@
 							,'${username}'
 							,'${birth}'
 							,'${grade}'
-							,'${state}'
+							,'1'
 							,SYSDATE )
 	</insert>
 	
 	<select id = "selectAdminfoUserid" resultType="int">
 		SELECT COUNT(*) FROM ADMINFO WHERE USERID = #{userid}
+	</select>
+	
+	<select id="selectAdminfoList" resultType="hashmap">
+		SELECT B.* FROM(
+			SELECT ROWNUM RN,A.* FROM(
+				SELECT USERID
+					,USERPASS
+					,USERNAME
+					,TO_CHAR(BIRTH,'YYYY-MM-DD') BIRTH 
+					,GRADE
+					,STATE
+					,RDATE 
+				 FROM
+				  	ADMINFO) A ) B
+		WHERE 
+			RN BETWEEN #{firstIndex} AND #{lastIndex}	
+	</select>
+	
+	<select id="selectAdminfoTotal" resultType="int">
+		SELECT COUNT(*) FROM ADMINFO
 	</select>
 	
 </mapper>

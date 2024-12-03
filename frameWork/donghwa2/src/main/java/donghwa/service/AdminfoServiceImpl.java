@@ -1,5 +1,7 @@
 package donghwa.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -20,6 +22,16 @@ public class AdminfoServiceImpl implements AdminfoService {
 	@Override
 	public int selectAdminfoUserid(AdminfoVO vo) throws Exception {
 		return adminfoMapper.selectAdminfoUserid(vo);
+	}
+
+	@Override
+	public List<?> selectAdminfoList(DefaultVO vo) throws Exception {
+		return adminfoMapper.selectAdminfoList(vo);
+	}
+
+	@Override
+	public int selectAdminfoTotal(DefaultVO vo) throws Exception {
+		return adminfoMapper.selectAdminfoTotal(vo);
 	}
 	
 	

@@ -35,8 +35,7 @@ public class DonghwaController {
 	public String sub3() {
 		return "intro/sub3";
 	}
-	
-	
+
 }
 
 

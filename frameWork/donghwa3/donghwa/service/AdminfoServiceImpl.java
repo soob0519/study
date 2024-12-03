@@ -16,6 +16,11 @@ public class AdminfoServiceImpl implements AdminfoService {
 	public int insertAdminfo(AdminfoVO vo) throws Exception {
 		return adminfoMapper.insertAdminfo(vo);
 	}
+
+	@Override
+	public int selectAdminfoUserid(AdminfoVO vo) throws Exception {
+		return adminfoMapper.selectAdminfoUserid(vo);
+	}
 	
 	
 }

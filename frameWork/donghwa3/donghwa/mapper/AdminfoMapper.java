@@ -9,4 +9,6 @@ public interface AdminfoMapper {
 
 	public int insertAdminfo(AdminfoVO vo);
 
+	public int selectAdminfoUserid(AdminfoVO vo);
+
 }
