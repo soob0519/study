@@ -178,56 +178,10 @@ input,textarea,select {
 	<table class="type08" align="center">
 		<tr>
 			<th style="font-size:20px;">
-		관리자등록
+		관리자 메인
 			</th>
 		</tr>
 	</table>
-	<br>
-	<form name="frm" id="frm" method="post" action="/admInsert.do">
-		<input type="hidden" id="userchk" value="2">
-		<table class="type08" align="center">
-			<tr>
-				<th width="20%">아이디</th>
-				<td width="80%">
-				<input type="text" name="userid" id="userid" placeholder="4자이상">
-				<span id="span_userid"></span>
-				</td>
-			</tr>
-			<tr>
-				<th>암호</th>
-				<td><input type="password" name="userpass" id="userpass"></td>
-			</tr>
-			<tr>
-				<th>이름</th>
-				<td><input type="text" name="username" id="username"></td>
-			</tr>
-			<tr>
-				<th>생일</th>
-				<td><input type="text" name="birth" id="birth"></td>
-			</tr>
-			<tr>
-				<th>등급</th>
-				<td>
-					<select name="grade" id="grade">
-					<option value="1">레벨1</option>
-					<option value="2" selected>레벨2</option>
-					<option value="3">레벨3</option>
-					</select>
-				</td>
-			</tr>
-		</table>
-		<br>
-		<table align="center" style="width:940px;">
-			<tr>
-				<th style="font-size:20px;">
-				<button type="submit" id="btnSave" class="button1" onclick="return false;">저장</button>
-				<button type="reset" id="btnReset" class="button1">취소</button>
-				</th>
-			</tr>
-		</table>
-		<p style="height:100px;">&nbsp;</p>
-
-	</form>
 	</div>
 </div>
 </body>
