@@ -33,6 +33,16 @@ public class AdminfoServiceImpl implements AdminfoService {
 	public int selectAdminfoTotal(DefaultVO vo) throws Exception {
 		return adminfoMapper.selectAdminfoTotal(vo);
 	}
+
+	@Override
+	public int selectAdminfoUseridCnt(AdminfoVO vo) throws Exception {
+		return adminfoMapper.selectAdminfoUseridCnt(vo);
+	}
+
+	@Override
+	public int selectAdminGrade(AdminfoVO vo) throws Exception {
+		return adminfoMapper.selectAdminGrade(vo);
+	}
 	
 	
 }

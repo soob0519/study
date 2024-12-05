@@ -52,7 +52,7 @@ input,textarea,select {
 	<table class="type08" align="center">
 		<tr>
 			<th style="font-size:20px;">
-				관리자목록
+				공시목록
 			</th>
 		</tr>
 	</table>
@@ -64,27 +64,22 @@ input,textarea,select {
 			</caption>
 			<tr>
 				<th width="10%">번호</th>
-				<th width="20%">아이디</th>
-				<th width="20%">이름</th>
-				<th width="20%">생일</th>
-				<th width="20%">등급</th>
-				<th width="10%">상태</th>
+				<th width="50%">제목</th>
+				<th width="10%">이름</th>
+				<th width="10%">날짜</th>
+				<th width="10%">조회</th>
+				<th width="10%"> - </th>
 			</tr>
 			
 		<c:forEach var="st" items="${list}">
 			<tr>
 				<td>${recordCount }</td>
-				<td>${st.USERID }</td>
-				<td>${st.USERNAME }</td>
-				<td>${st.BIRTH }</td>
-				<td>${st.GRADE }</td>
+				<td><a href="/admBoardModify.do?unq=${st.UNQ }">${st.TITLE }</a></td>
+				<td>${st.WRITER }</td>
+				<td>${st.RDATE }</td>
+				<td>${st.HITS }</td>
 				<td>
-				<c:if test="${st.STATE == '1' }">
-					<span style="color:green;font-weight:bold;">근무</span>
-				</c:if>
-				<c:if test="${st.STATE == '2' }">
-					<span style="color:red;font-weight:bold;">퇴사</span>
-				</c:if>
+				
 				</td>
 			</tr>
 			<c:set var="recordCount" value="${recordCount-1 }" />
@@ -96,13 +91,13 @@ input,textarea,select {
 			<tr>
 				<th style="font-size:12px;">
 		<c:forEach var="p" begin="1" end="${totalpage }">
-					<a href="admList.do?pageIndex=${p }">${p }</a>
+					<a href="admBoardList.do?pageIndex=${p }">${p }</a>
 		</c:forEach>				
 				</th>
 			</tr>
 			<tr>
 				<td align="right">
-					<button type="button" onclick="location='/admWrite.do'">계정등록</button>
+					<button type="button" onclick="location='/admBoardWrite.do'">등록</button>
 				</td>
 			</tr>
 		</table>

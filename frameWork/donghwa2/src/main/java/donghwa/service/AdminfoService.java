@@ -28,5 +28,21 @@ public interface AdminfoService {
 	 */
 	int selectAdminfoTotal(DefaultVO vo) throws Exception;
 	
+	/**
+	 * 관리자 로그인정보 확인
+	 * @param vo
+	 * @return
+	 * @throws Exception
+	 */
+	int selectAdminfoUseridCnt(AdminfoVO vo) throws Exception;
+	
+	/**
+	 * 관리자의 레벨 확인
+	 * @param vo
+	 * @return
+	 * @throws Exception
+	 */
+	int selectAdminGrade(AdminfoVO vo)throws Exception;
+	
 	
 }

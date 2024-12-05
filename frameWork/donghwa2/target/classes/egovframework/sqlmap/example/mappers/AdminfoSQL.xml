@@ -46,4 +46,13 @@
 		SELECT COUNT(*) FROM ADMINFO
 	</select>
 	
+	<select id="selectAdminfoUseridCnt" resultType="int">
+		SELECT count(*) FROM ADMINFO WHERE USERID=#{userid} 
+										 AND USERPASS=#{userpass}
+	</select>
+	
+	<select id="selectAdminGrade" resultType="int">
+		SELECT GRADE FROM ADMINFO WHERE USERID = #{userid}
+	</select>
+	
 </mapper>

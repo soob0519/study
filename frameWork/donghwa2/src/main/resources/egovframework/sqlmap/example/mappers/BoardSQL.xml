@@ -62,5 +62,14 @@
 			BOARD2   
 		WHERE UNQ = #{unq}
 	</select>
+	
+	<update id="updateBoard">
+		UPDATE BOARD2 SET TITLE = #{title}
+						,WRITER = #{writer}
+						,CONTENT = #{content}
+						,GUBUN = #{gubun}
+						,UDATE = SYSDATE
+				WHERE UNQ = #{unq}
+	</update>
 
 </mapper>

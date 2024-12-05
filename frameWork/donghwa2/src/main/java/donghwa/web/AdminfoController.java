@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.enterprise.inject.Model;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -20,7 +21,21 @@ public class AdminfoController {
 	
 	@Resource(name="adminfoService")
 	AdminfoService adminfoService;
-
+	
+	@RequestMapping(value="/admMain.do")
+	public String admMain(HttpSession session) {
+		
+		String id = (String)session.getAttribute("selectAdminUserid");
+		String grade = session.getAttribute("selectAdminGrade")+"";
+		
+		String src = "admin/admMain";
+		
+		if(id == null || id.equals("") || id.equals("null")) {
+			src = "redirect:/admLogin.do";
+		}
+		return src;
+	}
+	
 	@RequestMapping(value="/admLogin.do")
 	public String admLogin() {
 		return "admin/admLogin";
@@ -35,6 +50,36 @@ public class AdminfoController {
 	public String admWrite() {
 		return "admin/admWrite";
 	}
+	
+	@RequestMapping(value="/admLogout.do")
+	@ResponseBody
+	public String admLogout(HttpSession session) {
+		
+		session.removeAttribute("selectAdminUserid");
+		session.removeAttribute("selectAdminGrade");
+		return "ok";
+	}
+	
+	@RequestMapping(value="/admSession.do")
+	// 메세지 전달
+	@ResponseBody
+	public String admSessionConfirm(AdminfoVO vo
+									,HttpSession session) throws Exception {
+		String msg = "";
+		int cnt = adminfoService.selectAdminfoUseridCnt(vo);
+		
+		if(cnt==0) {	// 존재하지 않음
+			msg = "1";
+		} else if(cnt==1) {
+			msg = "2";
+			int grade = adminfoService.selectAdminGrade(vo);
+			
+			session.setAttribute("selectAdminUserid", vo.getUserid());	// ID
+			session.setAttribute("selectAdminGrade", grade);	// GRADE 레벨
+		}
+		return msg;
+	}
+	
 	
 	@RequestMapping(value="/admList.do")
 	public String admList(DefaultVO vo, ModelMap model) throws Exception {

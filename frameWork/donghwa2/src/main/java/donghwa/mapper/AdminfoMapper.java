@@ -18,4 +18,8 @@ public interface AdminfoMapper {
 
 	public int selectAdminfoTotal(DefaultVO vo);
 
+	public int selectAdminfoUseridCnt(AdminfoVO vo);
+
+	public int selectAdminGrade(AdminfoVO vo);
+
 }
