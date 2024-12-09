@@ -7197,12 +7197,13 @@ function Datepicker() {
 		currentText: "Today", // Display text for current month link
 		monthNames: [ "January", "February", "March", "April", "May", "June",
 			"July", "August", "September", "October", "November", "December" ], // Names of months for drop-down and formatting
+		//monthNamesShort: [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ], // For formatting
 		monthNamesShort: [ "01월", "02월", "03월", "04월", "05월", "06월", "07월", "08월", "09월", "10월", "11월", "12월" ], // For formatting
-		// monthNamesShort: [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ]
+
 		dayNames: [ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ], // For formatting
 		dayNamesShort: [ "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" ], // For formatting
 		dayNamesMin: [ "일", "월", "화", "수", "목", "금", "토" ], // Column headings for days starting at Sunday
-		// dayNamesMin: [ "Su", "Mo", "Tu", "We", "Th", "Fr", "Sa" ]
+		//dayNamesMin: [ "Su", "Mo", "Tu", "We", "Th", "Fr", "Sa" ],
 		weekHeader: "Wk", // Column header for week of the year
 		dateFormat: "yy-mm-dd", // See format options on parseDate
 		firstDay: 0, // The first day of the week, Sun = 0, Mon = 1, ...
@@ -8899,7 +8900,7 @@ $.extend( Datepicker.prototype, {
 						.text( nextText )
 				)[ 0 ].outerHTML;
 		} else if ( hideIfNoPrevNext ) {
-			next = "";
+			next = "next";
 		} else {
 			next = $( "<a>" )
 				.attr( {

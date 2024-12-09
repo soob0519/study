@@ -13,39 +13,78 @@ import donghwa.service.BoardService;
 import donghwa.service.BoardVO;
 import donghwa.service.DefaultVO;
 
-
 @Controller
 public class AdminBoardController {
-	
+
 	@Resource(name="boardService")
 	BoardService boardService;
+
+	@RequestMapping(value="/admBoardWrite.do")
+	public String admBoardWrite() {
+		
+		return "admin/admBoardWrite";
+	}
 	
+	/**
+	 * 게시물 저장처리
+	 * @param vo
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value="/admBoardSave.do")
+	// 문자(열) 전달
+	@ResponseBody
+	public String insertBoard(BoardVO vo) throws Exception {
+		
+		String msg = "ok";
+		System.out.println("============ save ===============");
+		int cnt = boardService.insertBoard(vo);
+		if( cnt == 0 ) {
+			msg = "fail";
+		}
+		return msg;
+	}
+
+	///admBoardModify.do
 	@RequestMapping("/admBoardModify.do")
-	public String selectBoardDetail(BoardVO vo,ModelMap model) throws Exception {
+	public String selectBoardDetail(BoardVO vo,ModelMap model)  throws Exception {
 		
 		BoardVO boardVO = boardService.selectBoardDetail(vo);
-		model.addAttribute("boardVO",boardVO);
+		model.addAttribute("boardVO", boardVO);
 		
-		System.out.println("title : "+ boardVO.getTitle());		
-		System.out.println("writer : "+ boardVO.getWriter());	
-		
+		System.out.println("title : " + boardVO.getTitle());
+		System.out.println("writer : " + boardVO.getWriter());
+
 		return "admin/admBoardModify";
 	}
 	
 	@RequestMapping("/admBoardUpdate.do")
 	@ResponseBody
-	public String updateboard(BoardVO vo) throws Exception {
+	public String updateBoard(BoardVO vo) throws Exception {
+		
 		String msg = "ok";
 		int cnt = boardService.updateBoard(vo);
-		if(cnt == 0) {
+		if( cnt == 0 ) {
 			msg = "fail";
 		}
 		return msg;
 	}
 	
-	
+	// /admBoardDelete.do
+	@RequestMapping("/admBoardDelete.do")
+	@ResponseBody
+	public String deleteBoard(BoardVO vo) throws Exception {
+		String msg = "ok";
+		int cnt = boardService.deleteBoard(vo);
+		if(cnt == 0) {
+			msg = "fail";
+		}
+		return msg;
+	}
+
 	@RequestMapping("/admBoardList.do")
-	public String selectBoardLsit(DefaultVO vo,ModelMap model) throws Exception {
+	public String selectBoardList(DefaultVO vo,ModelMap model) throws Exception {
+
 		// 현재 출력 페이지 번호
 		int pageIndex = vo.getPageIndex(); // default: 1
 		int pageUnit = vo.getPageUnit();   // default: 10
@@ -70,12 +109,11 @@ public class AdminBoardController {
 		List<?> list = boardService.selectBoardList(vo);
 		
 		model.addAttribute("list", list);
+		model.addAttribute("gubun", vo.getGubun());
 		model.addAttribute("total", total);
 		model.addAttribute("totalpage", totalpage);
 		model.addAttribute("recordCount", recordCountPerPage);
 		
 		return "admin/admBoardList";
 	}
-	
-	
 }

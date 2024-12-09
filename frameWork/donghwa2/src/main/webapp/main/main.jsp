@@ -48,7 +48,7 @@
                             <a href="/sub2.do">연구개발</a>
                         </li>
                         <li>
-                            <a href="/boardList.do">IR자료실</a>
+                            <a href="/boardList.do?mno=1">IR자료실</a>
                         </li>
                         <li>
                             <a href="/sub3.do">사회공헌</a>
@@ -93,9 +93,9 @@
                         <li><a href="/sub2.do">글로벌 동화</a></li>
                     </ul>
                     <ul>
-                        <li><a href="/boardList.do">공시</a></li>
-                        <li><a href="/boardList.do">사업보고서</a></li>
-                        <li><a href="/boardList.do">전자공고</a></li>
+                        <li><a href="/boardList.do?mno=1">공시</a></li>
+                        <li><a href="/boardList.do?mno=2">사업보고서</a></li>
+                        <li><a href="/boardList.do?mno=3">전자공고</a></li>
                     </ul>
                     <ul>
                         <li><a href="/sub3.do">개요</a></li>

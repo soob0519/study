@@ -16,60 +16,98 @@
 							,UDATE
 							,HITS
 					FROM
-						BOARD2   
+						BOARD2 
+					  
 					WHERE 1=1
+					
+					  AND gubun=#{gubun}
 
 					<if test="searchKeyword != null">
 						<if test="searchKeyword != ''">
-							AND (TITLE LIKE '%'||#{searchKeyword}||'%'
-								OR
-							 CONTENT LIKE '%'||#{searchKeyword}||'%	)
+							AND ( TITLE LIKE '%'||#{searchKeyword}||'%'
+							     	OR
+							      CONTENT LIKE '%'||#{searchKeyword}||'%' )
 						</if>
 					</if>
+					
+					ORDER BY UNQ DESC
 						
 				) A ) B
-		
 		WHERE  
 				RN BETWEEN #{firstIndex} AND #{lastIndex} 
 	</select>
 
 	<select id="selectBoardTotal" resultType="int">
 		SELECT 
-			COUNT(*) 
+				COUNT(*) 
 		FROM 
-			BOARD2
-		WHERE 1=1
-				<if test="searchKeyword != null">
-					<if test="searchKeyword != ''">
-						AND (TITLE LIKE '%'||#{searchKeyword}||'%'
-							OR
-						 CONTENT LIKE '%'||#{searchKeyword}||'%	)
-					</if>
+				BOARD2  
+		WHERE 
+				1=1
+			AND 
+				gubun = #{gubun}
+
+			<if test="searchKeyword != null">
+				<if test="searchKeyword != ''">
+					AND ( TITLE LIKE '%'||#{searchKeyword}||'%'
+					     	OR
+					      CONTENT LIKE '%'||#{searchKeyword}||'%' )
 				</if>
+			</if>
 	</select>
 	
 	<select id="selectBoardDetail" resultType="donghwa.service.BoardVO">
-		SELECT   UNQ
-				,TITLE
-				,PASS
-				,WRITER
-				,CONTENT
-				,GUBUN
-				,RDATE
-				,UDATE
-				,HITS
-		FROM
-			BOARD2   
-		WHERE UNQ = #{unq}
+			SELECT   UNQ
+					,TITLE
+					,PASS
+					,WRITER
+					,CONTENT
+					,GUBUN
+					,RDATE
+					,UDATE
+					,HITS
+			FROM
+				BOARD2 
+				  
+			WHERE UNQ=#{unq}
 	</select>
 	
-	<update id="updateBoard">
-		UPDATE BOARD2 SET TITLE = #{title}
-						,WRITER = #{writer}
-						,CONTENT = #{content}
-						,GUBUN = #{gubun}
-						,UDATE = SYSDATE
-				WHERE UNQ = #{unq}
-	</update>
+	<insert id="insertBoard">
+		INSERT INTO BOARD2(  UNQ
+							,TITLE
+							,PASS
+							,WRITER
+							,CONTENT
+							,GUBUN
+							,RDATE
+							,HITS )	
+			VALUES(      board2_seq.nextval
+						,#{title}
+						,#{pass}
+						,#{writer}
+						,#{content}
+						,#{gubun}
+						,sysdate
+						,'0' )
+	</insert>
 
+	<update id="updateBoard">
+		UPDATE BOARD2  SET  TITLE   = #{title}
+						   ,WRITER  = #{writer}
+						   ,CONTENT = #{content}
+						   ,GUBUN   = #{gubun}
+						   ,UDATE   = SYSDATE
+			WHERE
+					UNQ = #{unq}
+	</update>
+	
+	<delete id="deleteBoard">
+		DELETE FROM BOARD2 WHERE UNQ=#{unq}
+	</delete>
+	
+	
 </mapper>
+
+
+
+

@@ -1,8 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     											pageEncoding="UTF-8"%>
 
-
 <%@ taglib prefix="c"      uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%
+// 파라메터값 받음
+String mno = request.getParameter("mno");
+%>
+
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -17,14 +22,7 @@
     </head>
 	<body>
         <script>AOS.init();</script>
-		<!-- 
-		--------------------김주영---------------
-		 -->
-		 
-		 
-		 
-		 
-		 
+
 		<!--사이트맵영역-->
         <div class="site_map">
 			<jsp:include page="../include/sitemap.jsp" />
@@ -51,10 +49,20 @@
                         <a href="/"><span class="blind">home</span></a>
                     </li>
                     <li>
-                        <a href="/boardList.do">IR자료실</a>
+                        <a href="/boardList.do?mno=1">IR자료실</a>
                     </li>
                     <li>
-                        <a href="/boardList.do">사업보고서</a>
+                    <%
+                    switch(mno){
+                    case "1": out.print("<a href='/boardList.do?mno=1'>공시</a>");
+                    	break;
+                    case "2": out.print("<a href='/boardList.do?mno=2'>사업보고서</a>");
+                    	break;
+                    case "3": out.print("<a href='/boardList.do?mno=3'>전자공고</a>");
+                    	break;
+                    }
+                    %>
+                        
                     </li>
                 </ul>
                 <div class="intro_tit">
@@ -64,13 +72,16 @@
                 </div>
                 <ul class="tab_menu">
                     <li>
-                       <a href="/boardList.do">공시</a>
+                       <a href="/boardList.do" 
+                       		<%if(mno.equals("1")){out.print("class='on'"); } %>>공시</a>
                     </li>
                     <li>
-                        <a href="/boardList.do" class="on">사업보고서</a> 
+                        <a href="/boardList.do" 
+                        	<%if(mno.equals("2")){out.print("class='on'"); } %>>사업보고서</a> 
                     </li>
                     <li>
-                    <a href="/boardList.do">전자공고</a> 
+                    <a href="/boardList.do" 
+                    		<%if(mno.equals("3")){out.print("class='on'"); } %>>전자공고</a> 
                     </li>
                 </ul>
             </div>
@@ -113,7 +124,7 @@
 								<c:forEach var="lst" items="${boardlist }">
                                     <li class="bb_contents">
                                         <h4>${recordCountPerPage }</h4>
-                                        <h4><a href="/boardDetail.do?unq=${lst.UNQ }">${lst.TITLE }</a></h4>
+                                        <h4><a href="/boardDetail.do?unq=${lst.UNQ }&mno=<%=mno %>">${lst.TITLE }</a></h4>
                                         <h4>${lst.RDATE }</h4>
                                         <p><a href="20240320084800_[동화약품]사업보고서(2024.03.19).pdf" target="_blank"><span class="blind">첨부파일 다운로드</span></a></p>
                                     </li>
@@ -128,7 +139,7 @@
                                     <li><a href="#none"><span class="blind">이전버튼</span></a></li>
             
 							<c:forEach var="p" begin="1" end="${totalpage }">
-                                    <li><a href="/boardList.do?pageIndex=${p }">${p }</a></li>
+                                    <li><a href="/boardList.do?mno=<%=mno %>&pageIndex=${p }">${p }</a></li>
 							</c:forEach>
                                     
                                     <li><a href="#none"><span class="blind">다음버튼</span></a></li>

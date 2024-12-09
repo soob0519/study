@@ -39,11 +39,11 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="/boardList.do">IR자료실</a>
+                    <a href="/boardList.do?mno=1">IR자료실</a>
                     <ul class="depth2">
-                        <li><a href="/boardList.do">공시</a></li>
-                        <li><a href="/boardList.do">사업보고서</a></li>
-                        <li><a href="/boardList.do">전자공고</a></li>
+                        <li><a href="/boardList.do?mno=1">공시</a></li>
+                        <li><a href="/boardList.do?mno=2">사업보고서</a></li>
+                        <li><a href="/boardList.do?mno=3">전자공고</a></li>
                     </ul>
                 </li>
                 <li>

@@ -4,42 +4,40 @@
 <mapper namespace="donghwa.mapper.AdminfoMapper">
 
 	<insert id="insertAdminfo">
-		INSERT INTO ADMINFO (
-							USERID
+		INSERT INTO ADMINFO( USERID
 							,USERPASS
 							,USERNAME
 							,BIRTH
 							,GRADE
 							,STATE
-							,RDATE ) 
-					VALUES(
-							'${userid}'
-							,'${userpass}'
-							,'${username}'
-							,'${birth}'
-							,'${grade}'
-							,'1'
-							,SYSDATE )
+							,RDATE) 
+			VALUES(  '${userid}'
+					,'${userpass}'
+					,'${username}'
+					,'${birth}'
+					,'${grade}'
+					,'1'
+					, SYSDATE  )
 	</insert>
 	
-	<select id = "selectAdminfoUserid" resultType="int">
-		SELECT COUNT(*) FROM ADMINFO WHERE USERID = #{userid}
+	<select id="selectAdminfoUserid" resultType="int">
+		SELECT COUNT(*) FROM ADMINFO WHERE USERID=#{userid}
 	</select>
 	
 	<select id="selectAdminfoList" resultType="hashmap">
-		SELECT B.* FROM(
-			SELECT ROWNUM RN,A.* FROM(
-				SELECT USERID
-					,USERPASS
-					,USERNAME
-					,TO_CHAR(BIRTH,'YYYY-MM-DD') BIRTH 
-					,GRADE
-					,STATE
-					,RDATE 
-				 FROM
-				  	ADMINFO) A ) B
-		WHERE 
-			RN BETWEEN #{firstIndex} AND #{lastIndex}	
+		SELECT B.* FROM (
+			SELECT ROWNUM RN, A.* FROM (	
+				SELECT   USERID
+						,USERPASS
+						,USERNAME
+						,TO_CHAR(BIRTH,'YYYY-MM-DD') BIRTH
+						,GRADE
+						,STATE
+						,RDATE
+				FROM
+						ADMINFO ) A ) B
+		WHERE
+			 	RN BETWEEN #{firstIndex} AND #{lastIndex}
 	</select>
 	
 	<select id="selectAdminfoTotal" resultType="int">
@@ -47,12 +45,16 @@
 	</select>
 	
 	<select id="selectAdminfoUseridCnt" resultType="int">
-		SELECT count(*) FROM ADMINFO WHERE USERID=#{userid} 
-										 AND USERPASS=#{userpass}
+		SELECT count(*) FROM ADMINFO WHERE USERID=#{userid}
+                                       AND USERPASS=#{userpass}
 	</select>
 	
 	<select id="selectAdminGrade" resultType="int">
-		SELECT GRADE FROM ADMINFO WHERE USERID = #{userid}
+		SELECT GRADE FROM ADMINFO WHERE  USERID=#{userid}
 	</select>
-	
+
 </mapper>
+
+
+
+

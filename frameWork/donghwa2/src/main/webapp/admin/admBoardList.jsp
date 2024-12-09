@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     											pageEncoding="UTF-8"%>
-<%@ taglib prefix="c"      uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!doctype html>
 <html lang="en">
@@ -14,13 +16,7 @@
   <script src="/js/jquery-3.7.1.js"></script>
   <script src="/js/jquery-ui.js"></script>
   
-<script>
-  
-</script>
-
-
 </head>
-
 
 <style>
 .locTd {
@@ -42,9 +38,35 @@ input,textarea,select {
 }
 </style>
 
+<script>
+
+function fn_del(unq) {
+	if( confirm("정말 삭제하시겠습니까?") ) {
+		$.ajax({ 
+			type : "post",
+			url  : "/admBoardDelete.do",
+			data : "unq="+unq,
+			datatype : "text",
+			success : function(data) {  // ok, fail
+				if( data == "ok" ) {
+					alert("삭제성공");
+					location = "/admBoardList.do?gubun=${gubun}";
+				} else {
+					alert("삭제실패");
+				}
+			},
+			error : function() {
+				alert("오류!!");
+			}
+		});
+	}
+}
+</script>
+
 <body>
+
 <div class="adminTop">
-	<%@ include file = "../include/admMenu.jsp" %>
+	<%@ include file="../include/admMenu.jsp" %>
 </div>
 
 <div class="adminMain">
@@ -52,15 +74,24 @@ input,textarea,select {
 	<table class="type08" align="center">
 		<tr>
 			<th style="font-size:20px;">
-				공시목록
+				<c:if test="${gubun=='1'}"> 
+					공시
+				</c:if>
+				<c:if test="${gubun=='2'}"> 
+					사업보고서
+				</c:if>
+				<c:if test="${gubun=='3'}"> 
+					전자공고
+				</c:if>
+				목록
 			</th>
 		</tr>
 	</table>
 	<br>
-	
-		<table class="type08" align="center" style="text-align:center;">
+		
+		<table class="type08" align="center">
 			<caption style="text-align:left;">
-				Total : ${total }개 
+				Total : ${total }개
 			</caption>
 			<tr>
 				<th width="10%">번호</th>
@@ -68,42 +99,48 @@ input,textarea,select {
 				<th width="10%">이름</th>
 				<th width="10%">날짜</th>
 				<th width="10%">조회</th>
-				<th width="10%"> - </th>
+				<th width="10%">버튼</th>
 			</tr>
-			
-		<c:forEach var="st" items="${list}">
-			<tr>
-				<td>${recordCount }</td>
-				<td><a href="/admBoardModify.do?unq=${st.UNQ }">${st.TITLE }</a></td>
-				<td>${st.WRITER }</td>
-				<td>${st.RDATE }</td>
-				<td>${st.HITS }</td>
+		<c:forEach var="st"  items="${list }"  >
+			<tr align="center">
+				<td>${recordCount}</td>
+				<td align="left">&nbsp;
+		<a href="/admBoardModify.do?unq=${st.UNQ }&gubun=${gubun}">${st.TITLE}</a>
+				</td>
+				<td>${st.WRITER}</td>
+				<td>${fn:substring(st.RDATE,0,10)}</td>
+				<td>${st.HITS}</td>
 				<td>
-				
+					<button type="button" onclick="fn_del('${st.UNQ }')">삭제</button>
 				</td>
 			</tr>
-			<c:set var="recordCount" value="${recordCount-1 }" />
+			
+			<c:set var="recordCount" value="${recordCount-1}"/>
+			
 		</c:forEach>	
-		
+
 		</table>
 		<br>
+		
 		<table align="center" style="width:940px;">
 			<tr>
 				<th style="font-size:12px;">
-		<c:forEach var="p" begin="1" end="${totalpage }">
-					<a href="admBoardList.do?pageIndex=${p }">${p }</a>
-		</c:forEach>				
+				
+		<c:forEach var="p" begin="1" end="${totalpage}">
+					<a href="/admBoardList.do?pageIndex=${p}">${p }</a>
+		</c:forEach>
+
 				</th>
 			</tr>
 			<tr>
-				<td align="right">
-					<button type="button" onclick="location='/admBoardWrite.do'">등록</button>
+				<td	align="right">
+					<button type="button" 
+							onclick="location='/admBoardWrite.do'">등록</button>
 				</td>
 			</tr>
 		</table>
 		<p style="height:100px;">&nbsp;</p>
 
-	</form>
 	</div>
 </div>
 </body>

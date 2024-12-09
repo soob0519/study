@@ -51,6 +51,5 @@ public class AdminfoVO {
 	public void setRdate(String rdate) {
 		this.rdate = rdate;
 	}
-	
-	
+
 }

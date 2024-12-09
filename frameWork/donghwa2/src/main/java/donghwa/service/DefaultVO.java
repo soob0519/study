@@ -65,6 +65,30 @@ public class DefaultVO implements Serializable {
 
 	/** lastIndex */
 	private int lastIndex = 10;
+	
+	
+	/** 공시,사업보고서,전자공고의 구분 값 :: 관리자모드 **/
+	private String gubun = "1";
+	
+	/** 공시,사업보고서,전자공고의 구분 값 :: 사용자모드 **/
+	private String mno = "1";
+	
+	
+	public String getMno() {
+		return mno;
+	}
+
+	public void setMno(String mno) {
+		this.mno = mno;
+	}
+
+	public String getGubun() {
+		return gubun;
+	}
+
+	public void setGubun(String gubun) {
+		this.gubun = gubun;
+	}
 
 	/** recordCountPerPage */
 	private int recordCountPerPage = 10;

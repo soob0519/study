@@ -1,5 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 
+<%
+String mno = request.getParameter("mno");
+if(mno == null || mno.equals("")){
+	// 게시판 메뉴번호의 누락시 공시목록 페이지로 자동 이동
+	response.sendRedirect("/boardList.do?mno=1");
+%>
+	<!-- <jsp:forward page="/boardList.do?mno=1"/> -->
+<%
+}
+%>
+
+
 <!DOCTYPE html>
 <html lang="ko">
     <head>
@@ -29,7 +41,20 @@
  
         <section class="sub">
             <div class="navi2 sub_center">
-                <h2>사업보고서</h2>
+                <h2>
+                <%
+                switch(mno){
+                case "1" : out.print("공시");
+                	break;
+                case "2" : out.print("사업보고서");
+                	break;
+                case "3" : out.print("전자공고");
+                	break;
+                }
+                %>
+                사업보고서
+                
+                </h2>
                 <div class="intro_tit">
                     <h2>동화약품<br>
                         <span>정확</span>하고 <span>투명</span>한 경영정보
@@ -48,14 +73,8 @@
                             <p>2023년 4분기 사업보고서</p>
                         </a>
                     </div>
-<<<<<<< .mine
-                    <div class="bb_sub_text">
-                        ${boardvo.content }
-||||||| .r20
-=======
                     <div class="bb_sub_text">  
                        ${boardvo.content }
->>>>>>> .r34
                     </div>
                     <div class="bb_sub_list">
                         <a href="/boardList.do">목록</a>

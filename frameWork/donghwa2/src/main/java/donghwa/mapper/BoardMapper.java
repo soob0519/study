@@ -12,5 +12,7 @@ public interface BoardMapper {
 	int selectBoardTotal(DefaultVO vo);
 	BoardVO selectBoardDetail(BoardVO vo);
 	int updateBoard(BoardVO vo);
+	int insertBoard(BoardVO vo);
+	int deleteBoard(BoardVO vo);
 
 }

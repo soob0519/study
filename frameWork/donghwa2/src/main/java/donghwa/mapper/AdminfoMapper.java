@@ -23,3 +23,5 @@ public interface AdminfoMapper {
 	public int selectAdminGrade(AdminfoVO vo);
 
 }
+
+

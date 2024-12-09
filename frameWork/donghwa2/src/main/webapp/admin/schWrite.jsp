@@ -3,11 +3,6 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
-<%
-String gubun = request.getParameter("gubun");
-%>
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -46,40 +41,71 @@ textarea {
 }
 </style>
 
+<style>
+	.overflow {
+	  height: 300px;
+	}
+</style>
+
+
+
 <script>
 
 $(function(){
+	
+	$("#schdt1").datepicker();
+	$("#schdt2").selectmenu();
+	$("#schdt2").selectmenu()
+    			.selectmenu( "menuWidget" )
+     			.addClass( "overflow" );
 	
 	$("#btnSave").click(function(){ 
 		
 		// 제목,암호의 공백체크
 		let title = $("#title").val();
-		let pass  = $("#pass").val();
+		let schdt1  = $("#schdt1").val();
+		let schdt2  = $("#schdt2").val();
+		let userid  = $("#userid").val();
+		let cont  = $("#cont").val();
 		
 		if( title == "" ) {
 			alert("제목을 입력하세요.");
 			$("#title").focus();
 			return false;
 		}
-		if( pass == "" ) {
-			alert("암호를 입력하세요.");
-			$("#pass").focus();
+		if( schdt1 == "" ) {
+			alert("날짜를 입력하세요.");
+			$("#schdt1").focus();
 			return false;
 		}
+		
+		// 2024-12-09 09:30
+		let schdt = schdt1+" "+schdt2+":00";
+		
 		// 폼 인식
-		let form = $("#frm").serialize();
+		// let form = $("#frm").serialize();
+		
+		// JSON 타입
+		let sendData = {
+				'title' : title,
+				'userid' : userid,
+				'cont' : cont,
+				'schdt' : schdt
+				
+		}
+		
 		// 비동기 전송기능
 		$.ajax({  
 			type : "post",
-			url  : "/admBoardUpdate.do",
-			data : form,
-			datatype : "text",       // "ok", "fail"
-			success : function(data) {
+			url  : "/schSave.do",
+			data : sendData,
+			datatype : "text",          // "ok", "fail"
+			success : function(data) {  // 전송성공
 				if(data == "ok") {
-					alert("수정완료!!");
-					location = "/admBoardList.do";
+					alert("저장완료!!");
+					location = "/schList.do";
 				} else {
-					alert("수정실패!!");
+					alert("저장실패!!");
 				}
 			},
 			error : function() {
@@ -89,10 +115,7 @@ $(function(){
 	});
 });
 
-
-
 </script>
-
 
 <body>
 
@@ -105,59 +128,47 @@ $(function(){
 	<table class="type08" align="center">
 		<tr>
 			<th style="font-size:20px;">
-				<%
-				if(gubun.equals("1")) {
-					out.print("공시");
-				} else if(gubun.equals("2")) {
-					out.print("사업보고서");
-				} else if(gubun.equals("3")) {
-					out.print("전자공고");
-				}
-				%>
-				수정
+				일정
 			</th>
 		</tr>
 	</table>
 	<br>
 		<form id="frm" >
-		<table class="type08" align="center">
-		
-			<input type="hidden" name="unq" value="${boardVO.unq }">
-		
+		<table class="type08" align="center">	
 			<caption style="text-align:left;">
 				
 			</caption>
 			<tr>
+				<th>일정날짜</th>
+				<td>
+					<input type="text" name="schdt1" id="schdt1" style="width:235px;margin-bottom:3px;">
+					<br>
+					<select name="schdt2" id="schdt2" style="width:200px;">
+					<%
+					for(int t1=0; t1<=23; t1++){
+						String t2 = "";
+						if(t1<10) t2 = "0"+t1;
+						else t2 = ""+t1;
+					%>
+						<option value="<%=t2 %>:00"><%=t2 %>:00</option>
+						<option value="<%=t2 %>:30"><%=t2 %>:30</option>
+					<%
+					}
+					%>
+					</select>
+				</td>
+			</tr>
+			<tr>
 				<th>제목</th>
-				<td><input type="text" name="title" id="title" value="${boardVO.title }"></td>
+				<td><input type="text" name="title" id="title"></td>
 			</tr>
 			<tr>
-				<th>암호</th>
-				<td><input type="password" name="pass" id="pass"></td>
-			</tr>
-			<tr>
-				<th>이름</th>
-				<td><input type="text" name="writer" id="writer" value="${boardVO.writer }"></td>
+				<th>아이디</th>
+				<td><input type="text" name="userid" id="userid"></td>
 			</tr>
 			<tr>
 				<th>내용</th>
-				<td><textarea name="content" id="content">${boardVO.content }</textarea></td>
-			</tr>
-			<tr>
-				<th>구분</th>
-				<td><input type="text" name="gubun" id="gubun" value="${boardVO.gubun }"></td>
-			</tr>
-			<tr>
-				<th>조회</th>
-				<td>${boardVO.hits }</td>
-			</tr>
-			<tr>
-				<th>등록</th>
-				<td>${boardVO.rdate }</td>
-			</tr>
-			<tr>
-				<th>변경</th>
-				<td>${boardVO.udate }</td>
+				<td><textarea name="cont" id="cont"></textarea></td>
 			</tr>
 		</table>
 		<br>

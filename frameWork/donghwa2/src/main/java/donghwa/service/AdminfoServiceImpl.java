@@ -10,7 +10,7 @@ import donghwa.mapper.AdminfoMapper;
 
 @Service("adminfoService")
 public class AdminfoServiceImpl implements AdminfoService {
-	
+
 	@Resource(name="adminfoMapper")
 	AdminfoMapper adminfoMapper;
 	
@@ -43,6 +43,8 @@ public class AdminfoServiceImpl implements AdminfoService {
 	public int selectAdminGrade(AdminfoVO vo) throws Exception {
 		return adminfoMapper.selectAdminGrade(vo);
 	}
-	
-	
+
 }
+
+
+

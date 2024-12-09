@@ -21,6 +21,13 @@ public class BoardController {
 	@RequestMapping(value="/boardList.do")
 	public String selectBoardList(DefaultVO vo,ModelMap model) throws Exception {
 		
+		// 게시판 구분값 세팅 (mno -> gubun)
+		String mno = vo.getMno();
+		if(mno == null || mno.equals("")) {
+			mno="1";
+		}
+		vo.setMno(mno);
+		
 		// 현재 출력 페이지 번호
 		int pageIndex = vo.getPageIndex(); // default: 1
 		int pageUnit = vo.getPageUnit();   // default: 10
@@ -56,8 +63,10 @@ public class BoardController {
 	
 	@RequestMapping(value="/boardDetail.do")
 	public String selectBoardDetail(BoardVO vo,ModelMap model) throws Exception {
+		
 		BoardVO vo1 = boardService.selectBoardDetail(vo);
 		model.addAttribute("boardvo",vo1);
+		
 		return "board/boardDetail";
 	}
 }
