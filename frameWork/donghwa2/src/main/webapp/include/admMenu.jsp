@@ -18,6 +18,8 @@
 		&nbsp;&nbsp;&nbsp;
 		<a href="/admPollList.do">설문관리</a>
 		&nbsp;&nbsp;&nbsp;
+		<a href="/schList.do">일정관리</a>
+		&nbsp;&nbsp;&nbsp;
 		<a href="javascript:fn_logout()">로그아웃</a>
 	</div>
   <script>

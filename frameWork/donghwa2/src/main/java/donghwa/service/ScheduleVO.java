@@ -6,10 +6,16 @@ public class ScheduleVO {
 	private String schdt;
 	private String title;
 	private String cont;
-	private String usetid;
+	private String userid;
 	private String regdt;
 	private String upddt;
 	
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
 	public int getUnq() {
 		return unq;
 	}
@@ -34,12 +40,7 @@ public class ScheduleVO {
 	public void setCont(String cont) {
 		this.cont = cont;
 	}
-	public String getUsetid() {
-		return usetid;
-	}
-	public void setUsetid(String usetid) {
-		this.usetid = usetid;
-	}
+	
 	public String getRegdt() {
 		return regdt;
 	}

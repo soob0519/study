@@ -8,5 +8,4 @@ public interface ScheduleMapper {
 
 	int insertSchedule(ScheduleVO vo);
 	
-	
 }

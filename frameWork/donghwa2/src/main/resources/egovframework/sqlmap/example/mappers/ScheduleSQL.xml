@@ -10,10 +10,10 @@
 								,USERID 
 								,REGDT )
 				VALUES (		sch_seq.nextval
-								,#{schdt} 
-								,#{title} 
-								,#{cont} 
-								,#{userid} 
+								,'${schdt}'
+								,'${title}'
+								,'${cont}'
+								,'${userid}'
 								,sysdate )
 	</insert>
 

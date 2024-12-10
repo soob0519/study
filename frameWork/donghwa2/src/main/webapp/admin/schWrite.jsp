@@ -84,7 +84,7 @@ $(function(){
 		
 		// 폼 인식
 		// let form = $("#frm").serialize();
-		
+		// let sss = "title="+title+"&userid="+userid+"&cont="+cont+"&schdt="+schdt;
 		// JSON 타입
 		let sendData = {
 				'title' : title,
@@ -93,7 +93,7 @@ $(function(){
 				'schdt' : schdt
 				
 		}
-		
+	
 		// 비동기 전송기능
 		$.ajax({  
 			type : "post",
@@ -101,7 +101,7 @@ $(function(){
 			data : sendData,
 			datatype : "text",          // "ok", "fail"
 			success : function(data) {  // 전송성공
-				if(data == "ok") {
+				if(data == "ok") {					
 					alert("저장완료!!");
 					location = "/schList.do";
 				} else {
@@ -128,7 +128,7 @@ $(function(){
 	<table class="type08" align="center">
 		<tr>
 			<th style="font-size:20px;">
-				일정
+				일정등록
 			</th>
 		</tr>
 	</table>
