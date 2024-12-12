@@ -108,6 +108,9 @@ public class AdminBoardController {
 		// 검색, 페이징
 		List<?> list = boardService.selectBoardList(vo);
 		
+		System.out.println(list);
+		
+		
 		model.addAttribute("list", list);
 		model.addAttribute("gubun", vo.getGubun());
 		model.addAttribute("total", total);

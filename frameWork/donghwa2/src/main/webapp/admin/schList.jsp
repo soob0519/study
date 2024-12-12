@@ -186,7 +186,7 @@ textarea {
 			}
 			for(int d=1; d<lastday; d++){
 				tdCnt++;
-				String v_today = vdate + "-" + d;
+				String v_today = v_date + "-" + d;
 				String tdColor = "#ffffff";
 				if(today.equals(v_today)) {
 					tdColor = "yellow";
@@ -198,9 +198,23 @@ textarea {
 				if(map.get(v_today) != null){
 					out.print(map.get(v_today));
 				}
+				
+				// 날짜를 jstl 변수로 변환
+				pageContext.setAttribute("schday", d);
 				%>
 				<br>
-				일정(5)
+				
+				<%
+				// vdate(2024-12)의 값에서 출력날짜를 연결함
+				
+				%>
+				
+				<c:forEach var="map" items="${myMap }">
+					<c:if test="${map.key == schday }">
+						<a href="/schList.do?vdate=<%=v_today %>">일정(${map.value })</a>
+					</c:if>
+				</c:forEach>
+				
 				
 				</td>
 			<%
@@ -212,12 +226,28 @@ textarea {
 			</tr>
 		</table>
 		
-		<div style="margin-top:5px;margin-left:20px; width:1050px; text-align:right;">
+		<div style="margin-bottom:10px;margin-top:5px;margin-left:20px; width:1050px; text-align:right;">
 			<button type="button" onclick="location='/schWrite.do'">일정등록</button>
 		</div>
-		
+		<div>
+		<table class="type08" align="center">
+			<tr>
+				<th>순번</th>
+				<th>시간</th>
+				<th>제목</th>
+				<th>비고</th>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>05:00</td>
+				<td>아침운동</td>
+				<td>-</td>
+			</tr>
+		</table>
+		</div>
 		<p style="height:100px;">&nbsp;</p>
-
+		
+				
 	</div>
 </div>
 </body>

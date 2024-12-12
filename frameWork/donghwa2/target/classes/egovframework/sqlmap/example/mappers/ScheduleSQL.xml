@@ -16,6 +16,17 @@
 								,'${userid}'
 								,sysdate )
 	</insert>
-
+	
+	<select id="selectScheduleListSchdt" resultType="hashmap">
+		SELECT DD,COUNT(DD) CNT FROM(
+			SELECT TO_CHAR(SCHDT,'DD') DD FROM SCHEDULE
+				WHERE USERID=#{userid}
+					AND TO_CHAR(SCHDT,'YYYY-MM') = #{schdt}) A 
+		GROUP BY DD
+		
+	</select>
+	
+	
+	
 
 </mapper>

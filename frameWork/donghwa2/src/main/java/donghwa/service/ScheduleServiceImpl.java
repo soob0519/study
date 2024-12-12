@@ -1,5 +1,7 @@
 package donghwa.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -15,6 +17,11 @@ public class ScheduleServiceImpl implements ScheduleService {
 	@Override
 	public int insertSchedule(ScheduleVO vo) throws Exception{
 		return scheduleMapper.insertSchedule(vo);
+	}
+
+	@Override
+	public List<?> selectScheduleListSchdt(ScheduleVO vo) throws Exception {
+		return scheduleMapper.selectScheduleListSchdt(vo);
 	}
 	
 }
