@@ -23,5 +23,25 @@ public class ScheduleServiceImpl implements ScheduleService {
 	public List<?> selectScheduleListSchdt(ScheduleVO vo) throws Exception {
 		return scheduleMapper.selectScheduleListSchdt(vo);
 	}
+
+	@Override
+	public List<?> selectScheduleListEntry(String vdate) throws Exception {
+		return scheduleMapper.selectScheduleListEntry(vdate);
+	}
+
+	@Override
+	public int deleteSchedule(ScheduleVO vo) throws Exception {
+		return scheduleMapper.deleteSchedule(vo);
+	}
+
+	@Override
+	public int updateSchedule(ScheduleVO vo) throws Exception {
+		return  scheduleMapper.updateSchedule(vo);
+	}
+
+	@Override
+	public int selectScheduleSchdtCnt(ScheduleVO vo) throws Exception {
+		return scheduleMapper.selectScheduleSchdtCnt(vo);
+	}
 	
 }

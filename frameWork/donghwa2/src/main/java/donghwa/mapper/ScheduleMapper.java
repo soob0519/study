@@ -11,7 +11,10 @@ import donghwa.service.ScheduleVO;
 public interface ScheduleMapper {
 
 	int insertSchedule(ScheduleVO vo);
-
 	List<?> selectScheduleListSchdt(ScheduleVO vo);
+	List<?> selectScheduleListEntry(String vdate);
+	int deleteSchedule(ScheduleVO vo);
+	int updateSchedule(ScheduleVO vo);
+	int selectScheduleSchdtCnt(ScheduleVO vo);
 	
 }

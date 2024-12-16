@@ -63,8 +63,8 @@ $(function(){
 		
 		// 제목,암호의 공백체크
 		let title = $("#title").val();
-		let schdt1  = $("#schdt1").val();
-		let schdt2  = $("#schdt2").val();
+		let schdt1  = $("#schdt1").val();	// 날짜
+		let schdt2  = $("#schdt2").val();	// 시간
 		let userid  = $("#userid").val();
 		let cont  = $("#cont").val();
 		
@@ -101,9 +101,12 @@ $(function(){
 			data : sendData,
 			datatype : "text",          // "ok", "fail"
 			success : function(data) {  // 전송성공
+				// alert(data);
 				if(data == "ok") {					
 					alert("저장완료!!");
 					location = "/schList.do";
+				} else if(data == "already"){
+					alert("이미 등록된 시간입니다.");
 				} else {
 					alert("저장실패!!");
 				}

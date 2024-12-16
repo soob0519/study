@@ -26,7 +26,32 @@
 		
 	</select>
 	
+	<select id="selectScheduleListEntry" resultType="hashmap">
+		SELECT UNQ,SCHDT,TITLE,CONT FROM SCHEDULE
+			WHERE
+				TO_CHAR(SCHDT,'YYYY-MM-DD') = #{vdate}
+	</select>
+	
+	<select id="selectScheduleSchdtCnt" resultType="int">
+		SELECT COUNT(*) FROM SCHEDULE 
+		WHERE 
+				USERID='${userid}' 
+		AND 
+				TO_CHAR(SCHDT,'YYYY-MM-DD HH24:MI:SS') = '${schdt}'
+	</select>
 	
 	
+	<delete id="deleteSchedule">
+		DELETE FROM SCHEDULE WHERE UNQ=#{unq}
+	</delete>
+	
+	<update id="updateSchedule">
+		UPDATE SCHEDULE 
+		SET 
+				TITLE=#{title} 
+				,CONT=#{cont} 
+		WHERE 
+				UNQ=#{unq}
+	</update>
 
 </mapper>

@@ -7,6 +7,7 @@
     											pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <%
 Map<String,String> map = new HashMap<String,String>();
@@ -229,23 +230,156 @@ textarea {
 		<div style="margin-bottom:10px;margin-top:5px;margin-left:20px; width:1050px; text-align:right;">
 			<button type="button" onclick="location='/schWrite.do'">일정등록</button>
 		</div>
+
 		<div>
 		<table class="type08" align="center">
 			<tr>
-				<th>순번</th>
-				<th>시간</th>
+				<th width="10%">순번</th>
+				<th width="20%">시간</th>
 				<th>제목</th>
-				<th>비고</th>
+				<th width="16%">비고</th>
 			</tr>
+			
+			<c:forEach var="result" items="${list2 }"
+				varStatus="status"> <% // jsp 주석을 사용해야함 그냥 ${} 사용하면 오류뜸 %>
+			<tr align="center">
+				<td>${status.count }</td>
+				<td>
+					${fn:substring(result.SCHDT,0,16) }
+				</td>
+				<td align="left">
+					<span id="title_txt${status.count }">${result.TITLE }</span>
+					<input type="text" name="title" id="title${status.count }" value="${result.TITLE }">
+				</td>
+				<td>
+					<button type="button" onclick="fn_view('${status.count }')">+</button>
+					<button type="button" onclick="fn_hide('${status.count }')">-</button>
+					<button type="button" onclick="fn_modify('${result.UNQ }','${status.count }')">M</button>
+					<button type="button" onclick="fn_delete('${result.UNQ }')">D</button>
+				</td>
+			</tr>		
 			<tr>
-				<td>1</td>
-				<td>05:00</td>
-				<td>아침운동</td>
-				<td>-</td>
+				<td colspan="4">
+					<div id="divCont${status.count }" style="width:98%;height:50px;">${result.CONT}</div>
+					<div id="divTextarea${status.count }" style="width:98%;">
+						<textarea name="cont${status.count }" id="cont${status.count }" >${result.CONT}</textarea>
+						<button type="button" id="btn_modify${status.count }" onclick="fn_update('${result.UNQ }','${status.count }')">수정</button>
+					</div>
+				</td>
 			</tr>
+			</c:forEach>
 		</table>
 		</div>
 		<p style="height:100px;">&nbsp;</p>
+						
+<script>
+
+$(function(){
+	for(var i=1; i<=48; i++){
+		// 내용_텍스트
+		$("#divCont"+i).hide();
+		// 내용_입력상자
+		$("#divTextarea"+i).hide();
+		// 제목_입력상자
+		$("#title"+i).hide();
+	}
+});
+
+function fn_modify(unq,cnt){
+	$("#divCont"+cnt).hide();
+	$("#divTextarea"+cnt).show();
+	$("#title_txt"+cnt).hide();
+	$("#title"+cnt).show();
+	
+}
+
+function fn_update(unq,cnt) {
+	let title = $.trim($("#title"+cnt).val());
+	let cont = $.trim($("#cont"+cnt).val());
+	if(title==""){
+		alert("제목을 입력해주세요");
+		$("title"+cnt).focus();
+		return false;
+	}
+	// JSON 형식
+	let datas = {'title':title,'cont':cont,'unq':unq};
+	$.ajax({
+		type : "post",
+		url : "/schUpdate.do",
+		data : datas,
+		success : function(data){
+			if(data == "ok"){
+				alert("수정처리 완료");
+				location="/schList.do?vdate=<%=vdate %>";
+			} else {
+				alert("수정처리 실패");
+			}
+		},
+		error : function(){
+			alert("오류발생!!!!");
+		}
+	});
+
+
+}
+
+
+function fn_view(nn){
+	$("#divCont"+nn).show();
+	$("#divTextarea"+nn).hide();
+	$("#title_txt"+nn).show();
+	$("#title"+nn).hide();
+}
+
+function fn_hide(nn){
+	$("#divCont"+nn).hide();
+	$("#divTextarea"+nn).hide();
+	$("#title_txt"+nn).show();
+	$("#title"+nn).hide();
+}
+
+function fn_delete(unq){
+	if(confirm("해당 일정을 삭제하시겠습니까?")){
+		// location="/schDelete.do?unq="+unq;	너무 옛날거
+		
+		$.ajax({
+			type : "post",
+			url : "/schDelete.do",
+			data : "unq="+unq,	
+			
+			datatype : "text",
+			success : function(data){
+				if(data == "ok"){
+					alert("해당 일정을 삭제했습니다.");
+					location="/schList.do?vdate=<%=vdate %>";
+				} else {
+					alert("다시시도해주세요.");
+				}
+			},
+			error : function(){
+				alert("오류발생!!!!");
+			}
+			
+		});
+		
+	}
+}
+
+
+/*	document.getElementById("divCont1").style.display = "none";
+	document.getElementById("divCont2").style.display = "none";
+	
+	function fn_view(nn){
+		// 보이게
+		document.getElementById("divCont"+nn).style.display = "block";
+	}
+	
+	function fn_hide(nn){
+		// 안보이게
+		document.getElementById("divCont"+nn).style.display = "none";
+	}
+*/
+</script>
 		
 				
 	</div>
