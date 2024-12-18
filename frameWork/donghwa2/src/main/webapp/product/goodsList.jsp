@@ -12,12 +12,6 @@
         <script src="js/script.js"></script>
     </head>
     
-    
-    <font size="7"><b>TEST7777777</b></font>
-    asdfsadfsadfsadfsd
-  asdfasdfsdf
-    ########
-    
     <body>
         <script>AOS.init();</script>
 

@@ -26,6 +26,13 @@
         </property>
     </bean>
     
+    <!--  파일업로드 설정 추가 S -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize"   value="1000000000" />
+        <property name="maxInMemorySize" value="1000000000" />
+    </bean>
+    <!--  파일업로드 설정 추가 E -->
+    
     <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver" />
     <!-- 쿠키를 이용한 Locale 이용시 <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver"/> -->
     <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
