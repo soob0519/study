@@ -3,17 +3,20 @@ package donghwa.web;
 import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import donghwa.service.DefaultVO;
 import donghwa.service.GoodsService;
 import donghwa.service.GoodsVO;
 
@@ -34,15 +37,15 @@ public class GoodsController {
 	public String insertGoods(   MultipartHttpServletRequest multiRequest
 								,GoodsVO vo) throws Exception {
 		
-		String dirPath = "C:/eGovFrameDev-4.2.0-64bit/workspace/donghwa2/src/main/webapp/upload";
-
+		String dirPath = "C:/eGovFrameDev-4.2.0-64bit/workspace/donghwa3/src/main/webapp/upload";
+		String msg = "ok";
 		// 서버의 특정공간에 임시저장된 파일맵을 새로운 맵에 담는다.
 		Map map = multiRequest.getFileMap();
 		
 		// 새로운 맵에 있는 정보를 순차적으로 가져오기 위한 작업
 		// iterator() 메소드에 hasNext(), next() 메소드가 속해있음.
 		Iterator itr = map.entrySet().iterator();
-		
+				
 		// 파일의 존재유무
 		if( itr.hasNext() ) {	// 참(true)
 			
@@ -59,24 +62,67 @@ public class GoodsController {
 			System.out.println(file.getSize());
 			System.out.println(file.getContentType());
 			
-			// 우리가 지정한 경로를 설정한다.
-			String filePath = dirPath + "/" + orgname;
+			// 1byte
 			
-			// 우리가 지정한 경로로 파일을 옮긴다.
-			file.transferTo(new File(filePath));
-		
-			// 파일이름을 VO에 담는다.
-			vo.setFilename(orgname);
+			int filesize = (int)file.getSize();
+			int maxsize = 1024*1024*50;
+			
+			if(filesize>maxsize) {
+				msg = "over";
+			} else {
+				// 우리가 지정한 경로를 설정한다.
+				String filePath = dirPath + "/" + orgname;
+				
+				// 우리가 지정한 경로로 파일을 옮긴다.
+				file.transferTo(new File(filePath));
+			
+				// 파일이름을 VO에 담는다.
+				vo.setFilename(orgname);
+			}
 		}
 		
-		String msg = "ok";
-		
-		int result = goodsService.insertGoods(vo);
-		if(result == 0) {
-			msg = "fail";
+		if(msg != "over") {
+			int result = goodsService.insertGoods(vo);
+			if(result == 0) {
+				msg = "fail";
+			}
 		}
 		return msg;
 	}
+	
+	@RequestMapping(value="/goodsList.do")
+	public String selectGoodsList(DefaultVO vo,ModelMap model) throws Exception {
+
+			// 현재 출력 페이지 번호
+			int pageIndex = vo.getPageIndex(); // default: 1
+			int pageUnit = 6;   // default: 10
+			
+			int total = goodsService.selectGoodsTotal(vo);
+			
+			// 총 페이지 수
+			int totalpage = (int) Math.ceil((double)total/pageUnit);
+			
+			// 출력 페이지의 시작번호  ex) 3page -> 100 - (3-1)x10
+			int recordCountPerPage = total - (pageIndex-1)*pageUnit;
+
+			// 1:1 , 2:11, 3:21 ~~
+			// (3-1)*10 + 1 :: (현재페이지번호-1)*출력개수 + 1
+			int firstIndex = (pageIndex-1)*pageUnit + 1;
+			int lastIndex  = firstIndex + (pageUnit-1);
+			
+			vo.setFirstIndex(firstIndex);
+			vo.setLastIndex(lastIndex);
+			
+			// 검색, 페이징
+			List<?> list = goodsService.selectGoodsList(vo);
+			model.addAttribute("list", list);
+			model.addAttribute("total", total);
+			model.addAttribute("totalpage", totalpage);
+		
+		return "product/goodsList";
+	}
+	
+	
 }
 
 

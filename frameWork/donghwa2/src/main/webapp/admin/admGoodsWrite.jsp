@@ -79,6 +79,8 @@ $(function(){
 				if(data == "ok") {
 					alert("저장완료!!");
 					location = "/admGoodsList.do";
+				} else if(data == "over") {
+					alert("파일 크기가 1메가를 초과했습니다.");
 				} else {
 					alert("저장실패!!");
 				}

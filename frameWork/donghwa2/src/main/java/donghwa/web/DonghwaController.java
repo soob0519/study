@@ -18,11 +18,6 @@ public class DonghwaController {
 		return "main/main";
 	}
 	
-	@RequestMapping(value="/goodsList.do")
-	public String selectGoodsList() {
-		
-		return "product/goodsList";
-	}
 	
 	@RequestMapping(value="/sub1.do")
 	public String sub1() {

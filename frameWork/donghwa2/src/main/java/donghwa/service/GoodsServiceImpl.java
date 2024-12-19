@@ -1,5 +1,7 @@
 package donghwa.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -15,6 +17,16 @@ public class GoodsServiceImpl implements GoodsService {
 	@Override
 	public int insertGoods(GoodsVO vo) throws Exception {	
 		return goodsMapper.insertGoods(vo);
+	}
+
+	@Override
+	public List<?> selectGoodsList(DefaultVO vo) throws Exception {
+		return goodsMapper.selectGoodsList(vo);
+	}
+
+	@Override
+	public int selectGoodsTotal(DefaultVO vo) throws Exception {
+		return goodsMapper.selectGoodsTotal(vo);
 	}
 	
 

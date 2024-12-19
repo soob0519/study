@@ -3,27 +3,50 @@
 
 <mapper namespace="donghwa.mapper.GoodsMapper">
 
-		<insert id="insertGoods">
+	<insert id="insertGoods">
+	
+	INSERT INTO GOODS(	 CD
+						,TITLE
+						,PRICE
+						,CONT
+						,CATE
+						,FILENAME
+						,RDATE
+						,UDATE    ) 
+		VALUES(  goods_seq.nextval
+				,'${title}'
+				,'${price}'
+				,'${cont}'
+				,'${cate}'
+				,'${filename}'
+				,sysdate
+				,'' )
+	
+	</insert>
 		
-		INSERT INTO GOODS(	 CD
-							,TITLE
-							,PRICE
-							,CONT
-							,CATE
-							,FILENAME
-							,RDATE
-							,UDATE    ) 
-			VALUES(  goods_seq.nextval
-					,'${title}'
-					,'${price}'
-					,'${cont}'
-					,'${cate}'
-					,'${filename}'
-					,sysdate
-					,'' )
+	<select id="selectGoodsList" resultType="hashmap">
+		SELECT B.* FROM
+			( SELECT ROWNUM RN, A.* FROM 
+				( SELECT
+						CD
+						,TITLE
+						,PRICE
+						,CONT
+						,CATE
+						,FILENAME
+						,RDATE
+						,UDATE
+					FROM GOODS
+					ORDER BY
+					CD DESC ) A ) B
+			WHERE RN BETWEEN ${firstIndex} AND ${lastIndex}
+	</select>
 		
-		</insert>
-
+	<select id="selectGoodsTotal" resultType="int">
+		SELECT COUNT(*) FROM GOODS
+	</select>
+		
+		
 </mapper>
 
 

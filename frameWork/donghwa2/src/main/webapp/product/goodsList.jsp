@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html lang="ko">
     <head>
@@ -167,13 +170,18 @@
                                 <div class="pro_wrap">
                                     <p class="pro_count">전체 <span>388개</span> 제품이 있습니다.</p>
                                     <ul class="pro_item fix_flexbetween">
+                                       
+                                       <c:forEach var="goods" items="${list }">
                                         <li>
-                                            <a href="#none"><img src="images/product_img01.png" alt="후시딘"></a>
+                                            <a href="#none"><img src="upload/${goods.FILENAME }"></a>
                                             <div class="pro_item_text">
                                                 <p>신제품</p>
-                                                <h3>후시딘 Fucidin</h3>
+                                                <h3>${goods.TITLE }</h3>
                                             </div>
                                         </li>
+                                        </c:forEach>
+                                       
+                                        <!-- 
                                         <li>
                                             <a href="#none"><img src="images/product_img02.png" alt="잇치가글액"></a>
                                             <div class="pro_item_text">
@@ -209,17 +217,23 @@
                                                 <h3>판콜 PANCOLD</h3>
                                             </div>
                                         </li>
+                                         -->
                                     </ul>
                                     <ul class="pro_btn">
-                                        <li><a href="#none"><span class="blind">처음으로</span></a></li>
+                                        <li><a href="/goodsList.do?pageIndex=1"><span class="blind">처음으로</span></a></li>
                                         <li><a href="#none"><span class="blind">이전버튼</span></a></li>
+                                        <c:forEach var="p" begin="1" end="${totalpage}">
+												<li><a href="/goodsList.do?pageIndex=${p}">${p }</a></li>
+										</c:forEach>
+                                        <!-- 
                                         <li><a href="#none">1</a></li>
                                         <li><a href="#none">2</a></li>
                                         <li><a href="#none">3</a></li>
                                         <li><a href="#none">4</a></li>
                                         <li><a href="#none">5</a></li>
+                                         -->
                                         <li><a href="#none"><span class="blind">다음버튼</span></a></li>
-                                        <li><a href="#none"><span class="blind">맨끝으로</span></a></li>
+                                        <li><a href="/goodsList.do?pageIndex=${totalpage}"><span class="blind">맨끝으로</span></a></li>
                                     </ul>
                                 </div>
                             </div>
