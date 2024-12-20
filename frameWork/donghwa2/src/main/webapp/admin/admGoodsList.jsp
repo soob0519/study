@@ -40,17 +40,17 @@ input,textarea,select {
 
 <script>
 
-function fn_del(unq) {
+function fn_del(cd,filename) {
 	if( confirm("정말 삭제하시겠습니까?") ) {
 		$.ajax({ 
 			type : "post",
-			url  : "/admBoardDelete.do",
-			data : "unq="+unq,
+			url  : "/admGoodsDelete.do",
+			data : "cd="+cd+"&filename="+filename,
 			datatype : "text",
 			success : function(data) {  // ok, fail
 				if( data == "ok" ) {
 					alert("삭제성공");
-					location = "/admBoardList.do?gubun=${gubun}";
+					location = "/admGoodsList.do";
 				} else {
 					alert("삭제실패");
 				}
@@ -86,23 +86,29 @@ function fn_del(unq) {
 			</caption>
 			<tr>
 				<th width="10%">번호</th>
-				<th width="50%">제목</th>
-				<th width="10%">이름</th>
-				<th width="10%">날짜</th>
-				<th width="10%">조회</th>
+				<th width="50%">상품이름</th>
+				<th width="10%">카테고리</th>
+				<th width="10%">가격</th>
+				<th width="10%">파일</th>
 				<th width="10%">버튼</th>
 			</tr>
 		<c:forEach var="st"  items="${list }"  >
 			<tr align="center">
 				<td>${recordCount}</td>
 				<td align="left">&nbsp;
-		<a href="/admGoodsModify.do?unq=${st.UNQ }&gubun=${gubun}">${st.TITLE}</a>
+		<a href="/admGoodsModify.do?cd=${st.CD }">${st.TITLE}</a>
 				</td>
-				<td>${st.WRITER}</td>
-				<td>${fn:substring(st.RDATE,0,10)}</td>
-				<td>${st.HITS}</td>
+				<td>${st.CATE}</td>
+				<td>${st.PRICE}</td>
 				<td>
-					<button type="button" onclick="fn_del('${st.UNQ }')">삭제</button>
+				
+				<c:if test="${st.FILENAME !=null }">
+					<a href="/upload/${st.FILENAME }" target="_blank"><img src="/images/icon12.png" width="20" height="20"></a>
+				</c:if>
+				
+				</td>
+				<td>
+					<button type="button" onclick="fn_del('${st.CD }','${st.FILENAME }')">삭제</button>
 				</td>
 			</tr>
 			<c:set var="recordCount" value="${recordCount-1}"/>

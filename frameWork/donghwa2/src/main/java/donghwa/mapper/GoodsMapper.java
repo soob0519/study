@@ -13,5 +13,6 @@ public interface GoodsMapper {
 	int insertGoods(GoodsVO vo);
 	List<?> selectGoodsList(DefaultVO vo);
 	int selectGoodsTotal(DefaultVO vo);
+	int deleteGoods(GoodsVO vo);
 
 }

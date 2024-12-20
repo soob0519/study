@@ -45,7 +45,10 @@
 	<select id="selectGoodsTotal" resultType="int">
 		SELECT COUNT(*) FROM GOODS
 	</select>
-		
+	
+	<delete id="deleteGoods">
+		DELETE FROM GOODS WHERE CD='${cd}'
+	</delete>
 		
 </mapper>
 

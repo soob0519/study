@@ -28,6 +28,11 @@ public class GoodsServiceImpl implements GoodsService {
 	public int selectGoodsTotal(DefaultVO vo) throws Exception {
 		return goodsMapper.selectGoodsTotal(vo);
 	}
+
+	@Override
+	public int deleteGoods(GoodsVO vo) throws Exception {
+		return goodsMapper.deleteGoods(vo);
+	}
 	
 
 }
