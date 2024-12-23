@@ -41,14 +41,41 @@
 					CD DESC ) A ) B
 			WHERE RN BETWEEN ${firstIndex} AND ${lastIndex}
 	</select>
-		
+	
+	<select id="selectGoodsDetail" resultType="donghwa.service.GoodsVO">
+		SELECT CD
+				,TITLE
+				,PRICE
+				,CONT
+				,CATE
+				,FILENAME
+				,RDATE
+				,UDATE
+		FROM GOODS
+		WHERE 
+			CD = #{cd}
+	</select>
+	
 	<select id="selectGoodsTotal" resultType="int">
 		SELECT COUNT(*) FROM GOODS
 	</select>
 	
+	<update id="updateGoods">
+		UPDATE GOODS SET TITLE = #{title}
+						,PRICE = #{price}
+						,CONT = #{cont}
+						,CATE = #{cate}
+						,FILENAME = #{filename}
+						,UDATE = sysdate
+			WHERE 
+					CD = #{cd}
+	</update>
+	
 	<delete id="deleteGoods">
-		DELETE FROM GOODS WHERE CD='${cd}'
+		DELETE FROM GOODS WHERE CD = #{cd}
 	</delete>
+	
+	
 		
 </mapper>
 

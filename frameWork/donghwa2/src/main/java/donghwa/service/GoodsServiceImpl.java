@@ -33,6 +33,16 @@ public class GoodsServiceImpl implements GoodsService {
 	public int deleteGoods(GoodsVO vo) throws Exception {
 		return goodsMapper.deleteGoods(vo);
 	}
+
+	@Override
+	public GoodsVO selectGoodsDetail(GoodsVO vo) throws Exception {
+		return goodsMapper.selectGoodsDetail(vo);
+	}
+
+	@Override
+	public int updateGoods(GoodsVO vo) throws Exception {
+		return goodsMapper.updateGoods(vo);
+	}
 	
 
 }

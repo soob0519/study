@@ -11,6 +11,10 @@ public interface GoodsService {
 	int selectGoodsTotal(DefaultVO vo) throws Exception;
 
 	int deleteGoods(GoodsVO vo)throws Exception;
+	// 상세보기 서비스
+	GoodsVO selectGoodsDetail(GoodsVO vo) throws Exception;
+	// 업데이트 서비스
+	int updateGoods(GoodsVO vo) throws Exception;
 	
 	
 	
