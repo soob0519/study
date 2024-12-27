@@ -96,7 +96,7 @@ function fn_del(unq) {
 			<tr align="center">
 				<td>${recordCount}</td>
 				<td align="left">&nbsp;
-		<a href="/researchModify.do?unq=${st.UNQ }">${st.TITLE}</a>
+					<a href="/researchModify.do?unq=${st.UNQ }">${st.TITLE}</a>
 				</td>
 				<td>${st.SDATE} ~ ${st.EDATE}</td>
 				<td>${st.STATE}</td>
