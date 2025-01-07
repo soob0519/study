@@ -1,0 +1,209 @@
+<%@ page import="java.sql.ResultSet"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+<%@ include file = "../../include/oracleCon.jsp" %>	<!-- DB연결 -->
+<%@ include file = "../../include/code.jsp" %>
+
+
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title><%=msg %></title>
+  <link rel="stylesheet" href="../../css/myPageBoard.css"/>  <!-- 외부 css파일 불러오는 태그 -->
+ </head>
+
+ <body>
+ 	<header>
+ 		<!-- header Start -->
+		<%@ include file = "../../include/header.jsp" %>
+		<!-- header End -->
+	</header>
+	<nav>
+		<!-- Top Menu Start -->
+		<%@ include file = "../../include/topMenu.jsp" %>
+		<!-- Top Menu End -->
+	</nav>
+	
+<%
+// 검색기능을 활용하기 위한 파라미터 및 검색조건 변수(Where) 세팅 
+String searchField = request.getParameter("searchField");		// 검색필드의 파라미터값(전체:all,제목:title,내용:content)
+String searchText = request.getParameter("searchText");			// 브라우저상에서 사용자가 입력하는 검색어를 파라미터값으로 받는다.
+
+
+// (리뷰/Q&A 게시판 구분을 위한 코드)
+String Where = "WHERE gubun = '"+code+"' AND USERID='test1' ";
+if(searchText != null && !searchText.trim().equals("")){		// 검색어가 null 값이 아니면서, (앞뒤공백제거후)공백이 없다면...
+	switch(searchField){										// (if문 대신 switch문을 활용해서 코드 간략화)
+	case "all" 		: Where += "AND title LIKE '%"+searchText+"%' OR content LIKE '%"+searchText+"%'";
+		break;
+	case "title" 	: Where += "AND title LIKE '%"+searchText+"%'";
+		break;
+	case "content" 	: Where += "AND content LIKE '%"+searchText+"%'";
+		break;
+	}
+}
+String search = "searchField="+searchField+"&searchText="+searchText;
+
+
+// (이전코드)
+//String Where = ""; 											// SQL 에 활용하기 위한 비어있는 변수
+//if(searchText != null && !searchText.trim().equals("")){		// 검색어가 null 값이 아니면서, (앞뒤공백제거후)공백이 없다면...
+//	switch(searchField){										// (if문 대신 switch문을 활용해서 코드 간략화)
+//	case "all" 		: Where = "WHERE title LIKE '%"+searchText+"%' OR content LIKE '%"+searchText+"%'";
+//		break;
+//	case "title" 	: Where = "WHERE title LIKE '%"+searchText+"%'";
+//		break;
+//	case "content" 	: Where = "WHERE content LIKE '%"+searchText+"%'";
+//		break;
+//	}
+//}
+
+// 출력페이지 번호
+String pageNo = request.getParameter("page");
+if(pageNo == null) {
+	pageNo = "1";
+}
+
+int unitData = 5;		// 한 화면당 출력(표시)할 데이터 개수
+int unitPage = 10;		// 한 화면당 출력 페이지 개수 
+
+String sql1 = "SELECT count(*) FROM board2 " + Where;		// 총 데이터 개수 출력
+ResultSet rs1 = stmt.executeQuery(sql1);
+rs1.next();
+int total = rs1.getInt(1);
+
+// 일련번호 초기 세팅 ↓
+// int number = total - (지나간데이터개수)
+int rownum = total - (unitData*(Integer.parseInt(pageNo)-1));		// total - (지나간데이터개수*(보고있는페이지번호-1))
+
+// 마지막 페이지 번호(게시판 페이징 기능)  
+// ex: 12 개 데이터 있을 때  12/10 => 소숫점값 올림을위한 ceil(1.2) = 정수표현을위한 int (int)2.0 = 2 page 를 얻어낸다.
+int lastPage = (int)Math.ceil((double)total/unitData);
+
+// pageNo = "1" →	1
+// pageNo = "2" →	11
+// pageNo = "3" →	21
+//	(볼려고하는 페이지-1)*10+1 
+int sno = (Integer.parseInt(pageNo)-1)*unitData+1;			// 
+int eno = sno+(unitData-1);									//
+String sql2 = "SELECT b.* from ( "
+			+" 		SELECT rownum rn, a.* FROM ( "
+			+" 			SELECT "
+			+			" unq,gubun,title,writer,hits,to_char(rdate,'yyyy.mm.dd') rdate " 
+			+" 			FROM board2 "
+			+		Where 
+			+" 			ORDER BY unq DESC ) a ) b "
+			+"	WHERE rn BETWEEN "+sno+" AND "+eno;			// rn 데이터를 10개(1~10) 출력
+ResultSet rs2 = stmt.executeQuery(sql2);
+%>
+	
+	<section>
+		<div class="divTitle">
+			<%=msg %>
+		</div>
+		<div class="divSearch">
+		<form name="searchForm" method="post" action="boardList.jsp">
+			<select name="searchField" class="select1">
+				<option value="all">전체</option>
+				<option value="title">제목</option>
+				<option value="content">내용</option>
+			</select>
+			<input type="text" name="searchText" class="input3">
+			<button type="submit" name="" class="button3">검색</button>
+		</form>
+		</div>
+		<div class="div_agrees">
+		<table class="table_member">
+			<colgroup>
+				<col width="10%"/>
+				<col width="10%"/>
+				<col width="*"  />
+				<col width="10%"/>
+				<col width="10%"/>				
+				<col width="10%"/>				
+			</colgroup>
+			<tr>
+				<th>번호</th>
+				<th>구분</th>
+				<th>제목</th>
+				<th>글쓴이</th>
+				<th>등록일</th>
+				<th>조회수</th>
+			</tr>
+			<%
+			while(rs2.next()){
+				String unq = rs2.getString("unq");
+				String gubun = rs2.getString("gubun");
+				String title = rs2.getString("title");
+				String writer = rs2.getString("writer");
+				String rdate = rs2.getString("rdate");
+				int hits = rs2.getInt("hits");
+				/*
+				if(gubun.equals("1")){
+					gubun = "분실";
+				} else if(gubun.equals("2")){
+					gubun = "습득";
+				} else if(gubun.equals("3")){
+					gubun = "보관";
+				} 
+				*/
+				String sql3 = "SELECT COUNT(*) FROM board2sub WHERE punq ='"+unq+"'";
+				ResultSet rs3 = stmt2.executeQuery(sql3);			// stmt 는 한개 작업에 하나만 할당한다.(공유불가)
+				rs3.next();
+				int cnt = rs3.getInt(1);	// 1번 데이터부터 출력..
+			%>
+			<tr>
+				<td><%=rownum %></td>
+				<td><%=msg %></td>
+				<td style="text-align:left;"><a href="boardDetail.jsp?code=<%=code %>&unq=<%=unq%>"><%=title %></a>(<%=cnt %>)</td>
+				<td><%=writer %></td>
+				<td><%=rdate %></td>
+				<td><%=hits %></td>
+			</tr>
+			<%
+				rownum--;	// 행번호 가감처리.
+			}
+			%>
+		</table>
+			<div style="margin-top:10px; text-align:right; width:1200px;">
+				<button type="button" class="button4" onclick="location='boardWrite.jsp?code=<%=code %>'">글쓰기</button>
+			</div>
+			<div style="margin-top:30px; text-align:center; width:1200px;">
+			
+			<a href="boardList.jsp?code=<%=code %>&page=1&<%=search %>" class="num first"> 《 </a>
+			<a href="#" class="num bef"> 〈 </a>
+			<%
+			for(int p=1; p<=lastPage; p++){
+			%>
+				<a href="boardList.jsp?code=<%=code %>&page=<%=p %>&<%=search %>" class="num"><%=p %></a>
+			<%
+//				out.print("<a href='boardList.jsp?page="+p+"' class=\"num\"> "+p+" </a>");
+			}
+			%>
+			<a href="#" class="num bef"> 〉</a>
+			<a href="boardList.jsp?code=<%=code %>&page=<%=lastPage %>&<%=search %>" class="num last"> 》</a>
+						
+<!--		    # 게시판 페이지 기본형 
+				<a href="#" class="num first"> << </a>
+				<a href="#" class="num bef"> < </a>
+				<a href="#" class="num"> 1 </a>
+				<a href="#" class="num"> 2 </a>
+				<a href="#" class="num on"> 3 </a>
+				<a href="#" class="num"> 4 </a>
+				<a href="#" class="num"> 5 </a>
+				<a href="#" class="num bef"> > </a>
+				<a href="#" class="num last"> >> </a>
+													  -->
+				<!-- # 을 쓴 이유는, 모양만 잡아놓기 위해서. -->
+			</div>
+		</div>
+	</section>
+	<footer>
+		<!-- footer Start -->
+		<%@ include file = "../../include/footer.jsp" %>
+		<!-- footer End -->
+	</footer>
+ </body>
+</html>

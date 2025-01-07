@@ -1,0 +1,39 @@
+COMMENT ON COLUMN storeinfo.stid IS '가게고유번호';
+COMMENT ON COLUMN storeinfo.storename IS '가게이름';
+COMMENT ON COLUMN storeinfo.stcontent IS '한줄정보';
+COMMENT ON COLUMN storeinfo.way IS '한줄위치';
+COMMENT ON COLUMN storeinfo.operatinghour IS '운영시간';
+COMMENT ON COLUMN storeinfo.tel IS '전화번호';
+COMMENT ON COLUMN storeinfo.dayoff IS '휴무일';
+COMMENT ON COLUMN storeinfo.information IS '상제정보';
+
+COMMENT ON COLUMN storemenu.stid IS '가게고유번호';
+COMMENT ON COLUMN storemenu.menuname IS '메뉴이름';
+COMMENT ON COLUMN storemenu.mecontent IS '메뉴설명';
+COMMENT ON COLUMN storemenu.price IS '메뉴가격';
+
+COMMENT ON COLUMN storereview.stid IS '가게고유번호';
+COMMENT ON COLUMN storereview.cuid IS '회원고유번호';
+COMMENT ON COLUMN storereview.recontent IS '리뷰내용';
+COMMENT ON COLUMN storereview.lev IS '가게평점';
+COMMENT ON COLUMN storereview.rdate IS '리뷰작성날짜';
+
+COMMENT ON COLUMN storeboard.stid IS '가게고유번호';
+COMMENT ON COLUMN storeboard.gubun IS '공지구분';
+COMMENT ON COLUMN storeboard.title IS '공지제목';
+COMMENT ON COLUMN storeboard.ntcontent IS '공지내용';
+COMMENT ON COLUMN storeboard.rdate IS '공지등록일';
+
+COMMENT ON COLUMN "C##JAVA"."SCHEDULE"."UNQ" IS '예약번호';
+COMMENT ON COLUMN "C##JAVA"."SCHEDULE"."CUID" IS '회원아이디';
+COMMENT ON COLUMN "C##JAVA"."SCHEDULE"."CUPASS" IS '회원암호';
+COMMENT ON COLUMN "C##JAVA"."SCHEDULE"."CUNAME" IS '회원이름';
+COMMENT ON COLUMN "C##JAVA"."SCHEDULE"."RD" IS '예약접수시간';
+COMMENT ON COLUMN "C##JAVA"."SCHEDULE"."PP" IS '인원수';
+COMMENT ON COLUMN "C##JAVA"."SCHEDULE"."MENU" IS '예약메뉴';
+COMMENT ON COLUMN "C##JAVA"."SCHEDULE"."EA" IS '메뉴개수';
+COMMENT ON COLUMN "C##JAVA"."SCHEDULE"."PRICE" IS '합계가격';
+COMMENT ON COLUMN "C##JAVA"."SCHEDULE"."STATE" IS '예약상태';
+COMMENT ON COLUMN "C##JAVA"."SCHEDULE"."RQ" IS '고객요청사항';
+COMMENT ON COLUMN "C##JAVA"."SCHEDULE"."DAY" IS '내점예정일(예약일)';
+COMMENT ON COLUMN "C##JAVA"."SCHEDULE"."TIME" IS '내점예정일(시간)';

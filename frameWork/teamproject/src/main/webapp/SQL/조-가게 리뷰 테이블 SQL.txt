@@ -1,0 +1,25 @@
+가게 리뷰 테이블 SQL
+회원아이디		cuid
+가게고유번호	stid
+가게평점		lev
+리뷰내용		recontent
+리뷰작성날짜	rdate timestamp
+
+create table storereview (
+stid varchar(20) not null,
+cuid varchar(20) not null,
+recontent varchar(2000),
+lev number(1) not null,
+rdate timestamp
+);
+
+COMMENT ON COLUMN storereview.stid IS '가게고유번호';
+COMMENT ON COLUMN storereview.cuid IS '회원고유번호';
+COMMENT ON COLUMN storereview.recontent IS '리뷰내용';
+COMMENT ON COLUMN storereview.lev IS '가게평점';
+COMMENT ON COLUMN storereview.rdate IS '리뷰작성날짜';
+
+insert into storereview(stid,cuid,recontent,lev,rdate) values ('1','조수빈','보통맛','3',sysdate);
+insert into storereview(stid,cuid,recontent,lev,rdate) values ('1','조수빈2','완전맛있다','5',sysdate);
+insert into storereview(stid,cuid,recontent,lev,rdate) values ('1','조수빈3','우웩','2',sysdate);
+insert into storereview(stid,cuid,recontent,lev,rdate) values ('1','조수빈4','마시따','4',sysdate);

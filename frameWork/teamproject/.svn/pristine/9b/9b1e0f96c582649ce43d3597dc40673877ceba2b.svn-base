@@ -1,0 +1,213 @@
+@charset "UTF-8";
+
+header {
+	background-color:#c2bbf4;
+	height:100px;
+	width:1300px;
+}
+nav {
+	background-color:rebeccapurple;
+	height:50px;
+	width:1300px;
+	margin-top:-16px;
+}
+section {
+	width:1300px;
+	height:1000px;
+	background-color:aliceblue;
+}
+footer {
+	background-color:lavender;
+	height:100px;
+	width:1300px;
+}
+li.menu_li {
+	float:left;  /* 위치선정 속성 */
+	margin-right:5px;
+	width:100px;
+	padding:5px;
+	background-color:#c2bbf4;
+	list-style:none;  /* ★★★목록의 점(●)을 없애는 속성★★★ */
+	font-size:12px;
+	text-align:center;
+	border-radius:5px;
+}
+ul.menu_ul {
+	position:relative;
+	left:320px;
+	top:10px;
+}
+a {
+	text-decoration:none; /* underline(기본값), none, line-through */
+}
+.divTitle {
+	position:relative;
+	left:30px;
+	top:40px;
+	width:1200px;
+	font-size:40px;
+	font-weight:bold;
+	text-align:center;
+	color:skyblue;
+/*	border:1px solid #cccccc; */
+}	
+div.divSearch {
+	position:relative;
+	top:60px;
+	right:-40px;
+	width:1200px;
+	text-align:right;
+/*	border:0px solid #cccccc; */
+}
+div.div_agrees {
+	position:relative;
+	left:30px;
+	top:60px;
+	width:1200px;
+	height:750px;
+	border:0px solid #cccccc;
+	padding:10px;
+	font-size:12px;
+	line-height:3.0;
+}
+ .button1 {
+	width:200px;
+	padding:10px;
+	font-size:14px;
+	font-weight:bold;
+	color:#ffffff;
+	background-color:#0066ff;
+	border:0px;
+	cursor:pointer; /*help,progress,wait,cell,pointer*/
+ }
+ 
+ /* hover  : 마우스올렸을 경우(상태)
+  * focus  : 커서가 위치하는 경우
+  * active : 클릭순간의 경우
+  */
+ .button1:hover {
+	background-color:#006600;
+	/*세로(공간),가로(공간),둥근모서리(번짐),그림자크기    */
+	box-shadow:5px 5px 5px 0px #ff33ff;
+ }
+ .button1:focus {
+	background-color:#ffcc99;
+ }
+ .button1:active {
+	background-color:#ffff00;
+ }
+ 
+ .button2 {
+	width:100px;
+	padding:8px;
+	font-size:14px;
+	font-weight:bold;
+	color:#ffffff;
+	background-color:#0066ff;
+	border:0px;
+	cursor:pointer; /*help,progress,wait,cell,pointer*/
+ }
+ 
+ .button3 {
+	width:70px;
+	padding:8px;
+	font-size:12px;
+	font-weight:bold;
+	color:#ffffff;
+	background-color:skyblue;
+	border:0px;
+	border-radius: 10px;
+	cursor:pointer; /*help,progress,wait,cell,pointer*/
+ }
+ .button3:hover {
+	background-color:#ffcc00; box-shadow:10px 5px 10px 0px #f5a07c;
+ }
+ .button4 {
+ 	width:70px;
+	padding:8px;
+	font-size:12px;
+	font-weight:bold;
+	color:#ffffff;
+	background-color:skyblue;
+	border:0px;
+	border-radius: 10px;
+	cursor:pointer; /*help,progress,wait,cell,pointer*/
+ }
+ .button4:hover {
+	background-color:#ffcc00; box-shadow:10px 5px 10px 0px #f5a07c;
+ }
+table.table_member {
+	width:1200px;
+	border-collapse:collapse; /* 셀사이의 간격제거 */
+	border-top:1px solid #000000;
+}
+.table_member th, td {
+	border-bottom:1px solid #cccccc;
+	padding:5px;
+	text-align:center;
+}
+.table_member td {
+	color:deepskyblue;
+}
+.table_member th {
+	background-color:#fefdd6;
+	color:deepskyblue;
+}
+.table_member tr:hover {
+	background-color:ivory;
+}
+.table_member tr {
+	border-bottom:1px solid #cccccc;
+}
+body > section > div.div_agrees > form > table > tbody > tr > td > input {
+	color:deepskyblue;
+}
+body > section > div.div_agrees > form > table > tbody > tr:nth-child(4) > td > textarea {
+	color:deepskyblue;
+}
+.input1 {
+	width:70%;
+	padding:7px;
+}
+.input2 {
+	width:90%;
+	padding:7px;
+}
+.input3 {
+	width:150px;
+	padding:7px;
+	border-radius:10px;
+}
+ 
+hr {
+	border:0px;
+	height:1px;
+	background:#e9e9e9;
+}
+.select1 {
+	width:150px;
+	padding:7px;
+	border-radius:10px;
+}
+.num {
+	margin-left:-1px;
+	font-size:14px;
+	color:#0066ff;
+	padding:10px;
+	border:1px solid #cccccc;	
+ }
+ .num:hover {
+	background-color:ivory;
+ }
+ .num.first {
+	border-top-left-radius:10px;
+	border-bottom-left-radius:10px;
+ }
+ .num.last {
+	border-top-right-radius:10px;
+	border-bottom-right-radius:10px;
+ }
+ .num.on {
+	background-color:skyblue;
+	color:#ffffff;
+ }

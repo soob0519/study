@@ -1,0 +1,69 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<!-- DB 연결 -->
+<%@ include file = "/include/oracleCon.jsp" %>
+
+<!-- 파라미터(변수)값 설정 -->
+<%
+String title = request.getParameter("title");
+String pass = request.getParameter("pass");
+String writer = request.getParameter("writer");
+String content = request.getParameter("content");
+String gubun = request.getParameter("gubun");
+String hits = request.getParameter("hits");
+%>
+
+<!-- 제목, 암호의 null 값, 스페이스(공백입력) 체크 -->
+<%
+if(title == null || pass == null){
+%>
+	<script>
+		alert("잘못된 접근입니다.");
+		location = "boardWrite.jsp?code=<%=gubun %>";
+	</script>
+<%	
+	return;
+}
+
+// trim() 앞뒤공백 제거 메소드
+title = title.trim();
+pass = pass.trim();
+writer = writer.trim();
+content = content.trim();
+if(title.equals("") || pass.equals("")){
+%>
+	<script>
+		alert("잘못된 접근입니다.");
+		location = "boardWrite.jsp";
+	</script>
+<%	
+	return;
+}
+%>
+
+<!-- 입력 SQL 작성 및 적용 -->
+<%
+String sql1 = "INSERT INTO board2(unq,title,pass,writer,content,gubun,rdate,hits)"
+			+ " VALUES(board2_seq.nextval,'"+title+"','"+pass+"','"+writer+"','"+content+"','"+gubun+"',sysdate,'0')";	// sysdate 는 오라클의 '내장함수' 이므로 따옴표를 붙이지 않는다.★
+int result = stmt.executeUpdate(sql1);
+%>			
+
+<!-- 저장완료 메시지 -->
+<%
+if(result == 1){
+%>
+	<script>
+		alert("저장성공!");
+		location = "boardList.jsp?code=<%=gubun %>";
+	</script>
+<%
+} else {
+%>
+	<script>
+		alert("저장실패!");
+		history.back();
+	</script>
+<%	
+}
+%>

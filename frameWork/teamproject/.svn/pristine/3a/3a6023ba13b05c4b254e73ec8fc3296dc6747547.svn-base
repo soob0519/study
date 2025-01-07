@@ -1,0 +1,130 @@
+@charset "UTF-8";
+
+* {
+	font-family: 돋움;
+}
+body {
+	font-size: 12px;
+}
+body > section > div {
+    text-align: center;
+}
+body > section > form:nth-child(2) > div {
+    text-align: center;
+}
+body > section > form:nth-child(3) {
+    justify-items: center;
+}
+body > section > div:nth-child(1) > form > input[type=text] {
+    width: 130px;
+    height: 20px;
+    border-radius: 10px;
+}
+.table1 {
+	width: 800px;
+	height: 300px;
+	border:1px solid #ccc;
+	border-collapse: collapse;	/* 셀사이 공간제거 */
+}
+.table1 > tbody > tr:nth-child(1) > th:nth-child(1) {
+	background-color:mistyrose!important;
+}
+.table1 > tbody > tr:nth-child(1) > th:nth-child(7) {
+	background-color:aliceblue!important;
+}
+.table1 > tbody > tr > td:nth-child(7n+1) {
+	background-color:mistyrose!important;
+}
+.table1 > tbody > tr > td:nth-child(7n) {
+	background-color:aliceblue!important;
+}
+
+.table1 > tbody > tr:nth-child(1) > th:nth-child(n+2):nth-child(-n+6) {
+    background-color: floralwhite;
+}
+.table1 > tbody > tr > td:nth-child(n+2):nth-child(-n+6) {
+    background-color: floralwhite;
+}
+.table2 {
+	width: 800px;
+	height: 350px;
+	border:1px solid #ccc;
+	border-collapse: collapse;
+}
+.table2 > tbody {
+    background-color: gainsboro;
+}
+body > section > div:nth-child(4) {
+    justify-self: center;
+}
+.table2 > tbody > tr:nth-child(-n+5) > td:nth-child(1) {
+    width: 15%;
+}
+.table2 > tbody > tr:nth-child(-n+5) > td:nth-child(3) {
+    width: 15%;
+}
+.table2 > tbody > tr:nth-child(-n+3) > td:nth-child(2) {
+    width: 40%;
+}
+.table2 > tbody > tr:nth-child(1) > td:nth-child(4) {
+    width: 30%;
+}
+body > section > div:nth-child(4) > form > table > tbody > tr > td:hover {
+    background-color: ivory;
+}
+body > section > div:nth-child(4) {
+    border: 1px solid lightgray;
+}
+th,td {
+	border:1px solid #ccc;
+	padding: 7px;
+	text-align:center;
+}
+caption {
+	font-size: 24px;
+	font-weight: bold;
+	padding: 10px;
+}
+button {
+	padding: 8px;
+	background-color: aliceblue;
+	border-radius: 10px;
+	border: 1px solid skyblue;
+}
+button:hover {
+	background-color: ivory;
+}
+.div_button {
+	width: 600px;
+	margin-top: 10px;
+	text-align: center;
+}
+.input1 {
+	width: 96%;
+	font-size: 12px;
+}
+a {
+	text-decoration: none;
+}
+body > section > div:nth-child(7) {
+    width: 800px;
+    text-align: center;
+    border: 1px solid skyblue;
+    height: 200px;
+}
+body > section > div:nth-child(7) > div:nth-child(1) {
+    height: 30px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    font-weight: bold;
+    padding-top: 10px;
+}
+body > section > div:nth-child(7) > div:nth-child(2) {
+    height: 155px;
+    font-size: 16px;
+    text-align: left;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    overflow-y: scroll;
+}

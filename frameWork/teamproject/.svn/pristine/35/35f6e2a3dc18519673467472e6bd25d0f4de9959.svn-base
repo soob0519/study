@@ -1,0 +1,60 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<!-- DB연결 -->
+<%@ include file = "/include/oracleCon.jsp" %>
+
+<%
+String storename = request.getParameter("storename");
+String stcontent = request.getParameter("stcontent");
+String way = request.getParameter("way");
+String operatinghour = request.getParameter("operatinghour");
+String tel = request.getParameter("tel");
+String dayoff = request.getParameter("dayoff");
+String information = request.getParameter("information");
+
+// 앞뒤 공백 제거
+storename = storename.trim();
+stcontent = stcontent.trim();
+way = way.trim();
+operatinghour = operatinghour.trim();
+tel = tel.trim();
+dayoff = dayoff.trim();
+information = information.trim();
+
+// 사용자가 전화번호에 기호 입력 시, 제거하기 위한 전처리 작업.(전화번호 타입을 String 으로 변경해서, int 타입으로 입력은 불필요.)
+String tel2 = tel.replaceAll("-","");
+// System.out.println(tel2);
+// int tel3 = Integer.parseInt(tel2);
+
+%>
+
+
+<!-- UPDATE SQL 작성 및 적용(암호값 일치여부 확인하기 위해 pass 조건 추가) -->
+<%
+String sql = " UPDATE storeinfo SET STORENAME		 = '"+storename+	"' "
+								+" ,STCONTENT		 = '"+stcontent+	"' "
+								+" ,WAY 			 = '"+way+			"' "
+								+" ,OPERATINGHOUR	 = '"+operatinghour+"' "
+								+" ,TEL 			 = '"+tel2+			"' "
+								+" ,DAYOFF 			 = '"+dayoff+		"' "
+								+" ,INFORMATION 	 = '"+information+	"' "
+								+" WHERE STID = '1' ";
+int result = stmt.executeUpdate(sql);
+if(result == 1) {
+%>
+	<script>
+		alert("업데이트 성공!");
+		location="storeInfo.jsp";
+	</script>
+<%	
+} else {
+%>	
+	<script>
+		alert("업데이트 실패!");
+		history.back();
+	</script>
+<%
+	return;
+}
+ %>

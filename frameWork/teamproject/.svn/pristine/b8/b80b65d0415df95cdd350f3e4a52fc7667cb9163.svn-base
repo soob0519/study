@@ -1,0 +1,48 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<!-- DB연결 -->
+<%@ include file = "/include/oracleCon.jsp" %>
+
+<%
+String menuname = request.getParameter("menuname");
+String price = request.getParameter("price");
+String mecontent = request.getParameter("mecontent");
+
+
+// 앞뒤 공백 제거
+menuname = menuname.trim();
+price = price.trim();
+mecontent = mecontent.trim();
+
+%>
+
+<%
+String sql = " INSERT INTO storemenu (   STID 		  		 "
+									 +" ,UNQ	 	  		 "
+									 +" ,MENUNAME 	  		 "
+									 +" ,PRICE 		  	 	 "
+									 +" ,MECONTENT )  		 "
+							+" VALUES( '1'			 		 "
+							+" 		 , STOREMENU_SEQ.NEXTVAL "
+							+" 		 ,'"+menuname+"'  		 "
+							+" 		 ,'"+price+"' 	  		 "
+							+" 		 ,'"+mecontent+"')		 ";
+int result = stmt.executeUpdate(sql);
+if(result == 1) {
+%>
+	<script>
+		alert("메뉴 추가성공!");
+		location="menu.jsp";
+	</script>
+<%	
+} else {
+%>	
+	<script>
+		alert("메뉴 추가실패");
+		history.back();
+	</script>
+<%
+	return;
+}
+ %>

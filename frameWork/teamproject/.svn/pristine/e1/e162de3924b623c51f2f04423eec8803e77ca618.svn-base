@@ -1,0 +1,395 @@
+<%@page import="java.sql.ResultSet"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<%@ include file="../include/oracleCon.jsp" %>
+
+<%
+request.setCharacterEncoding("utf-8");
+
+%>
+
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>회원가입</title>
+ </head>
+ 
+ <style>
+ section {
+	color:#7d7d7d;
+ }
+ 
+ .table1 {
+	width:900px;
+	border:1px solid #cccccc;
+	padding:40px;
+ }
+ 
+ .btn1 {
+	width:100px;
+	height:21px;
+	font-size:10px;
+	background-color:#f4f4f4;
+	border:1px solid #8c8c8c;
+	border-radius:3px;
+ }
+ 
+ .input2 {
+	width:45px;
+ }
+ 
+ .input3 {
+	width:80px;
+	
+ }
+ 
+.div_btn {
+	margin-left:400px;
+	margin-top:20px;
+}
+
+a{
+	color:#ffffff;
+	text-decoration:none;
+}
+
+.btn2 {
+	width:100px;
+	height:50px;
+	font-weight:bold;
+	border-radius:3px;
+	border:1px solid #c7c7c7;
+	background-color:#ffffff;
+}
+
+.btn2 a {
+	color:#000000;
+}
+
+.btn2:hover{
+	border:1px solid #c7c7c7;
+	background-color:#dddddd;
+ }
+ 
+.btn3 {
+	width:100px;
+	height:50px;
+	font-weight:bold;
+	border-radius:3px;
+	border:1px solid #0289f7;
+	background-color:#0289f7;
+}
+
+.btn3:hover{
+	border:1px solid #0289f7;
+	background-color:#0099ff;
+}
+ 
+ hr {
+	border:0px;
+	height:1px;
+	background:#cccccc;
+  }
+  
+ 
+ </style>
+ 
+<script>
+function fn_userid() {
+	userid = document.frm.userid.value;
+	location="loginChk2.jsp?userid="+userid;
+}
+
+ function fn_submit() {
+	if (document.frm.userid.value == "") {
+		alert("아이디를 입력하세요.");	
+		document.frm.userid.focus();
+		return false;
+	}	
+	
+	if (document.frm.userid.value.length < 4 ||
+		document.frm.userid.value.length >12) 
+	{
+		alert("아이디는 최소 4글자 이상입니다.");
+		return false;
+	}
+	
+	if (document.frm.pass.value == "") {
+		alert("비밀번호를 입력하세요.");	
+		document.frm.pass.focus();
+		return false;
+	}	
+	
+	if (document.frm.pass.value.length < 8) 
+	{
+		alert("비밀번호는 최소 8글자 이상입니다.");
+		return false;
+	}
+	
+	if (document.frm.pass1.value == "") {
+		alert("비밀번호를 입력하세요.");	
+		document.frm.pass1.focus();
+		return false;
+	}
+	
+	if (document.frm.pass.value != document.frm.pass1.value) {
+		alert("비밀번호가 같지 않습니다.");	
+		document.frm.pass1.focus();
+		return false;
+	}	
+	
+	if (document.frm.name.value == "") {
+		alert("이름을 입력하세요.");	
+		document.frm.name.focus();
+		return false;
+	}
+	
+	if (document.frm.rname.value == "") {
+		alert("상호명을 입력하세요.");	
+		document.frm.rname.focus();
+		return false;
+	}
+	
+	if (document.frm.rkind.value == "") {
+		alert("업종을 입력하세요.");	
+		document.frm.rkind.focus();
+		return false;
+	}
+	
+	if (document.frm.addr.value == "") {
+		alert("지역(시/도) 입력하세요.");	
+		document.frm.addr.focus();
+		return false;
+	}
+	
+	if (document.frm.mobile1.value == "") {
+		alert("핸드폰 번호를 입력하세요.");	
+		document.frm.mobile1.focus();
+		return false;
+	}
+	
+	if (document.frm.mobile2.value == "") {
+		alert("핸드폰 번호를 입력하세요.");	
+		document.frm.mobile2.focus();
+		return false;
+	}
+	
+	if (document.frm.mobile3.value == "") {
+		alert("핸드폰 번호를 입력하세요.");	
+		document.frm.mobile3.focus();
+		return false;
+	}
+	
+	if (document.frm.email.value == "") {
+		alert("이메일을 입력하세요.");	
+		document.frm.email.focus();
+		return false;
+	}
+	
+	document.frm.submit();
+ }
+</script>
+ 
+ 
+ <body>
+	<header>
+	</header>
+	
+	<nav>
+	</nav>
+	
+	<section>
+    <div class="div_title">
+		<h1>회원가입</h1>
+	</div>
+	
+	<form name="frm" method="post" action="loginMemberWriteSave2.jsp">
+	<div class="div_main">
+	
+	<table class="table1">
+		<tr >
+			<td style="font-size:13px;"><b> 개인정보 입력</b></td>
+			<td>
+				<span style="font-size:11px;">
+					<img src="../images/check.PNG" style="width:12px;margin-left:550px;">표시된 것은 필수항목입니다.</span>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2"> <hr> </td>
+		</tr>
+		
+		<tr>
+			<td style="font-size:11px; width:100px;"><b>아이디</b> <img src="../images/check.PNG" style="width:12px;"></td>
+			<td>
+				<input type="text" name="userid" class="input1">
+				<button type="button" class="btn1" onclick="fn_userid()">아이디중복확인</button>
+				<span style="font-size:10px; margin-left:10px;"> 영, 숫자조합(4~12자)</span>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2"> <hr> </td>
+		</tr>
+		
+		<tr>
+			<td style="font-size:11px;"><b>비밀번호</b><img src="../images/check.PNG" style="width:12px;"></td>
+			<td>
+				<input type="password" name="pass" class="input1">
+				<span style="font-size:10px; margin-left:10px;"> 
+					영, 숫자, 특수문자 조합(8자 이상) </span>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2"> <hr> </td>
+		</tr>
+		
+		<tr>
+			<td style="font-size:11px;"><b>비밀번호 확인</b><img src="../images/check.PNG" style="width:12px;"></td>
+			<td>
+				<input type="password" name="pass1" class="input1">
+				<span style="font-size:10px; margin-left:10px;"> 다시한번 입력해주세요</span>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2"> <hr> </td>
+		</tr>
+		
+		<tr>
+			<td style="font-size:11px;"><b>이름</b><img src="../images/check.PNG" style="width:12px;"></td>
+			<td>
+				<input type="text" name="name" class="input1">
+				<span style="font-size:10px; margin-left:10px;"> 실명 한글이름을 입력해주세요</span>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2"> <hr> </td>
+		</tr>
+		
+		<tr>
+			<td style="font-size:11px;"><b>상호명</b><img src="../images/check.PNG" style="width:12px;"></td>
+			<td>
+				<input type="text" name="rname" class="input1">
+				<span style="font-size:11px; margin-left:10px;"> </span>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2"> <hr> </td>
+		</tr>
+		
+		<tr>
+			<td style="font-size:11px;"><b>업종</b><img src="../images/check.PNG" style="width:12px;"></td>
+			<td>
+				<input type="text" name="rkind" class="input1">
+				<span style="font-size:10px; margin-left:10px;"> 해당 업종을 입력해주세요</span>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2"> <hr> </td>
+		</tr>
+		
+		<tr>
+			<td style="font-size:11px;"><b>지역(시/도)</b><img src="../images/check.PNG" style="width:12px;"></td>
+			<td>
+				<input type="text" name="addr" class="input1">
+				<span style="font-size:10px; margin-left:10px;"> 지역(시/도)을 입력해주세요</span>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2"> <hr> </td>
+		</tr>
+		
+		<tr>
+			<td style="font-size:11px;"><b>휴대폰번호</b><img src="../images/check.PNG" style="width:12px;"></td>
+			<td>
+				<input type="text" name="mobile1" class="input2"> -
+				<input type="text" name="mobile2" class="input2"> -
+				<input type="text" name="mobile3" class="input2">
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2"> <hr> </td>
+		</tr>
+		
+		<tr>
+			<td style="font-size:11px;"><b>이메일주소</b><img src="../images/check.PNG" style="width:12px;"></td>
+			<td>
+				<input type="text" name="email" class="input4">
+				
+				<span style="font-size:11px; margin-left:20px;"> 메일수신이 가능한 이메일주소를 입력해주세요.</span>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2"> <hr> </td>
+		</tr>
+		
+		<tr>
+			<td style="font-size:11px;"><b>이메일수신여부</b></td>
+			<td>
+				<input type="checkbox" name="chk1" checked>
+					<span style="font-size:12px;"> 수신함</span>
+				&nbsp;&nbsp;
+				<input type="checkbox" name="chk1"><span style="font-size:12px;"> 수신하지 않음</span>
+				<span style="font-size:11px; margin-left:20px;">이벤트, 제품 정보, 주문 정보등에 대한 메일링 서비스를 제공해드립니다.</span>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2"> <hr> </td>
+		</tr>
+		
+		<tr>
+			<td style="font-size:11px;"><b>SMS수신여부</b></td>
+			<td>
+				<input type="checkbox" name="chk1" checked>
+					<span style="font-size:12px;"> 수신함</span>
+				&nbsp;&nbsp;
+				<input type="checkbox" name="chk1"><span style="font-size:12px;"> 수신하지 않음</span>
+				<span style="font-size:11px; margin-left:20px;">이벤트, 제품 정보, 주문 정보등에 대한 SMS 서비스를 제공해드립니다.</span>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2"> <hr> </td>
+		</tr>
+		
+		<tr>
+			<td style="font-size:11px;"><b>가입경로</b></font></td>
+			<td>
+				<input type="checkbox" name=""><span style="font-size:12px;"> 네이버</span>
+				&nbsp;&nbsp;
+				<input type="checkbox" name=""><span style="font-size:12px;"> 구글</span>
+				&nbsp;&nbsp;
+				<input type="checkbox" name=""><span style="font-size:12px;"> 다음</span>
+				&nbsp;&nbsp;
+				<input type="checkbox" name=""><span style="font-size:12px;"> 블로그</span>
+				&nbsp;&nbsp;
+				<input type="checkbox" name=""><span style="font-size:12px;"> 카페</span>
+				&nbsp;&nbsp;
+				<input type="checkbox" name=""><span style="font-size:12px;"> 페이스북</span>
+				&nbsp;&nbsp;
+				<input type="checkbox" name=""><span style="font-size:12px;"> 인스타</span>
+				&nbsp;&nbsp;
+				<input type="checkbox" name=""><span style="font-size:12px;"> 지인소개</span>
+				&nbsp;&nbsp;
+				<input type="checkbox" name=""><span style="font-size:12px;"> 뉴스</span>
+				
+				<span style="font-size:11px; margin-left:10px;">괌플레이에 대해 알게된 경로를 선택해주시기를 바랍니다.</span>
+			</td>
+		</tr>
+	</table>	
+		
+		<div class="div_btn">
+			<button type="button" class="btn2"><a href="/main.jsp">취소</a></button>
+			<button type="button" class="btn3" onclick="fn_submit();return false;"><a href="/main.jsp">회원가입</a></button>
+		
+		</div>
+	</div>
+		
+	</form>
+		
+ </section>
+ 
+ <footer>
+ </footer>
+ 
+ </body>
+</html>

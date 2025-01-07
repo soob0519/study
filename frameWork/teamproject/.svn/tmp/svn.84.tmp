@@ -1,0 +1,20 @@
+가게 메뉴 테이블 SQL
+메뉴이름		menuname
+메뉴설명		mecontent
+메뉴가격		price
+
+create table storemenu (
+stid varchar(20) not null,
+menuname varchar(1000) not null,
+mecontent varchar(2000) not null,
+price varchar(1000)
+);
+
+COMMENT ON COLUMN storemenu.stid IS '가게고유번호';
+COMMENT ON COLUMN storemenu.menuname IS '메뉴이름';
+COMMENT ON COLUMN storemenu.mecontent IS '메뉴설명';
+COMMENT ON COLUMN storemenu.price IS '메뉴가격';
+
+insert into storemenu(stid,menuname,mecontent,price) values ('1','은대구파스타','은대구로 맛을 낸 맛있는 파스타','15,000');
+insert into storemenu(stid,menuname,mecontent,price) values ('1','트러플크림파스타','맛있는 트러플크림 파스타','17,000');
+insert into storemenu(stid,menuname,mecontent,price) values ('1','안심스테이크','소고기 안심 스테이크','55,000');

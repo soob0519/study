@@ -1,0 +1,50 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<!-- DB연결 -->
+<%@ include file = "../../include/oracleCon.jsp" %>
+
+<%
+String gubun = request.getParameter("gubun");
+String title = request.getParameter("title");
+String ntcontent = request.getParameter("ntcontent");
+
+
+// 앞뒤 공백 제거
+gubun = gubun.trim();
+title = title.trim();
+ntcontent = ntcontent.trim();
+
+%>
+
+<%
+String sql = " INSERT INTO storenotice ( STID	 				 "
+									 +" ,UNQ 					 "
+									 +" ,GUBUN 					 "
+									 +" ,TITLE 					 "
+									 +" ,NTCONTENT 				 "
+									 +" ,RDATE )				 "
+							+" VALUES('1'						 "
+							+" 		 , storenotice_seq.nextval	 "
+							+" 		 ,'"+gubun+"' 	 			 "
+							+" 		 ,'"+title+"' 	 			 "
+							+" 		 ,'"+ntcontent+"'			 "
+							+"  	 ,SYSDATE ) 				 ";
+int result = stmt.executeUpdate(sql);
+if(result == 1) {
+%>
+	<script>
+		alert("공지 입력성공!");
+		location="notice.jsp";
+	</script>
+<%	
+} else {
+%>	
+	<script>
+		alert("입력실패");
+		history.back();
+	</script>
+<%
+	return;
+}
+ %>

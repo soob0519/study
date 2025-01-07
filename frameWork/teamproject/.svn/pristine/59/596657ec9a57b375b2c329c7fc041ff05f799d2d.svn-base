@@ -1,0 +1,272 @@
+<%@ page import="java.sql.ResultSet"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<%@ include file = "/include/oracleCon.jsp" %>    
+
+<%
+// 세션검사(로그인 상태인지 체크하는 코드)
+// 세션타입이라서 문자타입으로 만들어야한다. (스트링 괄호붙이거나, 뒤에 공백 붙여서 문자타입으로 만들기.)
+String SessionUserid = (String)session.getAttribute("sessionId");		// 로그인 하지 않으면 null 값이 된다.
+// 또는 String SessionUserid = session.getAttribute("SESSION_ID")+"";
+%>
+
+<%
+//출력페이지 번호
+String pageNo = request.getParameter("page");
+if(pageNo == null) {
+	pageNo = "1";
+}
+
+// 1개 페이지씩 이동하기 위한 변수
+int bPage =  Integer.parseInt(pageNo)-1;
+int nPage =  Integer.parseInt(pageNo)+1;
+
+int unitData = 5;		// 한 화면당 출력(표시)할 데이터 개수
+int unitPage = 10;		// 한 화면당 출력 페이지 개수 
+
+String sql1 = "SELECT count(*) FROM STOREINFO ";		// 총 데이터 개수 출력
+ResultSet rs1 = stmt.executeQuery(sql1);
+rs1.next();
+int total = rs1.getInt(1);
+
+// 일련번호 초기 세팅 ↓
+// int number = total - (지나간데이터개수)
+int rownum = total - (unitData*(Integer.parseInt(pageNo)-1));		// total - (지나간데이터개수*(보고있는페이지번호-1))
+
+// 마지막 페이지 번호(게시판 페이징 기능)  
+// ex: 12 개 데이터 있을 때  12/10 => 소숫점값 올림을위한 ceil(1.2) = 정수표현을위한 int (int)2.0 = 2 page 를 얻어낸다.
+int lastPage = (int)Math.ceil((double)total/unitData);
+
+// pageNo = "1" →	1
+// pageNo = "2" →	11
+// pageNo = "3" →	21
+//	(볼려고하는 페이지-1)*10+1 
+int sno = (Integer.parseInt(pageNo)-1)*unitData+1;		// 페이지별 게시글의 시작번호
+int eno = sno+(unitData-1);								// 페이지별 게시글의 끝번호
+%>
+
+<%
+String sql = "SELECT B.* FROM ( 		"
+		   + "	SELECT ROWNUM RN, A.* FROM ( "
+		   + "		SELECT 				"  
+						+"STID				"
+						+",STORENAME		"
+						+",STCONTENT		"
+						+",WAY				"
+						+",nvl(OPERATINGHOUR,' ') OPERATINGHOUR	"
+						+",nvl(TEL,' ') TEL	"
+						+",nvl(DAYOFF,' ') DAYOFF "
+						+",INFORMATION	"
+						+" FROM STOREINFO ORDER BY STID DESC ) A ) B	"
+			+" 	WHERE "
+			+" 	RN BETWEEN '"+sno+"' AND '"+eno+"' ";
+ResultSet rs = stmt.executeQuery(sql);
+
+//줄바꿈(상세보기시에만 필요. 입력시에는 불필요)
+//operatinghour = operatinghour.replace("\n", "<br>");
+//information = information.replace("\n", "<br>");
+
+%>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>메인화면</title>
+  <link rel="stylesheet" href="store/storeInfo.css"/>  <!-- 외부 css파일 불러오는 태그 -->
+ </head>
+
+<style>
+	header {
+		width:100%;
+		top:0px;
+		height:60px;
+		padding-top:20px;
+		background-color:aliceblue;
+		font-size:20px;
+		font-weight:bold;
+		text-align:center;
+		position:fixed;
+	}
+	body > header > div > input[type=text] {
+	    border-radius: 20px;
+	    padding-left: 20px;
+	    font-size:20px;
+	}
+	body > header > div > button {
+    	border-radius: 20px;
+	}
+	body > nav {
+	    padding-top: 72px;
+	}
+	body > nav > div {
+		width:100%;
+		height:50px;
+		background-color:lightslategray;
+		font-size:18px;
+		text-align:center;
+		justify-items: center;
+		padding:5px;
+	}
+	body > nav > div > table {
+		width:800px;
+		height:50px;
+		font-size:18px;
+		padding:5px;
+	}
+	body > nav > div > table > tbody > tr > th {
+    	border-radius: 10px;
+	}
+	body > nav > div > table > tbody > tr {
+ 	   background-color: lavender;
+	}
+	body > nav > div > table > tbody > tr > th:hover {
+	    background-color: ivory;
+	}
+	a {
+		color: mediumpurple;
+		text-decoration:none;
+	}
+	section {
+		height:900px;
+		background-color:white;
+		margin-top: 20px;
+	}
+	footer {
+		height:30px;
+		background-color:slategray;	
+	}
+	body > section > table.table1 > tbody {
+ 	   font-size: 16px;
+	}
+	.table1 {
+		width: 1000px;
+		height: 100px;
+		border:1px solid #ccc;
+		border-collapse: collapse;	/* 셀사이 공간제거 */
+	}
+</style>
+
+<script>
+
+
+</script>
+
+ <body>
+ 	<header>
+	 	<div>
+			<input type="text" name="search" style="width:500px; height:40px;">
+			<button type="button" style="height:40px;"><b>검색</b></button>
+			<!-- 가게 이름만 검색 가능 -->
+		</div>
+	</header>
+	<nav>
+		<div>
+		<table>
+			<tr>
+				<th><a href="main.jsp">홈</a></th>
+				<%
+				if(SessionUserid == null){
+				%>
+				<th><a href="loginWrite.jsp">로그인</a></th>
+				<th><a href="loginMemberWrite1.jsp">회원가입</a></th>
+				<%
+				} else {
+				%>
+				<th><a href="#">정보수정</a></th>
+				<th><a href="#">로그아웃</a></th>
+				<%
+				}
+				%>
+			</tr>
+		</table>
+		</div>
+	</nav>
+	<aside>
+	</aside>
+	<section>
+		<table>
+			<tr>
+				<td><img src="store/food80.jpg" style="width:500px;height:300px;"></td>
+				<td><img src="store/restaurant80.jpg" style="width:500px;height:300px;"></td>
+			</tr>
+		</table>
+		<br>
+		<div style="width:1000px;">
+			<div style="justify-self: right;">
+				<button type="button">리뷰 많은순</button>
+				<button type="button">평점 높은순</button>
+			</div>
+		</div>
+			<table class="table1">
+				<tr>
+					<th style="width:50%;">가게 이름</th>
+					<th style="width:20%;">휴무일</th>
+					<th style="width:15%;">전화번호</th>
+					<th style="width:10%;">리뷰 수</th>
+					<th style="width:5%;">평점</th>
+				</tr>
+				<%
+				while(rs.next()){
+					String stid = rs.getString("stid");
+					String storename = rs.getString("storename");
+					String stcontent = rs.getString("stcontent");
+					String way = rs.getString("way");
+					String operatinghour = rs.getString("operatinghour");
+					String tel = rs.getString("tel");
+					String dayoff = rs.getString("dayoff");
+					String information = rs.getString("information");
+				 %>
+				<tr>
+					<td><a href="storeDetail.jsp?storename=<%=storename %>"><%=storename %></a></td>
+					<td><%=dayoff %></td>
+					<td><%=tel %></td>
+					<td>123</td>
+					<td>5</td>
+				</tr>	
+				<%
+					rownum--;	// 행번호 가감처리.
+				}
+				%>
+				
+			</table>
+			<div style="margin-top:20px; text-align:center;">
+				<a href="<%=request.getRequestURI() %>?page=1" class="num first"> 《 </a>
+				<% int nowPage = Integer.parseInt(pageNo); %>
+				<% if(nowPage==1){ %>
+					<a href="<%=request.getRequestURI() %>?page=1" class="num bef"> 〈 </a>
+				<% } else if(nowPage > 1){ %>
+					<a href="<%=request.getRequestURI() %>?page=<%=bPage %>" class="num bef"> 〈 </a>
+				<% } %>
+				<%
+					for(int p=1; p<=lastPage; p++){
+				%>
+					<a href="<%=request.getRequestURI() %>?page=<%=p %>" class="num"><%=p %></a>
+				<%
+					}
+				%>
+				<% if(nowPage < lastPage){ %>
+					<a href="<%=request.getRequestURI() %>?page=<%=nPage %>" class="num bef"> 〉</a>
+				<%
+					} else if(nowPage == lastPage){
+				%>
+					<a href="<%=request.getRequestURI() %>?page=<%=lastPage %>" class="num bef"> 〉</a>
+				<%
+					}
+				 %>
+				 	<a href="<%=request.getRequestURI() %>?page=<%=lastPage %>" class="num last"> 》</a>
+			</div>
+			<br><br>
+			가게들 리스트 쫘르륵<br>
+			선택시 가게로 들어가는 화면<br>
+			로그인 세션 연결하기<br>
+			로그인 로그아웃<br>
+			검색버튼 활성화<br>
+	</section>
+	<footer>
+	</footer>
+ </body>
+</html>

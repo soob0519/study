@@ -1,0 +1,163 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<!-- DB연결 -->
+<%@ include file="../include/oracleCon.jsp" %>
+
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>title</title>
+  
+ </head>
+ 
+ <style>
+header {
+	width:100%;
+	height:60px;
+	padding-top:20px;
+	background-color:aliceblue;
+	font-size:20px;
+	font-weight:bold;
+	text-align:center;
+	position:fixed;
+}
+body > header > div > input[type=text] {
+    border-radius: 20px;
+    padding-left: 20px;
+    font-size:20px;
+}
+body > header > div > button {
+   	border-radius: 20px;
+}
+body > nav {
+    padding-top: 80px;
+}
+body > nav > div {
+	width:100%;
+	height:50px;
+	background-color:#c4f7f4;
+	font-size:18px;
+	text-align:center;
+	padding:5px;
+}
+section {
+	width:1200px;
+	height:1800px;
+	margin: auto;
+
+}
+footer {
+	background-color:#ffcc99;
+	height:100px;
+	width:100%;
+}
+
+body {
+	background-color:ivory;	
+}
+<!-- 화면 스타일 -->
+
+div {
+	border:1px solid #99ff00;
+	width:1200px;
+	margin-top:10px;
+	vertical-align:center;
+	background-color:#ffffff;
+}
+
+table {
+	border:1px solid #003366;
+	width:1200px;
+	vertical-align:center;
+	background-color:#ffffff;
+}
+
+span {
+	background-color:#ffffff;
+}
+
+tr,td {
+	border:1px solid #ff66ff;
+}
+
+ </style>
+ 
+	<body>
+  
+		<header>
+			<div>
+				<button type="button" style="width:500px; height:40px;" onclick="location='/teamproject/reserva.jsp'">
+					<b>예약하기</b>
+				</button>
+			</div>
+		</header>
+		  
+		<nav>
+		</nav>
+		  
+		<aside>
+		</aside>
+		  
+		<section>
+		<!-- 가게 예약테이블 -->
+		<div>
+			<table>
+				<colgroup>
+				<col width="70%"/>
+				<col width="*"/>
+			</colgroup>
+				<tr>
+					<td colspan="2">예약 테이블</td>
+					<!--날짜.인원.시간-->
+				</tr>
+				<tr>
+					<td rowspan="2"> < 2024년 11월 > </td>
+					<!-- 달력 -->
+					<td>인원</td>
+					<!-- 인원을 최대인원을 선택하면 1~최대인원 -->
+				</tr>
+				<tr>
+					<td> 시간 </td>
+					<!--  시간차를 선택하면 자동으로 영업시간 맞춰서 자동으로  -->
+				</tr>
+			</table>
+			<div>
+				<!-- 다음버튼 > 메뉴선택화면 -->
+				<button type="button">다음</button>
+			</div>
+		</div>
+		<!-- 가게 예약테이블2 -->
+		<div>
+			<table>
+				<tr>
+					<td>예약 테이블</td>
+					<td>메뉴화면</td>
+				</tr>
+			</table>
+			<table>
+				<tr>
+					<td> 메뉴 </td>
+					<td>+ -</td>
+				</tr>
+			</table>
+			<!-- 메뉴 추가하면 나오게 만들기 if이용 -->
+			<div>
+			추가한 메뉴 +-
+			</div>
+			<div>
+			총금액
+			</div>
+			<div>
+				<!--  예약하기 버튼 > 예약완료 나오고 다시 그전 화면으로 -->
+				<button type="submit">예약하기</button>
+			</div>
+		
+		</section>
+  
+		<footer>
+		</footer>  
+  
+	</body>
+</html>

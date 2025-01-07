@@ -1,0 +1,37 @@
+오라클
+create table schedule11 (
+unq number not null primary key,
+userid varchar2(50) not null unique,
+pass varchar2(100) not null,
+name varchar2(50) not null,
+engLast varchar2(50),
+engFirst varchar2(50),
+birth date,
+gender char(1) check(gender in('M','F')),
+mobile varchar2(50),
+email varchar2(100)
+);
+
+create sequence schedule11_seq
+start with 1
+increment by 1
+maxvalue 999999;
+
+
+가게용
+create table schedule12 (
+unq number not null primary key,
+userid varchar2(50) not null unique,
+pass varchar2(100) not null,
+name varchar2(50) not null,
+rname varchar2(50) not null,
+rkind varchar2(50),
+addr varchar(100),
+mobile varchar2(50),
+email varchar2(100)
+);
+
+create sequence schedule12_seq
+start with 1
+increment by 1
+maxvalue 999999;

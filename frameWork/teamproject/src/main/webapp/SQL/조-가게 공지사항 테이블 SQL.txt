@@ -1,0 +1,18 @@
+가게 공지사항 테이블 SQL
+create table storenotice (
+stid varchar(20) not null,
+gubun varchar(20) not null,
+title varchar(1000) ,
+ntcontent varchar(2000) not null,
+rdate timestamp
+);
+
+COMMENT ON COLUMN storenotice.stid IS '가게고유번호';
+COMMENT ON COLUMN storenotice.gubun IS '공지구분';
+COMMENT ON COLUMN storenotice.title IS '공지제목';
+COMMENT ON COLUMN storenotice.ntcontent IS '공지내용';
+COMMENT ON COLUMN storenotice.rdate IS '공지등록일';
+
+insert into storenotice(STID,GUBUN,TITLE,NTCONTENT,RDATE) values ('1','예약일정','크리스마스예약안내','크리스마스 예약은 11/18일 3시에 열립니다',sysdate);
+insert into storenotice(STID,GUBUN,TITLE,NTCONTENT,RDATE) values ('1','소식','이번달 스페셜 메뉴','구운대하와 비스큐소스',sysdate);
+insert into storenotice(STID,GUBUN,TITLE,NTCONTENT,RDATE) values ('1','소식','레터링 서비스 오픈','생일 혹은 기념일에 디져트 레터링 서비스를 제공합니다.',sysdate);

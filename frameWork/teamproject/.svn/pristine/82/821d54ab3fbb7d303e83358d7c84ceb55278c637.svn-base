@@ -1,0 +1,102 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+<%@ include file = "code.jsp" %>
+    
+<%
+String unq = request.getParameter("unq");
+String tbl = request.getParameter("tbl");
+// String code = request.getParameter("code"); 		# include 처리
+if(unq == null || unq.equals("")) {
+%>
+	<script>
+		alert("잘못된 접근입니다.");
+		location="boardList.jsp?code=<%=code%>";
+	</script>
+<%
+	return;
+}
+
+//String url = "boardDelete.jsp";
+//String msg = "공지사항";
+//if(tbl != null && tbl.equals("board2")){		// 왼쪽부터 해석하기 때문에 작성 순서에 주의!	tbl.equals("board2") && tbl != null ← 이렇게는 의미가 없음 
+//	url = "board2Delete.jsp";
+//	msg = "분실물";
+//	if(code.equals("2")){ msg="습득물"; }
+//}
+%>
+    
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title><%=msg %></title>
+  <link rel="stylesheet" href="myPageBoard.css?after"/>  <!-- 외부 css파일 불러오는 태그 -->
+ </head>
+ 
+ <script>
+function fn_submit() {
+	let pass = document.frm.pass.value;
+	if(pass == ""){
+		alert("암호를 입력해 주세요.");
+		document.frm.pass.focus();
+		return false;	 	 
+ 	}
+	document.frm.submit();
+}
+ </script>
+ 
+ <style>
+ td {
+ 	text-align: left;
+ 	color: skyblue;
+ }
+ .textarea1 {
+ 	width: 72%;
+ 	height: 200px;
+ }
+ </style>
+
+ <body>
+ 	<header>
+ 		<!-- header Start -->
+		<%@ include file = "header.jsp" %>
+		<!-- header End -->
+	</header>
+	<nav>
+		<!-- Top Menu Start -->
+		<%@ include file = "topMenu.jsp" %>
+		<!-- Top Menu End -->
+	</nav>
+	<section>
+		<div class="divTitle">
+			<%=msg %>
+		</div>
+		<div class="div_agrees">
+		<form name="frm" method="post" action="<%=url1 %>">
+		<input type="hidden" name="unq" value="<%=unq %>">
+		<input type="hidden" name="code" value="<%=code %>">
+		
+		<table class="table_member">
+			<colgroup>
+				<col width="*"/>			
+			</colgroup>
+			<tr>
+				<th>암호</th>
+				<td><input type="password" name="pass" class="input1"></td>
+			</tr>
+		</table>
+			<div style="margin-top:10px; text-align:center;">
+				<button type="submit" class="button4" onclick="fn_submit(); return false;">삭제</button>
+				<button type="reset" class="button4" onclick="">취소</button>
+			</div>
+		</form>
+		</div>
+	</section>
+	<footer>
+		<!-- footer Start -->
+		<%@ include file = "footer.jsp" %>
+		<!-- footer End -->
+	</footer>
+ </body>
+</html>

@@ -1,0 +1,231 @@
+<%@page import="java.sql.ResultSet"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<!-- DB연결 -->
+<%@ include file="/include/oracleCon.jsp" %>
+
+<%
+String id = request.getParameter("stid");
+if(id == null){
+	id = "1";
+}
+
+//출력페이지 번호
+String pageNo = request.getParameter("page");
+if(pageNo == null) {
+	pageNo = "1";
+}
+
+// 1개 페이지씩 이동하기 위한 변수
+int bPage =  Integer.parseInt(pageNo)-1;
+int nPage =  Integer.parseInt(pageNo)+1;
+
+int unitData = 3;		// 한 화면당 출력(표시)할 데이터 개수
+int unitPage = 10;		// 한 화면당 출력 페이지 개수 
+
+String sql1 = "SELECT count(*) FROM storemenu ";		// 총 데이터 개수 출력
+ResultSet rs1 = stmt.executeQuery(sql1);
+rs1.next();
+int total = rs1.getInt(1);
+
+// 일련번호 초기 세팅 ↓
+// int number = total - (지나간데이터개수)
+int rownum = total - (unitData*(Integer.parseInt(pageNo)-1));		// total - (지나간데이터개수*(보고있는페이지번호-1))
+
+// 마지막 페이지 번호(게시판 페이징 기능)  
+// ex: 12 개 데이터 있을 때  12/10 => 소숫점값 올림을위한 ceil(1.2) = 정수표현을위한 int (int)2.0 = 2 page 를 얻어낸다.
+int lastPage = (int)Math.ceil((double)total/unitData);
+
+// pageNo = "1" →	1
+// pageNo = "2" →	11
+// pageNo = "3" →	21
+//	(볼려고하는 페이지-1)*10+1 
+int sno = (Integer.parseInt(pageNo)-1)*unitData+1;		// 페이지별 게시글의 시작번호
+int eno = sno+(unitData-1);								// 페이지별 게시글의 끝번호
+%>
+
+<!-- 가게 메뉴 관련 SQL -->
+<!-- 나중에 가게 고유번호랑 연결 -->
+<%
+String sql ="SELECT B.* FROM( "
+			+"	SELECT ROWNUM RN, A.* FROM ( "
+			+"		SELECT "
+			+"				UNQ,STID,MENUNAME,MECONTENT,to_char(PRICE,'999,999,999') PRICE "
+			+" 			FROM STOREMENU  WHERE STID='"+id+"' "
+			+" 				ORDER BY UNQ DESC ) A ) B "
+			+"	WHERE	"
+			+" RN BETWEEN '"+sno+"' AND '"+eno+"'";
+ResultSet rs = stmt.executeQuery(sql);
+
+
+//페이징 처리의 시작페이지 번호, 종료페이지 번호
+double spage1 = (Integer.parseInt(pageNo)-1)/(double)10;		// ex) 3.2
+int	   spage2 = (int)(Math.floor(spage1)*10)+1;
+//int    epage  = spage2+9;
+int    epage  = spage2+(unitPage-1);
+
+//반복문의 마지막 번호가 라스트페이지 번호를 오버했을 경우의 세팅
+if (epage > lastPage ) {
+	epage = lastPage;
+}
+%>
+
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>메뉴정보 관리</title>
+  <link rel="stylesheet" href="../css/storeInfo.css" />
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>	<!-- ajax 사용하기 위한 원본 소스 url -->
+   
+ <script>
+function fn_submit() {
+	document.frm1.submit();
+}
+			
+function fn_btnDel(unq) {
+	let result = confirm("선택한 메뉴를 삭제 하시겠습니까?");
+	if(result == false){
+		return false;
+	} else if(result == true) {
+		$.ajax({
+		type : "post",
+		url  : "menuDelete.jsp",
+		data : "unq="+unq,
+		datatype : "text",
+		success : function(data) {	// url 로부터 ok 또는 fail 메시지를 리턴 받는다.
+//			alert(data);
+			if( $.trim(data) == "ok" ) {	// 삭제 성공 시, ok 가 리턴되긴하는데, 앞에 공백이 잔뜩 발생되어서, 제이쿼리 trim 함수로 공백제거해서 해결.
+			alert("메뉴가 삭제 되었습니다.");
+			document.location.href = document.location.href;	// 현재 페이지 새로고침
+			} else {
+				alert("삭제실패");
+			}
+		},
+			error : function() {
+				alert("데이터 전송 실패!");
+			}
+		});
+	}
+} 
+ </script>
+ 
+ </head>
+
+	<body>
+  
+ 	<header>
+	 	<div>
+			<input type="text" style="width:500px; height:40px;">
+			<button type="button" style="height:40px;">검색</button>
+		</div>
+	</header>
+	<nav>
+		<!-- Top Menu Start -->
+		<%@ include file = "../../include/topMenuST.jsp" %>
+		<!-- Top Menu End -->
+	</nav>
+	<aside>
+	</aside>
+		  
+		<section>
+		<table>
+			<tr>
+				<td><img src="../image/food80.jpg" style="width:500px;height:300px;"></td>
+				<td><img src="../image/restaurant80.jpg" style="width:500px;height:300px;"></td>
+			</tr>
+		</table>
+		<!-- 메뉴판 (정보) 테이블 -->
+		<div class="table1">
+		<form name="frm1" method="post" action="menuSave.jsp">
+			<table class="table1">
+				<tr>
+					<td colspan="3">
+						메뉴정보 입력
+					</td>
+				</tr>
+				<tr>
+					<td>메뉴명</td>
+					<td>가격</td>
+				</tr>
+					<tr>
+					<td><input type="text" name="menuname"></td>
+					<td><input type="text" name="price"></td>
+				</tr>
+				<tr>
+				 	<td>설명</td>
+				 	<td colspan="2"><textarea name="mecontent"></textarea></td>
+				</tr>	
+			</table>
+		</form>
+			<div style="text-align:right; margin-top:10px;">
+				<button type="submit" onclick="fn_submit(); return false;">메뉴 추가</button>
+			</div>
+			<br>
+			<table class="table1">
+				<tr>
+					<th colspan="6">메뉴 목록</th>
+				</tr>
+				<tr>
+					<th style="width:5%;">번호</th>
+					<th style="width:35%;">메뉴명</th>
+					<th style="width:*;">설명</th>
+					<th style="width:10%;">가격(원)</th>
+					<th style="width:10%;">삭제</th>
+				</tr>
+				<%
+				while(rs.next()){
+					String unq = rs.getString("UNQ");
+					String menuname = rs.getString("MENUNAME");
+					String mecontent = rs.getString("MECONTENT");
+					String price = rs.getString("PRICE");
+				 %>
+				<tr>
+					<td><%=rownum %></td>
+					<td><%=menuname %></td>
+					<td><%=mecontent %></td>
+					<td><%=price %></td>
+					<td><button type="button" onclick="fn_btnDel('<%=unq%>');">삭제</button></td>
+				</tr>	
+				<%
+					rownum--;	// 행번호 가감처리.
+				}
+				%>
+				
+			</table>
+			<div style="margin-top:20px; text-align:center;">
+				<a href="<%=request.getRequestURI() %>?page=1" class="num first"> 《 </a>
+				<% int nowPage = Integer.parseInt(pageNo); %>
+				<% if(nowPage==1){ %>
+					<a href="<%=request.getRequestURI() %>?page=1" class="num bef"> 〈 </a>
+				<% } else if(nowPage > 1){ %>
+					<a href="<%=request.getRequestURI() %>?page=<%=bPage %>" class="num bef"> 〈 </a>
+				<% } %>
+				<%
+					for(int p=1; p<=lastPage; p++){
+				%>
+					<a href="<%=request.getRequestURI() %>?page=<%=p %>" class="num"><%=p %></a>
+				<%
+					}
+				%>
+				<% if(nowPage < lastPage){ %>
+					<a href="<%=request.getRequestURI() %>?page=<%=nPage %>" class="num bef"> 〉</a>
+				<%
+					} else if(nowPage == lastPage){
+				%>
+					<a href="<%=request.getRequestURI() %>?page=<%=lastPage %>" class="num bef"> 〉</a>
+				<%
+					}
+				 %>
+				 	<a href="<%=request.getRequestURI() %>?page=<%=lastPage %>" class="num last"> 》</a>
+			</div>
+		</div>
+		</section>
+  
+		<footer>
+  
+		</footer> 
+  
+	</body>
+</html>

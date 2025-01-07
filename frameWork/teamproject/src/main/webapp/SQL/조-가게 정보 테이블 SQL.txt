@@ -1,0 +1,55 @@
+create table storeinfo (
+stid varchar(20) not null primary key,
+storename varchar(100) not null,
+stcontent varchar(1000) ,
+way varchar(1000) not null,
+operatinghour varchar(2000),
+tel number(20),
+dayoff varchar(1000),
+information varchar(2000)
+);
+
+COMMENT ON COLUMN storeinfo.stid IS '가게고유번호';
+COMMENT ON COLUMN storeinfo.storename IS '가게이름';
+COMMENT ON COLUMN storeinfo.stcontent IS '한줄정보';
+COMMENT ON COLUMN storeinfo.way IS '한줄위치';
+COMMENT ON COLUMN storeinfo.operatinghour IS '운영시간';
+COMMENT ON COLUMN storeinfo.tel IS '전화번호';
+COMMENT ON COLUMN storeinfo.dayoff IS '휴무일';
+COMMENT ON COLUMN storeinfo.information IS '상제정보';
+
+create sequence storeinfo_seq
+increment by 1
+start with 1
+maxvalue 9999;
+
+insert into storeinfo(
+                        STID
+                        ,STORENAME
+                        ,STCONTENT
+                        ,WAY
+                        ,OPERATINGHOUR
+                        ,TEL
+                        ,DAYOFF
+                        ,INFORMATION) 
+    values(
+            storeinfo_seq.nextval
+            ,'프라테르'
+            ,'은대구파스타를 비롯한 특색있는 메뉴들을 선보이는 빨간 벽돌집'
+            ,'서울특별시 중구 다산로 38길 68 1층'
+            ,'(월) 9:00~9:00	 
+                (화) 9:00~9:00 
+                (수) 9:00~9:00 
+                (목) 9:00~9:00 
+				(금) 9:00~9:00 
+				(토) 9:00~9:00 
+				(일) 9:00~9:00'
+            ,'0311111111'
+            ,'없음'
+            ,'런치에는 1인 1메뉴 필수 주문 부탁드립니다. 
+            [예약금] 
+            1인 1만원 
+            2일전 취소 100% 환불 
+            1일전 취소 50% 환불 
+            당일 취소 0% 환불 '
+            );
